@@ -12,6 +12,15 @@
         self.level = homeService.level;
         self.initPlayer = initPlayer;
         self.counter = homeService.counter;
+        self.getChange = getChange;
+        self.selected = homeService.selected;
+        self.selectPlayer = selectPlayer;
+        function selectPlayer () {
+            homeService.selectPlayer;
+        }
+        function getChange () {
+            homeService.update();
+        }
 
         function initPlayer () {
             homeService.initPlayer();

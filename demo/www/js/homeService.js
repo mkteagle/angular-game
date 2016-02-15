@@ -18,6 +18,13 @@
         self.recordId = null;
         self.id = null;
         self.recorded = null;
+        self.selected = null;
+        self.selectPlayer = selectPlayer;
+
+        function selectPlayer() {
+                self.selected = angular.isNumber(self.recorded) ? $scope.player[self.recorded] : self.recorded;
+                console.log(self.selected.counter);
+        }
 
         function incrementCounter () {
             if (self.recorded.counter >= 10) {
@@ -27,6 +34,7 @@
             }
             self.recorded.counter++;
             self.update();
+            self.selectPlayer();
         }
         function initPlayer () {
             self.player.$add({name: 'Mike', counter: self.counter, date: Date.now(), level: self.level, id: self.recordId}).then(function(ref) {
