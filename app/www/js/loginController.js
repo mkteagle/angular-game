@@ -27,8 +27,20 @@ function loginController($timeout, $localStorage) {
                     vm.fbData = authData;
                 });
             }
+
+
         });
     }
+    // this removes facebook data from local storage
+    // to FULLY logout, you MUST go to facebook.com and logout
+    function deleteFacebookData() {
+        $localStorage.$reset();
+        vm.fbData = {};
+        vm.message = 'Facebook data deleted.'
+    }
+    // bug alert: this delete function sometimes does NOT reset the local storage,
+    // so a page refresh finds facebook data in localstorage.
+
 
     var ref = new Firebase(url);
     ref.authWithOAuthPopup("twitter", function(error, authData) {
