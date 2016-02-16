@@ -7,16 +7,16 @@
 
     function homeController(homeService) {
         var self = this;
-        self.showToast = showToast;
-        self.incrementCounter = incrementCounter;
+        self.incrementCounter = homeService.incrementCounter;
         self.level = homeService.level;
         self.initPlayer = initPlayer;
-        self.counter = homeService.counter;
+        self.recorded = homeService.recorded;
+        self.counter = homeService.recorded.counter;
+        self.countdown = homeService.recorded.countdown;
         self.getChange = getChange;
         self.selected = homeService.selected;
         self.selectPlayer = selectPlayer;
         self.countItDown = countItDown;
-        self.countdown = homeService.countdown;
 
         function countItDown () {
             homeService.countItDown();
@@ -31,12 +31,12 @@
         function initPlayer () {
             homeService.initPlayer();
         }
-        function showToast () {
-            homeService.showToast();
-        }
-        function incrementCounter () {
-            homeService.incrementCounter();
-        }
+        //function showToast () {
+        //    homeService.showToast();
+        //}
+        //function incrementCounter () {
+        //    homeService.incrementCounter();
+        //}
     }
 
 })();
