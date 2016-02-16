@@ -2,10 +2,10 @@
     <ion-content>
 
         <toast></toast>
-        <div class="row"><div class="onehundred">{{hc.selected.counter}}</div> <span class="onehundreddonuts"> donuts</span></div>
-        <div class="row"><div class="onehundred">{{hc.selected.countdown}}</div> <span class="onehundreddonuts"> til 1000</span></div>
-        <progress id="progressbar" max="1000" value="{{ hc.selected.counter }}"> </progress>
-        <div id="progressbarlabel">{{ hc.selected.countdown }} %</div>
+        <div class="row"><div class="onehundred">{{hc.recorded.counter}}</div> <span class="onehundreddonuts"> donuts</span></div>
+        <div class="row"><div class="onehundred">{{hc.recorded.countdown}}</div> <span class="onehundreddonuts"> til 1000</span></div>
+        <progress id="progressbar" max="1000" value="{{ hc.recorded.counter }}"> </progress>
+        <div id="progressbarlabel">{{ hc.recorded.countdown }} %</div>
         <div class="main-container">
             <div class="row"><button class="button button-large button-positive" ng-click="hc.incrementCounter()">Eat Donut</button></div>
         </div>
