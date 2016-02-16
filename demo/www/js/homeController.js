@@ -3,9 +3,9 @@
 
     angular.module('homeCtrl', [])
         .controller('homeController', homeController);
-    homeController.$inject = ['ngToast', 'homeService'];
+    homeController.$inject = ['homeService'];
 
-    function homeController(ngToast, homeService) {
+    function homeController(homeService) {
         var self = this;
         self.showToast = showToast;
         self.incrementCounter = incrementCounter;
@@ -26,10 +26,7 @@
             homeService.initPlayer();
         }
         function showToast () {
-            ngToast.create({
-                className: 'success',
-                content: self.level
-            });
+            homeService.showToast();
         }
         function incrementCounter () {
             homeService.incrementCounter();
