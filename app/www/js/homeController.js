@@ -15,6 +15,12 @@
         self.getChange = getChange;
         self.selected = homeService.selected;
         self.selectPlayer = selectPlayer;
+        self.countItDown = countItDown;
+        self.countdown = homeService.countdown;
+
+        function countItDown () {
+            homeService.countItDown();
+        }
         function selectPlayer () {
             homeService.selectPlayer;
         }
