@@ -7,13 +7,18 @@ function loginController($timeout, $localStorage) {
     // controller data and functions
     var vm = this;
     vm.facebookLogin = facebookLogin;
+    vm.googleLogin = googleLogin;
     vm.deleteFacebookData = deleteFacebookData;
+    vm.deleteGoogleData = deleteGoogleData;
     vm.fbData = $localStorage['https://angular-game.firebaseio.com/'];
     // if facebook data is found in local storage, use it
     vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
     // IMPORTANT: change to match the URL of your Firebase.
     var url = 'https://angular-game.firebaseio.com/';
     // use Firebase library to login to facebook
+
+
+    // ******** FACEBOOK LOGIN ********
     function facebookLogin() {
         var ref = new Firebase(url);
         ref.authWithOAuthPopup('facebook', function (error, authData) {
@@ -28,35 +33,38 @@ function loginController($timeout, $localStorage) {
                 });
             }
 
-
         });
     }
-    // this removes facebook data from local storage
+
     // to FULLY logout, you MUST go to facebook.com and logout
     function deleteFacebookData() {
         $localStorage.$reset();
         vm.fbData = {};
         vm.message = 'Facebook data deleted.'
     }
-    // bug alert: this delete function sometimes does NOT reset the local storage,
-    // so a page refresh finds facebook data in localstorage.
 
-
-    var ref = new Firebase(url);
-    ref.authWithOAuthPopup("twitter", function(error, authData) {
-        if (error) {
-            console.log("Login to Twitter Failed!", error);
-            vm.message = 'Log in to Twitter Failed. ' + error;
-        } else {
-            console.log("Logged in to Twitter", authData);
-            vm.message = 'Logged in to Twitter.';
-            $timeout(function () { // invokes $scope.$apply()
-                vm.fbData = authData;
-            });
-        }
-    });
-
+    // ******** GOOGLE LOGIN ********
+    function googleLogin() {
+        var ref = new Firebase(url);
+        ref.authWithOAuthPopup("Google", function (error, authData) {
+            if (error) {
+                console.log("Login to Google Failed!", error);
+                vm.message = 'Log in to Google Failed. ' + error;
+            } else {
+                console.log("Logged in to Google", authData);
+                vm.message = 'Logged in to Google.';
+                $timeout(function () { // invokes $scope.$apply()
+                    vm.OAuthData = authData;
+                });
+            }
+        });
     }
-})();
-// bug alert: this delete function sometimes does NOT reset the local storage,
-// so a page refresh finds facebook data in localstorage.
+
+    // to FULLY logout, you MUST go to Google.com and logout
+    function deleteGoogleData() {
+        $localStorage.$reset();
+        vm.OAuthData = {};
+        vm.message = 'Google data deleted.'
+        }
+    }
+})
