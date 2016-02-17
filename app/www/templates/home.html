@@ -1,29 +1,12 @@
-
 <ion-view view-title="Game Play" ng-controller="homeController as hc" ng-init="hc.countItDown(); hc.selectPlayer()">
     <ion-content>
-
         <toast></toast>
         <div class="row"><div class="onehundred">{{hc.selected.counter}}</div> <span class="onehundreddonuts"> donuts</span></div>
-<<<<<<< HEAD
         <div class="row"><div class="onehundred">{{hc.selected.countdown}}</div> <span class="onehundreddonuts"> til 1000</span></div>
         <progress id="progressbar" max="1000" value="{{ hc.selected.counter }}"> </progress>
-        <div class="main-container list">
-            <div class="row"><button class="button button-large button-positive button_type_sound" ng-click="hc.showToast(); hc.incrementCounter(); hc.playSound();">Eat Donut</button></div>
-=======
-        <div class="row"><div class="onehundred">{{hc.selected.countdown}}</div> <span class="onehundreddonuts"> til 100</span></div>
-        <progress id="progressbar" max="hc.selected.countdown" value="{{ hc.selected.counter }}"> </progress>
         <div class="main-container">
-<<<<<<< HEAD
             <div class="row"><button class="button button-large button-positive button_type_sound" ng-click="hc.showToast(); hc.incrementCounter(); hc.playSound();">Eat Donut</button></div>
-=======
-            <div class="row"><button class="button button-large button-positive" ng-click="hc.incrementCounter(); hc.playSound();">Eat Donut</button></div>
-<<<<<<< HEAD
-            <div class="row"><button ng-if="hc.selected.update" class="button button-large button-positive" ng-click="hc.updatePlayer()">Eat Donut</button></div>
->>>>>>> master
-=======
             <div class="row"><button ng-hide="!hc.selected.upgrade" class="button button-large button-positive" ng-click="hc.updatePlayer()">Eat Donut</button></div>
->>>>>>> Teagle
->>>>>>> master
         </div>
     </ion-content>
 </ion-view>
