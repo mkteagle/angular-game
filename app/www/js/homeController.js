@@ -3,9 +3,9 @@
 
     angular.module('homeCtrl', [])
         .controller('homeController', homeController);
-    homeController.$inject = ['homeService'];
+    homeController.$inject = ['homeService', '$scope', '$timeout'];
 
-    function homeController(homeService) {
+    function homeController(homeService, $scope, $timeout) {
         var self = this;
         ion.sound({
             sounds: [
@@ -30,9 +30,9 @@
         self.incrementCounter = incrementCounter;
         self.level = homeService.level;
         self.initPlayer = initPlayer;
-        self.counter = homeService.counter;
         self.getChange = getChange;
-        self.selected = homeService.selected;
+        self.player = homeService.player;
+        self.selected = homeService.recorded;
         self.selectPlayer = selectPlayer;
         self.countItDown = countItDown;
         self.countdown = homeService.countdown;
@@ -46,21 +46,19 @@
             homeService.countItDown();
         }
         function selectPlayer () {
-            homeService.selectPlayer;
+            homeService.selectPlayer();
         }
         function getChange () {
             homeService.update();
         }
 
-        function initPlayer () {
-            homeService.initPlayer();
-        }
-        function showToast () {
-            homeService.showToast();
-        }
-        function incrementCounter () {
-            homeService.incrementCounter();
-        }
+                function initPlayer () {
+                    homeService.initPlayer();
+                }
+                function incrementCounter () {
+                    self.selected.counter = homeService.incrementCounter();
+                    self.selected.countdown = homeService.incrementCountdown();
+                }
     }
 
 })();
