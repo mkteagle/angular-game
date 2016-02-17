@@ -3,7 +3,7 @@
 
         <toast></toast>
         <div class="row"><div class="onehundred">{{hc.selected.counter}}</div> <span class="onehundreddonuts"> donuts</span></div>
-        <div class="row"><div class="onehundred">{{hc.selected.countdown}}</div> <span class="onehundreddonuts"> til 1000</span></div>
+        <div class="row"><div class="onehundred">{{hc.selected.countdown}}</div> <span class="onehundreddonuts"> til {{ hc.selected.countdown }}</span></div>
         <progress id="progressbar" max="hc.selected.countdown" value="{{ hc.selected.countdown }}"> </progress>
         <div id="progressbarlabel"></div>
         <div class="main-container">
