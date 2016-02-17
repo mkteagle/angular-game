@@ -52,7 +52,6 @@
             }
             else if (self.recorded.counter >= self.updated) {
                 self.recorded.countdown = self.countdown * 2;
-                self.
             }
             else {
                 self.recorded.countdown--;
