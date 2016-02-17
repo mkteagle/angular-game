@@ -10,13 +10,14 @@
         ion.sound({
             sounds: [
                 {
-                    alias: "button",
-                    name: "button_click",
-                    volume: 0.9,
+                    alias: "snap",
+                    name: "snap",
+                    path: "../www/audio/ion.sound-3.0.6/sounds/",
+                    volume: 0.3,
                     preload: false
                 }
             ],
-            path: "../audio/ion.sound-3.0.6/sounds/",
+            path: "../www/audio/ion.sound-3.0.6/sounds/",
             preload: true,
             multiplay: true
         });
@@ -31,9 +32,9 @@
         self.countdown = homeService.countdown;
         self.playSound = playSound;
 
-        $("#b01").on("click", function playSound () {
-           ion.sound.play("button");
-        });
+        function playSound () {
+            ion.sound.play("snap");
+        }
 
         function countItDown () {
             homeService.countItDown();
