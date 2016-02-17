@@ -23,6 +23,7 @@
         self.countItDown = countItDown;
         self.selectPlayer = selectPlayer;
         self.showToast = showToast;
+        self.incrementCountdown = incrementCountdown;
 
         function countItDown() {
             self.update();
@@ -38,24 +39,34 @@
             self.selected = angular.isNumber(self.recorded) ? $scope.player[self.recorded] : self.recorded;
         }
 
+        function incrementCountdown () {
+            if (self.recorded.counter >= 10) {
+                self.recorded.countdown = self.recorded.countdown - 2;
+                self.update();
+                return self.recorded.countdown;
+            }
+            else {
+                self.recorded.countdown--;
+                self.update();
+                return self.recorded.countdown;
+            }
+
+        }
+
         function incrementCounter () {
-            self.player.$loaded().then(function(){
                 if (self.recorded.counter >= 10) {
                     self.recorded.counter = self.recorded.counter + 2;
                     self.recorded.level = '2x';
-                    self.recorded.countdown = self.recorded.countdown - 2;
                     self.showToast();
                     self.update();
-                    self.selectPlayer();
+                    return self.recorded.counter;
                 }
                 else {
                     self.recorded.counter++;
-                    self.recorded.countdown--;
                     self.showToast();
                     self.update();
-                    self.selectPlayer();
+                    return self.recorded.counter;
                 }
-            })
 
         }
         function initPlayer () {
@@ -68,8 +79,6 @@
             })
         }
         function update() {
-            self.counter = self.recorded.counter;
-            self.countdown = self.recorded.countdown;
             self.player.$save(self.recorded);
             self.leaderBoard.$save(self.recorded);
         }
