@@ -46,7 +46,7 @@ function loginController($timeout, $localStorage) {
     // ******** GOOGLE LOGIN ********
     function googleLogin() {
         var ref = new Firebase(url);
-        ref.authWithOAuthPopup("Google", function (error, authData) {
+        ref.authWithOAuthPopup("google", function (error, authData) {
             if (error) {
                 console.log("Login to Google Failed!", error);
                 vm.message = 'Log in to Google Failed. ' + error;
@@ -67,6 +67,7 @@ function loginController($timeout, $localStorage) {
         vm.message = 'Google data deleted.'
         }
     }
+
 
     // ******** EMAIL LOGIN ********
     //var ref = new Firebase("https://angular-game.firebaseio.com");
