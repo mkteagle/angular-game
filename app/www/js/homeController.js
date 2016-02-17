@@ -20,7 +20,6 @@
             preload: true,
             multiplay: true
         });
-        self.showToast = showToast;
         self.incrementCounter = incrementCounter;
         self.level = homeService.level;
         self.initPlayer = initPlayer;
@@ -46,13 +45,13 @@
             homeService.update();
         }
 
-                function initPlayer () {
+        function initPlayer () {
                     homeService.initPlayer();
-                }
-                function incrementCounter () {
-                    self.selected.counter = homeService.incrementCounter();
-                    self.selected.countdown = homeService.incrementCountdown();
-                }
+        }
+        function incrementCounter () {
+            self.selected.counter = homeService.incrementCounter();
+            self.selected.countdown = homeService.incrementCountdown();
+        }
     }
 
 })();
