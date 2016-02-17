@@ -1,8 +1,8 @@
 (function (){
-angular.module('app.login', ['ngStorage'])
+angular.module('app.login', [])
 
 .controller('loginController', loginController);
-    loginController.$inject = ['$timeout', '$localStorage'];
+    loginController.$inject = ['$timeout', 'homeService'];
 
 function loginController($timeout, homeService) {
     // controller data and functions
