@@ -7,13 +7,15 @@
 
     function homeController(homeService) {
         var self = this;
+
+        //I got this code here: http://ionden.com/a/plugins/ion.sound/en.html to make the sound for the button
         ion.sound({
             sounds: [
                 {
                     alias: "snap",
                     name: "snap",
                     path: "../www/audio/ion.sound-3.0.6/sounds/",
-                    volume: 0.3,
+                    volume: 0.9,
                     preload: false
                 }
             ],
