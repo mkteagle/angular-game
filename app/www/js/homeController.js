@@ -3,9 +3,9 @@
 
     angular.module('homeCtrl', [])
         .controller('homeController', homeController);
-    homeController.$inject = ['homeService', '$scope', '$timeout'];
+    homeController.$inject = ['homeService'];
 
-    function homeController(homeService, $scope, $timeout) {
+    function homeController(homeService) {
         var self = this;
         ion.sound({
             sounds: [
@@ -53,7 +53,7 @@
         }
 
         function initPlayer () {
-                    homeService.initPlayer();
+            homeService.initPlayer();
         }
         function incrementCounter () {
             self.selected.counter = homeService.incrementCounter();
