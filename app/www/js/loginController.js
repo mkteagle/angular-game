@@ -2,46 +2,26 @@
 angular.module('app.login', ['ngStorage'])
 
 .controller('loginController', loginController);
-<<<<<<< HEAD
-<<<<<<< HEAD
-loginController.$inject = ['$timeout', '$localStorage', 'homeService'];
-function loginController($timeout, $localStorage, homeService) {
+    loginController.$inject = ['$timeout', '$localStorage'];
+
+function loginController($timeout, homeService) {
     // controller data and functions
     var vm = this;
     vm.player = homeService.player;
     vm.recorded = homeService.recorded;
-=======
-loginController.$inject = ['$timeout', '$localStorage'];
-function loginController($timeout, $localStorage) {
-    // controller data and functions
-    var vm = this;
->>>>>>> origin/Ricardo
-=======
-loginController.$inject = ['$timeout', '$localStorage', 'homeService'];
-function loginController($timeout, $localStorage, homeService) {
-    // controller data and functions
-    var vm = this;
-    vm.player = homeService.player;
-    vm.recorded = homeService.recorded;
->>>>>>> master
     vm.facebookLogin = facebookLogin;
     vm.googleLogin = googleLogin;
     vm.deleteFacebookData = deleteFacebookData;
     vm.deleteGoogleData = deleteGoogleData;
-<<<<<<< HEAD
-=======
     vm.authWithPassword = authWithPassword;
     vm.createUesr = createUesr;
     vm.changeEmail = changeEmail;
     vm.changePassord = changePassord;
->>>>>>> origin/Ricardo
-    vm.fbData = $localStorage['https://angular-game.firebaseio.com/'];
     // if facebook data is found in local storage, use it
     vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
     // IMPORTANT: change to match the URL of your Firebase.
     var url = 'https://angular-game.firebaseio.com/';
     // use Firebase library to login to facebook
-
 
     // ******** FACEBOOK LOGIN ********
     function facebookLogin() {
@@ -79,19 +59,9 @@ function loginController($timeout, $localStorage, homeService) {
                 console.log("Logged in to Google", authData);
                 vm.message = 'Logged in to Google.';
                 $timeout(function () { // invokes $scope.$apply()
-<<<<<<< HEAD
-<<<<<<< HEAD
                     vm.recorded.name = authData.google.displayName;
                     vm.recorded.img = authData.google.profileImageURL;
                     homeService.update();
-=======
-                    vm.OAuthData = authData;
->>>>>>> origin/Ricardo
-=======
-                    vm.recorded.name = authData.google.displayName;
-                    vm.recorded.img = authData.google.profileImageURL;
-                    homeService.update();
->>>>>>> master
                 });
             }
         });
@@ -104,23 +74,7 @@ function loginController($timeout, $localStorage, homeService) {
         vm.message = 'Google data deleted.'
         }
     }
-<<<<<<< HEAD
-=======
-
         // ******** EMAIL LOGIN ********
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     var ref = new Firebase("https://angular-game.firebaseio.com");
@@ -208,5 +162,4 @@ function loginController($timeout, $localStorage, homeService) {
         });
     }
 
->>>>>>> origin/Ricardo
 })();
