@@ -67,4 +67,44 @@ function loginController($timeout, $localStorage) {
         vm.message = 'Google data deleted.'
         }
     }
-})
+
+    // ******** EMAIL LOGIN ********
+    //var ref = new Firebase("https://angular-game.firebaseio.com");
+    //ref.createUser({
+    //    email    : "bobtony@firebase.com",
+    //    password : "correcthorsebatterystaple"
+    //}, function(error, userData) {
+    //    if (error) {
+    //        console.log("Error creating user:", error);
+    //    } else {
+    //        console.log("Successfully created user account with uid:", userData.uid);
+    //    }
+    //});
+    //
+    //var ref = new Firebase("https://angular-game.firebaseio.com");
+    //ref.authWithPassword({
+    //    email    : "bobtony@firebase.com",
+    //    password : "correcthorsebatterystaple"
+    //}, function(error, authData){}, {
+    //    remember: "sessionOnly"
+    //    if (error) {
+    //        console.log("Login Failed!", error);
+    //    } else {
+    //        console.log("Authenticated successfully with payload:", authData);
+    //    }
+    //});
+    //
+    //var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
+    //ref.changeEmail({
+    //    oldEmail : "bobtony@firebase.com",
+    //    newEmail : "bobtony@google.com",
+    //    password : "correcthorsebatterystaple"
+    //}, function(error) {
+    //    if (error === null) {
+    //        console.log("Email changed successfully");
+    //    } else {
+    //        console.log("Error changing email:", error);
+    //    }
+    //});
+
+})();
