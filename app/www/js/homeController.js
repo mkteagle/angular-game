@@ -7,24 +7,21 @@
 
     function homeController(homeService) {
         var self = this;
+
+        //I got this code here: http://ionden.com/a/plugins/ion.sound/en.html to make the sound for the button
         ion.sound({
             sounds: [
                 {
-                    name: "button_click"
-                },
-                {
-                    name: "door_bump",
-                    volume: 0.2
-                },
-                {
-                    name: "camera_flashing",
-                    volume: 0.3,
+                    alias: "snap",
+                    name: "snap",
+                    path: "../www/lib/ion-sound/sounds/",
+                    volume: 0.9,
                     preload: false
                 }
             ],
-            volume: 0.5,
-            path: "../www/audio/ion.sound-3.0.6/sounds/",
-            preload: true
+            path: "../www/lib/ion-sound/sounds/",
+            preload: true,
+            multiplay: true
         });
         self.incrementCounter = incrementCounter;
         self.level = homeService.level;
@@ -39,7 +36,7 @@
         self.playSound = playSound;
 
         function playSound () {
-           ion.sound.play("my_cool_sound");
+            ion.sound.play("snap");
         }
 
         function countItDown () {

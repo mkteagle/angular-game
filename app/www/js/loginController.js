@@ -1,9 +1,10 @@
 (function (){
-angular.module('app.login', ['ngStorage'])
+angular.module('app.login', [])
 
 .controller('loginController', loginController);
-loginController.$inject = ['$timeout', '$localStorage', 'homeService'];
-function loginController($timeout, $localStorage, homeService) {
+    loginController.$inject = ['$timeout', 'homeService'];
+
+function loginController($timeout, homeService) {
     // controller data and functions
     var vm = this;
     vm.player = homeService.player;
@@ -12,13 +13,15 @@ function loginController($timeout, $localStorage, homeService) {
     vm.googleLogin = googleLogin;
     vm.deleteFacebookData = deleteFacebookData;
     vm.deleteGoogleData = deleteGoogleData;
-    vm.fbData = $localStorage['https://angular-game.firebaseio.com/'];
+    vm.authWithPassword = authWithPassword;
+    vm.createUesr = createUesr;
+    vm.changeEmail = changeEmail;
+    vm.changePassord = changePassord;
     // if facebook data is found in local storage, use it
     vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
     // IMPORTANT: change to match the URL of your Firebase.
     var url = 'https://angular-game.firebaseio.com/';
     // use Firebase library to login to facebook
-
 
     // ******** FACEBOOK LOGIN ********
     function facebookLogin() {
@@ -71,4 +74,92 @@ function loginController($timeout, $localStorage, homeService) {
         vm.message = 'Google data deleted.'
         }
     }
+        // ******** EMAIL LOGIN ********
+
+
+    var ref = new Firebase("https://angular-game.firebaseio.com");
+
+    function createUesr() {
+
+        ref.createUser({
+            email: "bobtony@firebase.com",
+            password: "correcthorsebatterystaple"
+        }, function (error, userData) {
+            if (error) {
+                console.log("Error creating user:", error);
+            } else {
+                console.log("Successfully created user account with uid:", userData.uid);
+            }
+        });
+    }
+
+    function authWithPassword() {
+
+        ref.authWithPassword({
+        email    : "bobtony@firebase.com",
+        password : "correcthorsebatterystaple"
+    }, function(error, authData) {
+        if (error) {
+            console.log("Login Failed!", error);
+        } else {
+            console.log("Authenticated successfully with payload:", authData);
+        }
+    });
+
+    }
+
+    function changeEmail() {
+        ref.changeEmail({
+            oldEmail : "bobtony@firebase.com",
+            newEmail : "bobtony@google.com",
+            password : "correcthorsebatterystaple"
+        }, function(error) {
+            if (error === null) {
+                console.log("Email changed successfully");
+            } else {
+                console.log("Error changing email:", error);
+            }
+        });
+    }
+
+    function changePassord() {
+        ref.changePassword({
+            email       : "bobtony@firebase.com",
+            oldPassword : "correcthorsebatterystaple",
+            newPassword : "neatsupersecurenewpassword"
+        }, function(error) {
+            if (error === null) {
+                console.log("Password changed successfully");
+            } else {
+                console.log("Error changing password:", error);
+            }
+        });
+    }
+
+    function resetPassord() {
+        ref.resetPassword({
+            email : "bobtony@firebase.com"
+        }, function(error) {
+            if (error === null) {
+                console.log("Password reset email sent successfully");
+            } else {
+                console.log("Error sending password reset email:", error);
+            }
+        });
+
+    }
+
+    function removeUser() {
+        ref.removeUser({
+            email    : "bobtony@firebase.com",
+            password : "correcthorsebatterystaple"
+        }, function(error) {
+            if (error === null) {
+                console.log("User removed successfully");
+            } else {
+                console.log("Error removing user:", error);
+            }
+        });
+    }
+
 })();
