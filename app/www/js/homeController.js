@@ -3,9 +3,9 @@
 
     angular.module('homeCtrl', [])
         .controller('homeController', homeController);
-    homeController.$inject = ['homeService', '$scope', '$timeout'];
+    homeController.$inject = ['homeService'];
 
-    function homeController(homeService, $scope, $timeout) {
+    function homeController(homeService) {
         var self = this;
 
         //I got this code here: http://ionden.com/a/plugins/ion.sound/en.html to make the sound for the button
@@ -50,7 +50,7 @@
         }
 
         function initPlayer () {
-                    homeService.initPlayer();
+            homeService.initPlayer();
         }
         function incrementCounter () {
             self.selected.counter = homeService.incrementCounter();
