@@ -8,6 +8,7 @@
         <progress id="progressbar" max="1000" value="{{ hc.selected.counter }}"> </progress>
         <div class="main-container">
             <div class="row"><button class="button button-large button-positive" ng-click="hc.incrementCounter(); hc.playSound();">Eat Donut</button></div>
+            <div class="row"><button ng-if="hc.selected.update" class="button button-large button-positive" ng-click="hc.updatePlayer()">Eat Donut</button></div>
         </div>
     </ion-content>
 </ion-view>

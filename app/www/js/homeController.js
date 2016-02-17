@@ -35,6 +35,7 @@
         self.selectPlayer = selectPlayer;
         self.countItDown = countItDown;
         self.countdown = homeService.countdown;
+        self.updatePlayer = updatePlayer;
         self.playSound = playSound;
 
         function playSound () {
@@ -57,6 +58,9 @@
         function incrementCounter () {
             self.selected.counter = homeService.incrementCounter();
             self.selected.countdown = homeService.incrementCountdown();
+        }
+        function updatePlayer () {
+            homeService.updatePlayer();
         }
     }
 
