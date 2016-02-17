@@ -7,7 +7,7 @@
         <div class="row"><div class="onehundred">{{hc.selected.countdown}}</div> <span class="onehundreddonuts"> til 1000</span></div>
         <progress id="progressbar" max="1000" value="{{ hc.selected.counter }}"> </progress>
         <div class="main-container">
-            <div class="row"><button class="button button-large button-positive" ng-click="hc.showToast(); hc.incrementCounter(); hc.playSound();">Eat Donut</button></div>
+            <div class="row"><button class="button button-large button-positive button_type_sound" id="b01" ng-click="hc.showToast(); hc.incrementCounter(); hc.playSound();">Eat Donut</button></div>
         </div>
     </ion-content>
 </ion-view>
