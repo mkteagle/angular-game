@@ -3,6 +3,7 @@ angular.module('app.login', ['ngStorage'])
 
 .controller('loginController', loginController);
 <<<<<<< HEAD
+<<<<<<< HEAD
 loginController.$inject = ['$timeout', '$localStorage', 'homeService'];
 function loginController($timeout, $localStorage, homeService) {
     // controller data and functions
@@ -15,6 +16,14 @@ function loginController($timeout, $localStorage) {
     // controller data and functions
     var vm = this;
 >>>>>>> origin/Ricardo
+=======
+loginController.$inject = ['$timeout', '$localStorage', 'homeService'];
+function loginController($timeout, $localStorage, homeService) {
+    // controller data and functions
+    var vm = this;
+    vm.player = homeService.player;
+    vm.recorded = homeService.recorded;
+>>>>>>> master
     vm.facebookLogin = facebookLogin;
     vm.googleLogin = googleLogin;
     vm.deleteFacebookData = deleteFacebookData;
@@ -71,12 +80,18 @@ function loginController($timeout, $localStorage) {
                 vm.message = 'Logged in to Google.';
                 $timeout(function () { // invokes $scope.$apply()
 <<<<<<< HEAD
+<<<<<<< HEAD
                     vm.recorded.name = authData.google.displayName;
                     vm.recorded.img = authData.google.profileImageURL;
                     homeService.update();
 =======
                     vm.OAuthData = authData;
 >>>>>>> origin/Ricardo
+=======
+                    vm.recorded.name = authData.google.displayName;
+                    vm.recorded.img = authData.google.profileImageURL;
+                    homeService.update();
+>>>>>>> master
                 });
             }
         });
