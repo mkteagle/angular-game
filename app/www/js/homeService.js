@@ -19,10 +19,16 @@
         self.recorded = {counter: 0, countdown: 1000, level: '1x'};
         self.id = null;
         self.selected = null;
+        self.updated = self.recorded.counter * 2;
         self.countItDown = countItDown;
         self.selectPlayer = selectPlayer;
         self.showToast = showToast;
         self.incrementCountdown = incrementCountdown;
+        self.updatePlayer = updatePlayer;
+
+        function updatePlayer() {
+            self.recorded = {counter: 0, countdown: self.updated, updated: false}
+        }
 
         function countItDown() {
             self.update();
@@ -43,6 +49,9 @@
                 self.recorded.countdown = self.recorded.countdown - 2;
                 self.update();
                 return self.recorded.countdown;
+            }
+            else if (self.recorded.counter >= self.updated) {
+                self.recorded.countdown = self.countdown * 2;
             }
             else {
                 self.recorded.countdown--;
@@ -70,7 +79,7 @@
         }
         function initPlayer () {
             self.level = '1x';
-            self.player.$add({name: 'Mike', counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.recorded.countdown}).then(function(ref) {
+            self.player.$add({name: 'Mike', counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.recorded.countdown, upgrade: false}).then(function(ref) {
                 self.recordId = ref.key();
                 self.recorded = self.player.$getRecord(self.recordId);
                 self.recorded.id = self.recordId;
