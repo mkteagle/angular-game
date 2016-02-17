@@ -11,17 +11,15 @@ function loginController($timeout, homeService) {
     vm.recorded = homeService.recorded;
     vm.facebookLogin = facebookLogin;
     vm.googleLogin = googleLogin;
-    vm.deleteFacebookData = deleteFacebookData;
-    vm.deleteGoogleData = deleteGoogleData;
     vm.authWithPassword = authWithPassword;
     vm.createUesr = createUesr;
     vm.changeEmail = changeEmail;
     vm.changePassord = changePassord;
-    // if facebook data is found in local storage, use it
     vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
-    // IMPORTANT: change to match the URL of your Firebase.
+    //IMPORTANT change to match the url of your firebase
+
+    //var url = 'https://donut-click.firebaseio.com/';
     var url = 'https://angular-game.firebaseio.com/';
-    // use Firebase library to login to facebook
 
     // ******** FACEBOOK LOGIN ********
     function facebookLogin() {
@@ -31,21 +29,16 @@ function loginController($timeout, homeService) {
                 console.log('Log in to Facebook Failed', error);
                 vm.message = 'Log in to Facebook Failed. ' + error;
             } else {
-                console.log('Logged in to Facebook');
+                console.log('Logged in to Facebook', authData);
                 vm.message = 'Logged in to Facebook.';
                 $timeout(function () { // invokes $scope.$apply()
-                    vm.fbData = authData;
+                    vm.recorded.name = authData.facebook.displayName;
+                    vm.recorded.img = authData.facebook.profileImageURL;
+                    homeService.update();
                 });
             }
 
         });
-    }
-
-    // to FULLY logout, you MUST go to facebook.com and logout
-    function deleteFacebookData() {
-        $localStorage.$reset();
-        vm.fbData = {};
-        vm.message = 'Facebook data deleted.'
     }
 
     // ******** GOOGLE LOGIN ********
@@ -65,14 +58,6 @@ function loginController($timeout, homeService) {
                 });
             }
         });
-    }
-
-    // to FULLY logout, you MUST go to Google.com and logout
-    function deleteGoogleData() {
-        $localStorage.$reset();
-        vm.OAuthData = {};
-        vm.message = 'Google data deleted.'
-        }
     }
         // ******** EMAIL LOGIN ********
 
