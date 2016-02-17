@@ -59,7 +59,7 @@
         function initPlayer () {
             self.level = '1x';
             self.player.$add({name: 'Mike', counter: self.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.countdown}).then(function(ref) {
-                self.recordId = ref.name();
+                self.recordId = ref.key();
                 self.recorded = self.player.$getRecord(self.recordId);
                 self.recorded.id = self.recordId;
                 self.player.$save(self.recorded);
