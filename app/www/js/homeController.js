@@ -7,22 +7,43 @@
 
     function homeController(homeService) {
         var self = this;
-        self.showToast = showToast;
+
+        //I got this code here: http://ionden.com/a/plugins/ion.sound/en.html to make the sound for the button
+        ion.sound({
+            sounds: [
+                {
+                    alias: "snap",
+                    name: "snap",
+                    path: "../www/audio/ion.sound-3.0.6/sounds/",
+                    volume: 0.9,
+                    preload: false
+                }
+            ],
+            path: "../www/audio/ion.sound-3.0.6/sounds/",
+            preload: true,
+            multiplay: true
+        });
         self.incrementCounter = incrementCounter;
         self.level = homeService.level;
         self.initPlayer = initPlayer;
-        self.counter = homeService.counter;
         self.getChange = getChange;
-        self.selected = homeService.selected;
+        self.player = homeService.player;
+        self.selected = homeService.recorded;
         self.selectPlayer = selectPlayer;
         self.countItDown = countItDown;
         self.countdown = homeService.countdown;
+        self.updatePlayer = updatePlayer;
+        self.playSound = playSound;
+
+        function playSound () {
+            ion.sound.play("snap");
+        }
 
         function countItDown () {
             homeService.countItDown();
         }
         function selectPlayer () {
-            homeService.selectPlayer;
+            homeService.selectPlayer();
         }
         function getChange () {
             homeService.update();
@@ -31,11 +52,12 @@
         function initPlayer () {
             homeService.initPlayer();
         }
-        function showToast () {
-            homeService.showToast();
-        }
         function incrementCounter () {
-            homeService.incrementCounter();
+            self.selected.counter = homeService.incrementCounter();
+            self.selected.countdown = homeService.incrementCountdown();
+        }
+        function updatePlayer () {
+            homeService.updatePlayer();
         }
     }
 

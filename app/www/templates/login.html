@@ -3,6 +3,7 @@
         <div class="hero no-header flat">
             <div class="content">
                 <div class="app-icon"></div>
+                <div>{{vm.recorded.img}}</div>
                 <h1>Angular Game</h1>
             </div>
         </div>
@@ -13,10 +14,9 @@
         <div class="padding">
             <button ui-sref="app.profile" class="button button-full button-assertive ink">Login</button>
         </div>
-        <div class="button-bar social-login">
-            <button class="button button-small button-border icon-left ion-social-google button-assertive-900" ng-click='googleLogin()'>Google+</button>
-            <button class="button button-small button-border icon-left ion-social-twitter button-calm-900" ng-click='twitterLogin()'>Twitter</button>
-            <button class="button button-small button-border icon-left ion-social-facebook button-positive-900" ng-click='vm.facebookLogin()' >Facebook</button>
+        <div class="button-bar social-login" ng-controller="loginController as vm">
+            <button class="button button-small button-border icon-left ion-social-google button-assertive-900" ng-click='vm.googleLogin()'>Google+</button>
+            <button class="button button-small button-border icon-left ion-social-facebook button-positive-900" ng-click='vm.facebookLogin()'>Facebook</button>
             <button class="button button-small button-border icon-left ion-email button-100" ng-click='emailLogin()'>Email</button>
         </div>
     </ion-content>
