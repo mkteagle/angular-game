@@ -59,7 +59,8 @@ function loginController($timeout, homeService) {
             }
         });
     }
-        // ******** EMAIL LOGIN ********
+
+    // ******** EMAIL LOGIN ********
 
 
     var ref = new Firebase("https://angular-game.firebaseio.com");
@@ -81,24 +82,24 @@ function loginController($timeout, homeService) {
     function authWithPassword() {
 
         ref.authWithPassword({
-        email    : "bobtony@firebase.com",
-        password : "correcthorsebatterystaple"
-    }, function(error, authData) {
-        if (error) {
-            console.log("Login Failed!", error);
-        } else {
-            console.log("Authenticated successfully with payload:", authData);
-        }
-    });
+            email: "bobtony@firebase.com",
+            password: "correcthorsebatterystaple"
+        }, function (error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+            }
+        });
 
     }
 
     function changeEmail() {
         ref.changeEmail({
-            oldEmail : "bobtony@firebase.com",
-            newEmail : "bobtony@google.com",
-            password : "correcthorsebatterystaple"
-        }, function(error) {
+            oldEmail: "bobtony@firebase.com",
+            newEmail: "bobtony@google.com",
+            password: "correcthorsebatterystaple"
+        }, function (error) {
             if (error === null) {
                 console.log("Email changed successfully");
             } else {
@@ -109,10 +110,10 @@ function loginController($timeout, homeService) {
 
     function changePassord() {
         ref.changePassword({
-            email       : "bobtony@firebase.com",
-            oldPassword : "correcthorsebatterystaple",
-            newPassword : "neatsupersecurenewpassword"
-        }, function(error) {
+            email: "bobtony@firebase.com",
+            oldPassword: "correcthorsebatterystaple",
+            newPassword: "neatsupersecurenewpassword"
+        }, function (error) {
             if (error === null) {
                 console.log("Password changed successfully");
             } else {
@@ -123,8 +124,8 @@ function loginController($timeout, homeService) {
 
     function resetPassord() {
         ref.resetPassword({
-            email : "bobtony@firebase.com"
-        }, function(error) {
+            email: "bobtony@firebase.com"
+        }, function (error) {
             if (error === null) {
                 console.log("Password reset email sent successfully");
             } else {
@@ -136,9 +137,9 @@ function loginController($timeout, homeService) {
 
     function removeUser() {
         ref.removeUser({
-            email    : "bobtony@firebase.com",
-            password : "correcthorsebatterystaple"
-        }, function(error) {
+            email: "bobtony@firebase.com",
+            password: "correcthorsebatterystaple"
+        }, function (error) {
             if (error === null) {
                 console.log("User removed successfully");
             } else {
@@ -146,5 +147,6 @@ function loginController($timeout, homeService) {
             }
         });
     }
+}
 
 })();
