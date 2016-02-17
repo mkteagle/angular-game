@@ -13,11 +13,10 @@
         self.leaderBoard = $firebaseArray(leaderRef);
         self.player = $firebaseArray(ref);
         self.initPlayer = initPlayer;
-        self.level = null;
         self.incrementCounter = incrementCounter;
         self.update = update;
         self.recordId = null;
-        self.recorded = {counter: 0, countdown: 1000};
+        self.recorded = {counter: 0, countdown: 1000, level: '1x'};
         self.id = null;
         self.selected = null;
         self.countItDown = countItDown;
