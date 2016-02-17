@@ -49,6 +49,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             }
         }
     })
+
+    .state('app.email', {
+        url: '/registerEmail',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/registerEmail.html',
+                controller: 'loginController'
+            },
+            'fabContent': {
+                template: ''
+            }
+        }
+    })
+
     .state('app.home', {
         url: '/home',
         views: {
