@@ -7,7 +7,9 @@
         <progress id="progressbar" max="hc.selected.countdown" value="{{ hc.selected.countdown }}"> </progress>
         <div id="progressbarlabel"></div>
         <div class="main-container">
-            <div class="row"><button class="button button-large button-positive" ng-click="hc.showToast(); hc.incrementCounter(); hc.playSound()">Eat Donut</button></div>
+            <div class="row"><button class="button button-large button-positive" ng-click="hc.showToast(); hc.incrementCounter(); hc.playSound()">Eat Donut</button>
+                <button class="button button-large button-positive" ng-click="hc.newGame()">New Game</button>
+            </div>
         </div>
     </ion-content>
 </ion-view>

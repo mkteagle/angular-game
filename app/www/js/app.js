@@ -63,8 +63,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
-    .state('app.home', {
-        url: '/home',
+    .state('app.game', {
+        url: '/game',
         views: {
             'menuContent': {
                 templateUrl: 'templates/home.html',
@@ -90,5 +90,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
     ;
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/splash');
+    $urlRouterProvider.otherwise('/app/login');
 });
