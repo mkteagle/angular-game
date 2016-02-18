@@ -42,7 +42,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         views: {
             'menuContent': {
                 templateUrl: 'templates/login.html',
-                controller: 'loginController'
+                controller: 'loginController as vm'
             },
             'fabContent': {
                 template: ''
@@ -55,7 +55,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         views: {
             'menuContent': {
                 templateUrl: 'templates/registerEmail.html',
-                controller: 'loginController'
+                controller: 'loginController as vm'
             },
             'fabContent': {
                 template: ''

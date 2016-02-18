@@ -13,14 +13,16 @@ function loginController($timeout, homeService, $state) {
     vm.facebookLogin = facebookLogin;
     vm.googleLogin = googleLogin;
     vm.authWithPassword = authWithPassword;
-    vm.createUesr = createUesr;
+    vm.createUser = createUser;
     vm.changeEmail = changeEmail;
     vm.changePassord = changePassord;
+    vm.email = "";
+    vm.password = "";
     vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
     //IMPORTANT change to match the url of your firebase
 
-    var url = 'https://donut-click.firebaseio.com/';
-    //var url = 'https://angular-game.firebaseio.com/';
+    //var url = 'https://donut-click.firebaseio.com/';
+    var url = 'https://angular-game.firebaseio.com/';
 
     // ******** FACEBOOK LOGIN ********
     function facebookLogin() {
@@ -66,15 +68,13 @@ function loginController($timeout, homeService, $state) {
     }
 
     // ******** EMAIL LOGIN ********
+    var ref = new Firebase("https://angular-game.firebaseio.com");
 
-
-    //var ref = new Firebase("https://angular-game.firebaseio.com");
-
-    function createUesr() {
+    function createUser() {
 
         ref.createUser({
-            email: "bobtony@firebase.com",
-            password: "correcthorsebatterystaple"
+            email: vm.email,
+            password: vm.password
         }, function (error, userData) {
             if (error) {
                 console.log("Error creating user:", error);
@@ -87,8 +87,8 @@ function loginController($timeout, homeService, $state) {
     function authWithPassword() {
 
         ref.authWithPassword({
-            email: self.user,
-            password: self.password
+            email: vm.user,
+            password: vm.password
         }, function (error, authData) {
             if (error) {
                 console.log("Login Failed!", error);
