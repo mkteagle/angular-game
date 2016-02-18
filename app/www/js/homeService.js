@@ -16,17 +16,30 @@
         self.incrementCounter = incrementCounter;
         self.update = update;
         self.recordId = null;
+<<<<<<< Updated upstream
         self.recorded = {counter: 0, countdown: 100, level: '1x', updated: 100};
         self.id = null;
         self.selected = null;
         self.updated = 100;
+=======
+        self.recorded = {counter: 0, countdown: 1000, level: '1x'};
+        self.id = null;
+        self.selected = null;
+        self.updated = self.recorded.counter * 2;
+>>>>>>> Stashed changes
         self.countItDown = countItDown;
         self.selectPlayer = selectPlayer;
         self.showToast = showToast;
         self.incrementCountdown = incrementCountdown;
         self.updatePlayer = updatePlayer;
+<<<<<<< Updated upstream
         function updatePlayer() {
             self.recorded = {counter: 0, countdown: self.updated, upgrade: false}
+=======
+
+        function updatePlayer() {
+            self.recorded = {counter: 0, countdown: self.updated, updated: false}
+>>>>>>> Stashed changes
         }
 
         function countItDown() {
@@ -44,18 +57,26 @@
         }
 
         function incrementCountdown () {
+<<<<<<< Updated upstream
             console.log(self.updated);
+=======
+>>>>>>> Stashed changes
             if (self.recorded.counter >= 10) {
                 self.recorded.countdown = self.recorded.countdown - 2;
                 self.update();
                 return self.recorded.countdown;
             }
+<<<<<<< Updated upstream
             else if (self.recorded.counter >= 100) {
                 self.recorded.upgrade = true;
                 self.updated = self.updated * 2;
                 self.recorded.countdown = self.updated * 2;
                 self.update();
                 return self.recorded.countdown;
+=======
+            else if (self.recorded.counter >= self.updated) {
+                self.recorded.countdown = self.countdown * 2;
+>>>>>>> Stashed changes
             }
             else {
                 self.recorded.countdown--;

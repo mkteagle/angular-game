@@ -17,10 +17,6 @@ angular.module('starter.controllers', [])
         });
     }
 
-    ////////////////////////////////////////
-    // Layout Methods
-    ////////////////////////////////////////
-
     $scope.hideNavBar = function() {
         document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
     };
