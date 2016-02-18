@@ -41,9 +41,9 @@
     <script src="./lib/ion-sound/ion.sound.min.js"></script>
 
 </head>
-<body ng-app="starter">
+<body ng-app="starter" ng-controller="homeController as hc">
 
-    <ion-nav-view></ion-nav-view>
+    <ion-nav-view ng-init="hc.initPlayer()"></ion-nav-view>
 
 </body>
 </html>

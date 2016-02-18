@@ -16,7 +16,7 @@
         self.incrementCounter = incrementCounter;
         self.update = update;
         self.recordId = null;
-        self.recorded = {counter: 0, countdown: 100, level: '1x', updated: 100};
+
         self.id = null;
         self.selected = null;
         self.updated = 100;
@@ -28,21 +28,26 @@
         self.newGame = newGame;
         self.upgrades = [];
         self.goal = 1000;
+        self.index = 1;
+        self.countInc = 1;
         for (var i = 1; i < 10000; i++) {
-            self.upgrades.push({id: i.toString(), goal: self.goal});
+            self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
         }
+        self.recorded = {counter: 0, countdown: self.upgrades[self.index].goal, level: '1x', updated: 100};
         function newGame() {
             self.initPlayer();
             self.recorded.counter = 0;
-            self.recorded.countdown = 100;
+            self.recorded.countdown = self.upgrades[self.index].goal;
             self.recorded.updated = 100;
             self.recorded.upgrade = false;
             self.update();
             return self.recorded.counter;
         }
         function updatePlayer() {
-            self.recorded = {counter: 0, countdown: self.updated, upgrade: false}
+           self.recorded.upgrade = false;
+           self.recorded.counter = 0;
+           self.index++;
         }
 
         function countItDown() {
@@ -60,24 +65,17 @@
         }
 
         function incrementCountdown () {
-            if (self.recorded.counter <= self.upgrades) {
-                self.recorded.countdown = self.recorded.countdown - 1;
+            if (self.recorded.counter >= self.upgrades[self.index].goal) {
+                self.recorded.countdown = self.upgrades[self.index].goal;
                 self.update();
                 return self.recorded.countdown;
             }
-            else if (self.recorded.counter >= 100) {
+            else if (self.recorded.counter <= self.upgrades[self.index].goal) {
                 self.recorded.upgrade = true;
-                self.updated = self.updated * 2;
-                self.recorded.countdown = self.updated * 2;
+                self.index++;
                 self.update();
                 return self.recorded.countdown;
             }
-            else {
-                self.recorded.countdown = self.recorded.countdown - 2;
-                self.update();
-                return self.recorded.countdown;
-            }
-
         }
 
         function incrementCounter () {
@@ -98,7 +96,7 @@
         }
         function initPlayer () {
             self.level = '1x';
-            self.player.$add({name: 'Mike', counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.recorded.countdown, upgrade: false}).then(function(ref) {
+            self.player.$add({name: 'Mike', counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.upgrades[self.index].goal, upgrade: false}).then(function(ref) {
                 self.recordId = ref.key();
                 self.recorded = self.player.$getRecord(self.recordId);
                 self.recorded.id = self.recordId;

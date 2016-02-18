@@ -16,6 +16,7 @@
         vm.createUser = createUser;
         vm.changeEmail = changeEmail;
         vm.changePassord = changePassord;
+        vm.initPlayer = initPlayer;
         vm.email = "";
         vm.password = "";
         vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
@@ -23,7 +24,9 @@
 
         var url = 'https://donut-click.firebaseio.com/';
         //var url = 'https://angular-game.firebaseio.com/';
-
+        function initPlayer() {
+            homeService.initPlayer();
+        }
         // ******** FACEBOOK LOGIN ********
         function facebookLogin() {
             var ref = new Firebase(url);
