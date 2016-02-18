@@ -21,8 +21,8 @@
         vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
         //IMPORTANT change to match the url of your firebase
 
-        //var url = 'https://donut-click.firebaseio.com/';
-        var url = 'https://angular-game.firebaseio.com/';
+        var url = 'https://donut-click.firebaseio.com/';
+        //var url = 'https://angular-game.firebaseio.com/';
 
         // ******** FACEBOOK LOGIN ********
         function facebookLogin() {
@@ -68,7 +68,7 @@
         }
 
         // ******** EMAIL LOGIN ********
-        var ref = new Firebase("https://angular-game.firebaseio.com");
+        var ref = new Firebase(url);
 
         function createUser() {
 
