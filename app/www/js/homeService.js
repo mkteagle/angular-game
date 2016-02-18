@@ -25,6 +25,16 @@
         self.showToast = showToast;
         self.incrementCountdown = incrementCountdown;
         self.updatePlayer = updatePlayer;
+        self.newGame = newGame;
+        function newGame() {
+            self.initPlayer();
+            self.recorded.counter = 0;
+            self.recorded.countdown = 100;
+            self.recorded.updated = 100;
+            self.recorded.upgrade = false;
+            self.update();
+            return self.recorded.counter;
+        }
         function updatePlayer() {
             self.recorded = {counter: 0, countdown: self.updated, upgrade: false}
         }
@@ -45,8 +55,8 @@
 
         function incrementCountdown () {
             console.log(self.updated);
-            if (self.recorded.counter >= 10) {
-                self.recorded.countdown = self.recorded.countdown - 2;
+            if (self.recorded.counter <= 10) {
+                self.recorded.countdown = self.recorded.countdown - 1;
                 self.update();
                 return self.recorded.countdown;
             }
@@ -58,7 +68,7 @@
                 return self.recorded.countdown;
             }
             else {
-                self.recorded.countdown--;
+                self.recorded.countdown = self.recorded.countdown - 2;
                 self.update();
                 return self.recorded.countdown;
             }
@@ -66,15 +76,15 @@
         }
 
         function incrementCounter () {
-                if (self.recorded.counter >= 10) {
-                    self.recorded.counter = self.recorded.counter + 2;
-                    self.recorded.level = '2x';
+                if (self.recorded.counter < 10) {
+                    self.recorded.counter = self.recorded.counter + 1;
                     self.showToast();
                     self.update();
                     return self.recorded.counter;
                 }
                 else {
-                    self.recorded.counter++;
+                    self.recorded.counter = self.recorded.counter + 2;
+                    self.recorded.level = '2x';
                     self.showToast();
                     self.update();
                     return self.recorded.counter;
