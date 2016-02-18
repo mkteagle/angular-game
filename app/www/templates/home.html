@@ -8,6 +8,8 @@
         <div id="progressbarlabel"></div>
         <div class="main-container">
             <div class="row"><button class="button button-large button-positive" ng-click="hc.showToast(); hc.incrementCounter(); hc.playSound()">Eat Donut</button>
+                   <img ng-click="hc.showToast(); hc.incrementCounter(); hc.playSound()" ng-src="img/doughnut-giphy.gif" style="height: 180px; width: 170px;">
+
                 <button class="button button-large button-positive" ng-click="hc.newGame()">New Game</button>
                 <button class="button button-large button-clear" ng-click="hc.updatePlayer()" ng-if="!hc.selected.upgrade">Upgrade Player</button>
             </div>
