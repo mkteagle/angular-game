@@ -2,9 +2,9 @@
 angular.module('app.login', [])
 
 .controller('loginController', loginController);
-    loginController.$inject = ['$timeout', 'homeService', '$state'];
+    loginController.$inject = ['$timeout', 'homeService', '$state', '$scope'];
 
-function loginController($timeout, homeService, $state) {
+function loginController($timeout, homeService, $state, $scope) {
     // controller data and functions
     var vm = this;
     vm.player = homeService.player;
@@ -13,7 +13,7 @@ function loginController($timeout, homeService, $state) {
     vm.facebookLogin = facebookLogin;
     vm.googleLogin = googleLogin;
     vm.authWithPassword = authWithPassword;
-    vm.createUesr = createUesr;
+    vm.createUser = createUser;
     vm.changeEmail = changeEmail;
     vm.changePassord = changePassord;
     vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
@@ -69,8 +69,9 @@ function loginController($timeout, homeService, $state) {
 
 
     //var ref = new Firebase("https://angular-game.firebaseio.com");
+    var ref = new Firebase(url);
 
-    function createUesr() {
+    function createUser() {
 
         ref.createUser({
             email: "bobtony@firebase.com",
@@ -87,8 +88,8 @@ function loginController($timeout, homeService, $state) {
     function authWithPassword() {
 
         ref.authWithPassword({
-            email: self.user,
-            password: self.password
+            email: $scope.email,
+            password: $scope.password
         }, function (error, authData) {
             if (error) {
                 console.log("Login Failed!", error);
