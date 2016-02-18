@@ -26,6 +26,12 @@
         self.incrementCountdown = incrementCountdown;
         self.updatePlayer = updatePlayer;
         self.newGame = newGame;
+        self.upgrades = [];
+        self.goal = 1000;
+        for (var i = 1; i < 10000; i++) {
+            self.upgrades.push({id: i.toString(), goal: self.goal});
+            self.goal = self.goal * 2;
+        }
         function newGame() {
             self.initPlayer();
             self.recorded.counter = 0;
@@ -54,8 +60,7 @@
         }
 
         function incrementCountdown () {
-            console.log(self.updated);
-            if (self.recorded.counter <= 10) {
+            if (self.recorded.counter <= self.upgrades) {
                 self.recorded.countdown = self.recorded.countdown - 1;
                 self.update();
                 return self.recorded.countdown;
@@ -98,7 +103,8 @@
                 self.recorded = self.player.$getRecord(self.recordId);
                 self.recorded.id = self.recordId;
                 self.player.$save(self.recorded);
-            })
+            });
+            console.log(self.upgrades);
         }
         function update() {
             self.player.$save(self.recorded);
