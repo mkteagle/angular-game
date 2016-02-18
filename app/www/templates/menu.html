@@ -18,13 +18,13 @@
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
             <ion-list>
-                <ion-item nav-clear menu-close ui-sref="app.login">
+                <ion-item nav-clear ng-hide="hc.recorded.displayName != null" menu-close ui-sref="app.login">
                     Login
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.splash">
-                    New Game
+                <ion-item nav-clear menu-close>
+                    <a ng-click="hc.newGame()">New Game</a>
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.home">
+                <ion-item nav-clear menu-close ui-sref="app.game">
                     Resume Game
                 </ion-item>
             </ion-list>

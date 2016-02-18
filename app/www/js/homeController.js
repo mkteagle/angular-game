@@ -34,11 +34,14 @@
         self.countdown = homeService.countdown;
         self.updatePlayer = updatePlayer;
         self.playSound = playSound;
+        self.newGame = newGame;
 
         function playSound () {
             ion.sound.play("snap");
         }
-
+        function newGame() {
+            self.counter = homeService.newGame();
+        }
         function countItDown () {
             homeService.countItDown();
         }
