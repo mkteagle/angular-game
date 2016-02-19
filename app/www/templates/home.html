@@ -6,6 +6,7 @@
         <div class="row"><div class="onehundred">{{ hc.selected.countdown }}</div> <span class="onehundreddonuts"> til {{ hc.selected.goal }}</span></div>
         <progress id="progressbar" max="{{ hc.selected.countdown }}" value="{{100 - hc.selected.goal}}"> </progress>
         <div id="progressbarlabel"></div>
+
         <div class="main-container">
             <div class="row"><button class="button button-large button-positive" ng-click="hc.showToast(); hc.incrementCounter(); hc.playSound()">Eat Donut</button>
                    <img ng-click="hc.showToast(); hc.incrementCounter(); hc.incrementCountdown(); hc.playSound()" ng-src="img/doughnut-giphy.gif" style="height: 180px; width: 170px;">
