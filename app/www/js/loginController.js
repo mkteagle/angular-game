@@ -1,4 +1,4 @@
-(function (){
+(function () {
     angular.module('app.login', [])
 
         .controller('loginController', loginController);
@@ -27,6 +27,7 @@
         function initPlayer() {
             homeService.initPlayer();
         }
+
         // ******** FACEBOOK LOGIN ********
         function facebookLogin() {
             var ref = new Firebase(url);
@@ -37,10 +38,11 @@
                 } else {
                     console.log('Logged in to Facebook', authData);
                     vm.message = 'Logged in to Facebook.';
+                    homeService.initPlayer();
                     $timeout(function () { // invokes $scope.$apply()
                         vm.authData = authData.facebook;
-                        vm.recorded.name = vm.authData.displayName;
-                        vm.recorded.img = vm.authData.profileImageURL;
+                        homeService.recorded.name = vm.authData.displayName;
+                        homeService.recorded.img = vm.authData.profileImageURL;
                         homeService.update();
                         $state.go('app.splash');
                     });
@@ -61,9 +63,9 @@
                     vm.message = 'Logged in to Google.';
                     $timeout(function () { // invokes $scope.$apply()
                         vm.authData = authData.google;
-                        vm.recorded.name = vm.authData.displayName;
-                        vm.recorded.img = vm.authData.profileImageURL;
-                        homeService.update();
+                        homeService.recorded.name = vm.authData.displayName;
+                        homeService.recorded.img = vm.authData.profileImageURL;
+                        homeService.player.$save(homeService.recorded);
                         $state.go('app.splash');
                     });
                 }
@@ -98,7 +100,7 @@
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
                     vm.message = 'Logged into Game';
-                    $timeout(function() {
+                    $timeout(function () {
                         $state.go('app.splash');
                     })
                 }

@@ -30,20 +30,17 @@
         self.player = homeService.player;
         self.selected = homeService.recorded;
         self.selectPlayer = selectPlayer;
-        self.countItDown = countItDown;
         self.countdown = homeService.countdown;
         self.updatePlayer = updatePlayer;
         self.playSound = playSound;
         self.newGame = newGame;
+        self.incrementCountdown = incrementCountdown;
 
         function playSound () {
             ion.sound.play("snap");
         }
         function newGame() {
             self.counter = homeService.newGame();
-        }
-        function countItDown () {
-            homeService.countItDown();
         }
         function selectPlayer () {
             homeService.selectPlayer();
@@ -55,9 +52,11 @@
         function initPlayer () {
             homeService.initPlayer();
         }
+        function incrementCountdown() {
+            self.selected.countdown = homeService.incrementCountdown();
+        }
         function incrementCounter () {
             self.selected.counter = homeService.incrementCounter();
-            self.selected.countdown = homeService.incrementCountdown();
         }
         function updatePlayer () {
             homeService.updatePlayer();
