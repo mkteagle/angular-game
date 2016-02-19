@@ -3,13 +3,21 @@
 
 'use strict';
 
+<<<<<<< HEAD
 angular.module('starter.controllers', [])
+=======
+angular.module('starter.controllers', ['ngStorage'])
+>>>>>>> Ricardo2
     .controller('AppCtrl', AppCtrl)
     .controller('LoginCtrl', LoginCtrl);
 
 //AppCtrl.$inject = ['homeService'];
 
+<<<<<<< HEAD
 function AppCtrl ($scope, $ionicModal, $ionicPopover, $timeout) {
+=======
+function AppCtrl ($scope, $ionicModal, $ionicPopover, $timeout, $localStorage) {
+>>>>>>> Ricardo2
     // Form data for the login modal
     $scope.loginData = {};
     $scope.isExpanded = false;
