@@ -2,9 +2,11 @@
 angular.module('app.login', [])
 
 .controller('loginController', loginController);
-    loginController.$inject = ['$timeout', 'homeService', '$state'];
+    loginController.$inject = ['$timeout', 'homeService', '$state', '$localStorage'];
 
-function loginController($timeout, homeService, $state) {
+
+
+function loginController($timeout, homeService, $state, $localStorage) {
     // controller data and functions
     var vm = this;
     vm.player = homeService.player;
@@ -69,6 +71,10 @@ function loginController($timeout, homeService, $state) {
 
     // ******** EMAIL LOGIN ********
     var ref = new Firebase("https://angular-game.firebaseio.com");
+
+    //$scope.createUser = function() {
+    //    $localStorage.
+    //}
 
     function createUser() {
 
