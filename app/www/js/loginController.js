@@ -1,4 +1,4 @@
-(function (){
+(function () {
     angular.module('app.login', [])
 
         .controller('loginController', loginController);
@@ -16,13 +16,17 @@
         vm.createUser = createUser;
         vm.changeEmail = changeEmail;
         vm.changePassord = changePassord;
+        vm.initPlayer = initPlayer;
         vm.email = "";
         vm.password = "";
         vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
         //IMPORTANT change to match the url of your firebase
 
-        //var url = 'https://donut-click.firebaseio.com/';
-        var url = 'https://angular-game.firebaseio.com/';
+        var url = 'https://donut-click.firebaseio.com/';
+        //var url = 'https://angular-game.firebaseio.com/';
+        function initPlayer() {
+            homeService.initPlayer();
+        }
 
         // ******** FACEBOOK LOGIN ********
         function facebookLogin() {
@@ -34,10 +38,11 @@
                 } else {
                     console.log('Logged in to Facebook', authData);
                     vm.message = 'Logged in to Facebook.';
+                    homeService.initPlayer();
                     $timeout(function () { // invokes $scope.$apply()
                         vm.authData = authData.facebook;
-                        vm.recorded.name = vm.authData.displayName;
-                        vm.recorded.img = vm.authData.profileImageURL;
+                        homeService.recorded.name = vm.authData.displayName;
+                        homeService.recorded.img = vm.authData.profileImageURL;
                         homeService.update();
                         $state.go('app.splash');
                     });
@@ -58,9 +63,9 @@
                     vm.message = 'Logged in to Google.';
                     $timeout(function () { // invokes $scope.$apply()
                         vm.authData = authData.google;
-                        vm.recorded.name = vm.authData.displayName;
-                        vm.recorded.img = vm.authData.profileImageURL;
-                        homeService.update();
+                        homeService.recorded.name = vm.authData.displayName;
+                        homeService.recorded.img = vm.authData.profileImageURL;
+                        homeService.player.$save(homeService.recorded);
                         $state.go('app.splash');
                     });
                 }
@@ -68,7 +73,7 @@
         }
 
         // ******** EMAIL LOGIN ********
-        var ref = new Firebase("https://angular-game.firebaseio.com");
+        var ref = new Firebase(url);
 
         function createUser() {
 
@@ -95,7 +100,7 @@
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
                     vm.message = 'Logged into Game';
-                    $timeout(function() {
+                    $timeout(function () {
                         $state.go('app.splash');
                     })
                 }
