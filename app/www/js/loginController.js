@@ -20,6 +20,7 @@ function loginController($timeout, homeService, $state, $localStorage) {
     vm.changePassord = changePassord;
     vm.email = "";
     vm.password = "";
+    vm.isLoggedIn = false;
     vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
     //IMPORTANT change to match the url of your firebase
 
@@ -85,6 +86,7 @@ function loginController($timeout, homeService, $state, $localStorage) {
             if (error) {
                 console.log("Error creating user:", error);
             } else {
+                vm.isLoggedIn = true;
                 console.log("Successfully created user account with uid:", userData.uid);
             }
         });
