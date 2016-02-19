@@ -1,28 +1,27 @@
 (function () {
-    angular.module('app.login', ['ngStorage'])
+    angular.module('app.login', [])
 .controller('loginController', loginController);
-    loginController.$inject = ['$timeout', 'homeService', '$state', '$localStorage'];
+    loginController.$inject = ['loginService'];
 
 
 
-function loginController($timeout, homeService, $state, $localStorage) {
+function loginController(loginService) {
     // controller data and functions
     var vm = this;
-    vm.player = homeService.player;
-    vm.authData = {};
-    vm.recorded = homeService.recorded;
+    vm.authData = loginService.authData;
+    vm.recorded = loginService.recorded;
+    vm.isUserLoggedIn = loginService.isUserLoggedIn;
     vm.facebookLogin = facebookLogin;
     vm.googleLogin = googleLogin;
     vm.authWithPassword = authWithPassword;
     vm.createUser = createUser;
-    vm.changeEmail = changeEmail;
-    vm.changePassword = changePassword;
-    vm.email = "";
-    vm.password = "";
-    vm.isLoggedIn = false;
-    $localStorage.isUserLoggedIn = false;
-    vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
+    //vm.changeEmail = changeEmail;
+    //vm.changePassword = changePassword;
+    vm.email = '';
+    vm.password = '';
+    //vm.isLoggedIn = false;
     //IMPORTANT change to match the url of your firebase
+<<<<<<< HEAD
 
     var url = 'https://donut-click.firebaseio.com/';
     //var url = 'https://angular-game.firebaseio.com/';
@@ -107,60 +106,19 @@ function loginController($timeout, homeService, $state, $localStorage) {
             }
         });
 
+=======
+    function facebookLogin() {
+        loginService.facebookLogin();
+>>>>>>> loginService
     }
-
-    function changeEmail() {
-        ref.changeEmail({
-            oldEmail: "bobtony@firebase.com",
-            newEmail: "bobtony@google.com",
-            password: "correcthorsebatterystaple"
-        }, function (error) {
-            if (error === null) {
-                console.log("Email changed successfully");
-            } else {
-                console.log("Error changing email:", error);
-            }
-        });
+    function googleLogin() {
+        loginService.googleLogin();
     }
-
-    function changePassword() {
-        ref.changePassword({
-            email: "bobtony@firebase.com",
-            oldPassword: "correcthorsebatterystaple",
-            newPassword: "neatsupersecurenewpassword"
-        }, function (error) {
-            if (error === null) {
-                console.log("Password changed successfully");
-            } else {
-                console.log("Error changing password:", error);
-            }
-        });
+    function createUser() {
+        loginService.createUser(vm.email, vm.password);
     }
-
-    function resetPassord() {
-        ref.resetPassword({
-            email: "bobtony@firebase.com"
-        }, function (error) {
-            if (error === null) {
-                console.log("Password reset email sent successfully");
-            } else {
-                console.log("Error sending password reset email:", error);
-            }
-        });
-
-    }
-
-    function removeUser() {
-        ref.removeUser({
-            email: "bobtony@firebase.com",
-            password: "correcthorsebatterystaple"
-        }, function (error) {
-            if (error === null) {
-                console.log("User removed successfully");
-            } else {
-                console.log("Error removing user:", error);
-            }
-        });
+    function authWithPassword() {
+        loginService.authWithPassword(vm.email, vm.password);
     }
 }
 
