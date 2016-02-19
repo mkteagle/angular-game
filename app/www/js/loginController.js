@@ -16,17 +16,15 @@
         vm.createUser = createUser;
         vm.changeEmail = changeEmail;
         vm.changePassord = changePassord;
-        vm.initPlayer = initPlayer;
         vm.email = "";
         vm.password = "";
         vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
         //IMPORTANT change to match the url of your firebase
 
-        var url = 'https://donut-click.firebaseio.com/';
-        //var url = 'https://angular-game.firebaseio.com/';
-        function initPlayer() {
-            homeService.initPlayer();
-        }
+        //var url = 'https://donut-click.firebaseio.com/';
+        var url = 'https://angular-game.firebaseio.com/';
+        var ref = new Firebase(url);
+
 
         // ******** FACEBOOK LOGIN ********
         function facebookLogin() {
@@ -38,8 +36,8 @@
                 } else {
                     console.log('Logged in to Facebook', authData);
                     vm.message = 'Logged in to Facebook.';
-                    homeService.initPlayer();
                     $timeout(function () { // invokes $scope.$apply()
+                        homeService.initPlayer();
                         vm.authData = authData.facebook;
                         homeService.recorded.name = vm.authData.displayName;
                         homeService.recorded.img = vm.authData.profileImageURL;
@@ -62,6 +60,7 @@
                     console.log("Logged in to Google", authData);
                     vm.message = 'Logged in to Google.';
                     $timeout(function () { // invokes $scope.$apply()
+                        homeService.initPlayer();
                         vm.authData = authData.google;
                         homeService.recorded.name = vm.authData.displayName;
                         homeService.recorded.img = vm.authData.profileImageURL;
@@ -73,7 +72,6 @@
         }
 
         // ******** EMAIL LOGIN ********
-        var ref = new Firebase(url);
 
         function createUser() {
 
@@ -92,7 +90,7 @@
         function authWithPassword() {
 
             ref.authWithPassword({
-                email: vm.user,
+                email: vm.email,
                 password: vm.password
             }, function (error, authData) {
                 if (error) {
