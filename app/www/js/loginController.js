@@ -1,11 +1,11 @@
 (function () {
     angular.module('app.login', ['ngStorage'])
 .controller('loginController', loginController);
-    loginController.$inject = ['$timeout', 'homeService', '$state', '$localStorage'];
+    loginController.$inject = ['$timeout', 'homeService', '$state', '$localStorage', 'loginService'];
 
 
 
-function loginController($timeout, homeService, $state, $localStorage) {
+function loginController($timeout, homeService, $state, $localStorage, loginService) {
     // controller data and functions
     var vm = this;
     vm.player = homeService.player;
@@ -19,8 +19,9 @@ function loginController($timeout, homeService, $state, $localStorage) {
     vm.changePassword = changePassword;
     vm.email = "";
     vm.password = "";
-    vm.isLoggedIn = false;
+    //vm.isLoggedIn = false;
     $localStorage.isUserLoggedIn = false;
+    vm.isUserLoggedIn = $localStorage.isUserLoggedIn;
     vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
     //IMPORTANT change to match the url of your firebase
 
