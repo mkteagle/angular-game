@@ -54,15 +54,15 @@
         }
 
         function incrementCountdown () {
-            if (self.recorded.counter != self.upgrades[self.index].goal) {
-                self.recorded.countdown = Number(self.upgrades[self.index].goal) - Number(self.upgrades[self.index].id);
+            if (self.recorded.counter < self.upgrades[self.index].goal) {
+                console.log(self.recorded.countdown);
+                self.recorded.countdown = self.recorded.countdown - Number(self.upgrades[self.index].id);
                 self.update();
                 return self.recorded.countdown;
             }
             else {
                 self.recorded.upgrade = true;
-                self.recorded.countdown = self.upgrades[self.index].goal - Number(self.upgrades[self.index].id);
-                console.log(self.recorded.countdown);
+                self.recorded.countdown = self.recorded.countdown - Number(self.upgrades[self.index].id);
                 self.update();
                 return self.recorded.countdown;
             }
@@ -77,7 +77,7 @@
             self.update();
         }
         function incrementCounter () {
-                if (self.recorded.counter != self.upgrades[self.index].goal) {
+                if (self.recorded.counter < self.upgrades[self.index].goal) {
                     self.recorded.counter = self.recorded.counter + self.upgrades[self.index].id;
                     self.showToast();
                     self.update();
