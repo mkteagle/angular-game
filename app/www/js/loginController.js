@@ -73,7 +73,6 @@ function loginController($timeout, homeService, $state, $localStorage) {
 
 
     // ******** EMAIL LOGIN ********
-    //var ref = new Firebase("https://angular-game.firebaseio.com");
 
     function createUser() {
 
@@ -94,7 +93,7 @@ function loginController($timeout, homeService, $state, $localStorage) {
     function authWithPassword() {
 
         ref.authWithPassword({
-            email: vm.user,
+            email: vm.email,
             password: vm.password
         }, function (error, authData) {
             if (error) {
