@@ -98,7 +98,7 @@ p {
     margin-top: 50px;
 }
 progress {
-    width: 400px;
+    width: 300px;
     height: 14px;
     margin: 50px auto;
     display: block;
@@ -139,6 +139,7 @@ progress::-webkit-progress-value {
 #createUser {
     position: center !important;
 }
+
 /*Animated Background */
 /*@keyframes animatedBackground {*/
     /*from { background-position: 0 0; }*/
