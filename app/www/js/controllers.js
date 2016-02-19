@@ -1,9 +1,15 @@
-/* global angular, document, window */
+(function() {
+
+
 'use strict';
 
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngStorage'])
+    .controller('AppCtrl', AppCtrl)
+    .controller('LoginCtrl', LoginCtrl);
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
+//AppCtrl.$inject = ['homeService'];
+
+function AppCtrl ($scope, $ionicModal, $ionicPopover, $timeout, $localStorage) {
     // Form data for the login modal
     $scope.loginData = {};
     $scope.isExpanded = false;
@@ -12,7 +18,7 @@ angular.module('starter.controllers', [])
 
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
-        navIcons.addEventListener('click', function() {
+        navIcons.addEventListener('click', function () {
             this.classList.toggle('active');
         });
     }
@@ -21,15 +27,15 @@ angular.module('starter.controllers', [])
     // Layout Methods
     ////////////////////////////////////////
 
-    $scope.hideNavBar = function() {
+    $scope.hideNavBar = function () {
         document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
     };
 
-    $scope.showNavBar = function() {
+    $scope.showNavBar = function () {
         document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
     };
 
-    $scope.noHeader = function() {
+    $scope.noHeader = function () {
         var content = document.getElementsByTagName('ion-content');
         for (var i = 0; i < content.length; i++) {
             if (content[i].classList.contains('has-header')) {
@@ -38,11 +44,11 @@ angular.module('starter.controllers', [])
         }
     };
 
-    $scope.setExpanded = function(bool) {
+    $scope.setExpanded = function (bool) {
         $scope.isExpanded = bool;
     };
 
-    $scope.setHeaderFab = function(location) {
+    $scope.setHeaderFab = function (location) {
         var hasHeaderFabLeft = false;
         var hasHeaderFabRight = false;
 
@@ -59,7 +65,7 @@ angular.module('starter.controllers', [])
         $scope.hasHeaderFabRight = hasHeaderFabRight;
     };
 
-    $scope.hasHeader = function() {
+    $scope.hasHeader = function () {
         var content = document.getElementsByTagName('ion-content');
         for (var i = 0; i < content.length; i++) {
             if (!content[i].classList.contains('has-header')) {
@@ -69,32 +75,29 @@ angular.module('starter.controllers', [])
 
     };
 
-    $scope.hideHeader = function() {
+    $scope.hideHeader = function () {
         $scope.hideNavBar();
         $scope.noHeader();
     };
 
-    $scope.showHeader = function() {
+    $scope.showHeader = function () {
         $scope.showNavBar();
         $scope.hasHeader();
     };
 
-    $scope.clearFabs = function() {
+    $scope.clearFabs = function () {
         var fabs = document.getElementsByClassName('button-fab');
         if (fabs.length && fabs.length > 1) {
             fabs[0].remove();
         }
     };
-})
+}
+    function LoginCtrl($scope, $timeout, ionicMaterialInk) {
+        $scope.$parent.clearFabs();
+        $timeout(function() {
+            $scope.$parent.hideHeader();
+        }, 0);
+        ionicMaterialInk.displayEffect();
+    }
 
-.controller('LoginCtrl', function($scope, $timeout, $stateParams, ionicMaterialInk) {
-    $scope.$parent.clearFabs();
-    $timeout(function() {
-        $scope.$parent.hideHeader();
-    }, 0);
-    ionicMaterialInk.displayEffect();
-})
-
-
-
-;
+})();
