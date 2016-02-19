@@ -34,7 +34,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
-        controller: 'AppCtrl'
+        controller: 'AppCtrl as ac'
     })
 
     .state('app.login', {
