@@ -159,3 +159,5 @@ test/temp
 
 *.sublime-project
 ####################################
+
+app/www/templates/menu.html
