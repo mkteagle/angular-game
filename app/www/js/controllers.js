@@ -9,6 +9,8 @@ angular.module('starter.controllers', ['ngStorage'])
 
 //AppCtrl.$inject = ['homeService'];
 
+
+
 function AppCtrl ($scope, $ionicModal, $ionicPopover, $timeout, $localStorage) {
     // Form data for the login modal
     $scope.loginData = {};
