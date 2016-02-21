@@ -2,12 +2,12 @@
     'use strict';
     angular.module('loginService', [])
         .service('loginService', loginService);
-    loginService.$inject = ['$timeout', '$state','$localStorage', 'homeService'];
+    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService'];
 
-    function loginService($timeout, $state, $localStorage, homeService) {
+    function loginService($timeout, $state, $localStorage, gameService) {
         var self = this;
         self.authData = {};
-        self.recorded = homeService.recorded;
+        self.recorded = gameService.recorded;
         self.storage = storage;
         self.facebookLogin = facebookLogin;
         self.googleLogin = googleLogin;
@@ -32,11 +32,11 @@
                     console.log('Logged in to Facebook', authData);
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
-                        homeService.initPlayer();
+                        gameService.initPlayer();
                         self.authData = authData.facebook;
-                        homeService.recorded.name = self.authData.displayName;
-                        homeService.recorded.img = self.authData.profileImageURL;
-                        homeService.update();
+                        gameService.recorded.name = self.authData.displayName;
+                        gameService.recorded.img = self.authData.profileImageURL;
+                        gameService.update();
                         self.storage();
                         $state.go('app.splash');
                     });
@@ -55,11 +55,11 @@
                     console.log("Logged in to Google", authData);
                     self.message = 'Logged in to Google.';
                     $timeout(function () { // invokes $scope.$apply()
-                        homeService.initPlayer();
+                        gameService.initPlayer();
                         self.authData = authData.google;
-                        homeService.recorded.name = self.authData.displayName;
-                        homeService.recorded.img = self.authData.profileImageURL;
-                        homeService.player.$save(self.recorded);
+                        gameService.recorded.name = self.authData.displayName;
+                        gameService.recorded.img = self.authData.profileImageURL;
+                        gameService.player.$save(self.recorded);
                         self.storage();
                         $state.go('app.splash');
                     });

@@ -1,12 +1,12 @@
 (function() {
     'use strict';
-    angular.module('homeService', [])
-        .service('homeService', homeService);
+    angular.module('gameService', [])
+        .service('gameService', gameService);
 
-    homeService.$inject = ['$firebaseArray', 'ngToast'];
+    gameService.$inject = ['$firebaseArray', 'ngToast'];
 
 
-    function homeService ($firebaseArray, ngToast) {
+    function gameService ($firebaseArray, ngToast) {
         var self = this;
         var ref = new Firebase('http://donut-click.firebaseIO.com');
         var leaderRef = new Firebase('http://donut-click.firebaseIO.com/leaderboard');
@@ -55,7 +55,6 @@
 
         function incrementCountdown () {
             if (self.recorded.counter < self.upgrades[self.index].goal) {
-                console.log(self.recorded.countdown);
                 self.recorded.countdown = self.recorded.countdown - Number(self.upgrades[self.index].id);
                 self.update();
                 return self.recorded.countdown;

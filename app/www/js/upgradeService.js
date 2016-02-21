@@ -1,3 +1,10 @@
-/**
- * Created by i68066 on 2/20/16.
- */
+(function() {
+    angular.module('upgradeService', [])
+        .service('upgradeService', upgradeService);
+
+    function upgradeService() {
+        var self = this;
+        self.upgrades = {};
+
+    }
+})();
