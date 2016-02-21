@@ -3,9 +3,8 @@
 
 'use strict';
 
-angular.module('starter.controllers', [])
+angular.module('app.ctrl', [])
     .controller('AppCtrl', AppCtrl)
-    .controller('LoginCtrl', LoginCtrl);
 
 AppCtrl.$inject = ['loginService'];
 
@@ -96,12 +95,5 @@ function AppCtrl ($ionicModal, $ionicPopover, $timeout, $localStorage, loginServ
         }
     };
 }
-    function LoginCtrl($scope, $timeout, ionicMaterialInk) {
-        $scope.$parent.clearFabs();
-        $timeout(function() {
-            $scope.$parent.hideHeader();
-        }, 0);
-        ionicMaterialInk.displayEffect();
-    }
 
 })();
