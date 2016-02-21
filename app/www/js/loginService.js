@@ -57,10 +57,11 @@
                     $timeout(function () { // invokes $scope.$apply()
                         gameService.initPlayer();
                         self.authData = authData.google;
-                        gameService.recorded.name = self.authData.displayName;
-                        gameService.recorded.img = self.authData.profileImageURL;
+                        self.recorded.name = gameService.playerName();
+                        self.recorded.name = self.authData.displayName;
+                        self.recorded.img = gameService.playerPic();
+                        self.recorded.img = self.authData.profileImageURL;
                         gameService.player.$save(self.recorded);
-                        self.storage();
                         $state.go('app.splash');
                     });
                 }
