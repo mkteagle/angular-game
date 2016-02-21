@@ -3,20 +3,21 @@
 
 'use strict';
 
-angular.module('starter.controllers', ['ngStorage'])
+angular.module('app.ctrl', [])
     .controller('AppCtrl', AppCtrl)
-    .controller('LoginCtrl', LoginCtrl);
 
-//AppCtrl.$inject = ['homeService'];
-
+AppCtrl.$inject = ['loginService'];
 
 
-function AppCtrl ($scope, $ionicModal, $ionicPopover, $timeout, $localStorage) {
+
+function AppCtrl ($ionicModal, $ionicPopover, $timeout, $localStorage, loginService) {
     // Form data for the login modal
-    $scope.loginData = {};
-    $scope.isExpanded = false;
-    $scope.hasHeaderFabLeft = false;
-    $scope.hasHeaderFabRight = false;
+    var self = this;
+    self.loginData = {};
+    self.isExpanded = false;
+    self.hasHeaderFabLeft = false;
+    self.hasHeaderFabRight = false;
+    //self.isUserLoggedIn = loginService.isUserLoggedIn;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
@@ -29,15 +30,15 @@ function AppCtrl ($scope, $ionicModal, $ionicPopover, $timeout, $localStorage) {
     // Layout Methods
     ////////////////////////////////////////
 
-    $scope.hideNavBar = function () {
+    self.hideNavBar = function () {
         document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
     };
 
-    $scope.showNavBar = function () {
+    self.showNavBar = function () {
         document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
     };
 
-    $scope.noHeader = function () {
+    self.noHeader = function () {
         var content = document.getElementsByTagName('ion-content');
         for (var i = 0; i < content.length; i++) {
             if (content[i].classList.contains('has-header')) {
@@ -46,11 +47,11 @@ function AppCtrl ($scope, $ionicModal, $ionicPopover, $timeout, $localStorage) {
         }
     };
 
-    $scope.setExpanded = function (bool) {
-        $scope.isExpanded = bool;
+    self.setExpanded = function (bool) {
+        self.isExpanded = bool;
     };
 
-    $scope.setHeaderFab = function (location) {
+    self.setHeaderFab = function (location) {
         var hasHeaderFabLeft = false;
         var hasHeaderFabRight = false;
 
@@ -63,11 +64,11 @@ function AppCtrl ($scope, $ionicModal, $ionicPopover, $timeout, $localStorage) {
                 break;
         }
 
-        $scope.hasHeaderFabLeft = hasHeaderFabLeft;
-        $scope.hasHeaderFabRight = hasHeaderFabRight;
+        self.hasHeaderFabLeft = hasHeaderFabLeft;
+        self.hasHeaderFabRight = hasHeaderFabRight;
     };
 
-    $scope.hasHeader = function () {
+    self.hasHeader = function () {
         var content = document.getElementsByTagName('ion-content');
         for (var i = 0; i < content.length; i++) {
             if (!content[i].classList.contains('has-header')) {
@@ -77,29 +78,22 @@ function AppCtrl ($scope, $ionicModal, $ionicPopover, $timeout, $localStorage) {
 
     };
 
-    $scope.hideHeader = function () {
-        $scope.hideNavBar();
-        $scope.noHeader();
+    self.hideHeader = function () {
+        self.hideNavBar();
+        self.noHeader();
     };
 
-    $scope.showHeader = function () {
-        $scope.showNavBar();
-        $scope.hasHeader();
+    self.showHeader = function () {
+        self.showNavBar();
+        self.hasHeader();
     };
 
-    $scope.clearFabs = function () {
+    self.clearFabs = function () {
         var fabs = document.getElementsByClassName('button-fab');
         if (fabs.length && fabs.length > 1) {
             fabs[0].remove();
         }
     };
 }
-    function LoginCtrl($scope, $timeout, ionicMaterialInk) {
-        $scope.$parent.clearFabs();
-        $timeout(function() {
-            $scope.$parent.hideHeader();
-        }, 0);
-        ionicMaterialInk.displayEffect();
-    }
 
 })();
