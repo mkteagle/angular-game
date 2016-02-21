@@ -13,17 +13,29 @@
     </ion-side-menu-content>
     <ion-side-menu side="right">
         <ion-header-bar class="dark-bg expanded">
+<<<<<<< HEAD
             <span class="avatar" style="background: url('img/donutTemp.png'); background-size: cover;"></span>
             <h2>Homer</h2>
+=======
+            <span class="avatar" style="background: url('img/crown.jpg'); background-size: cover;"></span>
+            <h2>User</h2>
+>>>>>>> master
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
+
+            <ion-list ng-show="hc.recorded.displayName != null">
+
             <ion-list>
+<<<<<<< HEAD
+=======
+
+>>>>>>> Ricardo2
                 <ion-item nav-clear  menu-close ui-sref="app.login">
                     Log Out
                 </ion-item>
-                <ion-item nav-clear menu-close>
-                    <a ng-click="hc.newGame()">New Game</a>
-                </ion-item>
+                <!--<ion-item nav-clear menu-close>-->
+                    <!--<a ng-click="hc.newGame()">New Game</a>-->
+                <!--</ion-item>-->
                 <ion-item nav-clear menu-close ui-sref="app.game">
                     Resume Game
                 </ion-item>
