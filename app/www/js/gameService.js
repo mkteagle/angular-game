@@ -24,15 +24,17 @@
         self.incrementCountdown = incrementCountdown;
         self.updatePlayer = updatePlayer;
         self.newGame = newGame;
+        self.playerName = playerName;
+        self.playerPic = playerPic;
         self.upgrades = [];
         self.goal = 1000;
         self.index = 0;
-        self.countInc = 1;
+        self.incrementClicker = incrementClicker;
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 1.5;
         }
-        self.recorded = {name: '', img: '', counter: 0, countdown: self.upgrades[self.index].goal, level: self.upgrades[self.index].id + 'x', goal: self.upgrades[self.index].goal};
+        self.recorded = {name: '', img: '', counter: 0, countdown: self.upgrades[self.index].goal, level: self.upgrades[self.index].id + 'x', goal: self.upgrades[self.index].goal, clicker: 0};
         function newGame() {
             self.initPlayer();
             self.recorded.counter = 0;
@@ -41,6 +43,12 @@
             self.recorded.upgrade = false;
             self.update();
             return self.recorded.counter;
+        }
+        function playerName() {
+            return self.recorded.name;
+        }
+        function playerPic() {
+            return self.recorded.img;
         }
         function showToast() {
             ngToast.create({
@@ -52,9 +60,18 @@
         function selectPlayer() {
             self.selected = angular.isNumber(self.recorded) ? $scope.player[self.recorded] : self.recorded;
         }
+        function incrementClicker() {
+            self.recorded.clicker++;
+            return self.recorded.clicker;
+        }
 
         function incrementCountdown () {
-            if (self.recorded.counter < self.upgrades[self.index].goal) {
+            if (self.recorded.countdown <= 0) {
+                self.recorded.upgrade = true;
+                self.update();
+                return self.recorded.countdown = 0;
+            }
+            else if (self.recorded.counter < self.upgrades[self.index].goal) {
                 self.recorded.countdown = self.recorded.countdown - Number(self.upgrades[self.index].id);
                 self.update();
                 return self.recorded.countdown;
@@ -67,9 +84,9 @@
             }
         }
         function updatePlayer() {
+            self.recorded.counter = self.recorded.counter - self.upgrades[self.index].goal;
             self.index++;
             self.recorded.upgrade = false;
-            self.recorded.counter = 0;
             self.recorded.countdown = self.upgrades[self.index].goal;
             self.recorded.goal = self.upgrades[self.index].goal;
             self.recorded.level = self.upgrades[self.index].id + 'x';
@@ -92,7 +109,7 @@
         }
         function initPlayer () {
             self.level = '1x';
-            self.player.$add({name: self.recorded.name, img: self.recorded.img, counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.upgrades[self.index].goal, upgrade: false, goal: self.upgrades[self.index].goal}).then(function(ref) {
+            self.player.$add({name: self.recorded.name, img: self.recorded.img, counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.upgrades[self.index].goal, upgrade: false, goal: self.upgrades[self.index].goal, clicker: self.recorded.clicker}).then(function(ref) {
                 self.recordId = ref.key();
                 self.recorded = self.player.$getRecord(self.recordId);
                 self.recorded.id = self.recordId;
