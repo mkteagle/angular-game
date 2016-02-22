@@ -13,6 +13,7 @@
         self.googleLogin = googleLogin;
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
+        self.logout = logout;
         var url = 'https://donut-click.firebaseio.com/';
         //var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
@@ -33,6 +34,7 @@
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
                         gameService.initPlayer();
+                        self.isUserLoggedIn = true;
                         self.authData = authData.facebook;
                         gameService.recorded.name = self.authData.displayName;
                         gameService.recorded.img = self.authData.profileImageURL;
@@ -56,6 +58,7 @@
                     self.message = 'Logged in to Google.';
                     $timeout(function () { // invokes $scope.$apply()
                         gameService.initPlayer();
+                        self.isUserLoggedIn = true;
                         self.authData = authData.google;
                         self.recorded.name = gameService.playerName();
                         self.recorded.name = self.authData.displayName;
@@ -83,6 +86,7 @@
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
                     self.storage();
+                    self.isUserLoggedIn = true;
                     $timeout(function(){
                         $state.go('app.splash');
                     })
@@ -102,6 +106,7 @@
                     console.log("Authenticated successfully with payload:", authData);
                     self.message = 'Logged into Game';
                     self.storage();
+                    self.isUserLoggedIn = true;
                     $timeout(function() {
                         $state.go('app.splash');
                     })
@@ -109,6 +114,23 @@
             });
 
         }
+    }
+    function logout(email, password) {
+        ref.unauth({
+            email: email,
+            password: password
+        }, function (error) {
+            if (error) {
+                console.log("Logout Failed!", error);
+            }
+            else {
+                self.isUserLoggedIn = false;
+                $timeout(function() {
+                    $state.go('app.login');
+                })
+            }
+        })
+
     }
 
 })();
