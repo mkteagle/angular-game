@@ -1,4 +1,4 @@
-<ion-view view-title="Game Play" ng-controller="homeController as hc" ng-init="hc.countItDown()">
+<ion-view view-title="Game Play" ng-controller="gameController as hc" ng-init="hc.countItDown()">
     <ion-content>
 
         <toast></toast>
@@ -8,14 +8,12 @@
         <div class="row">
             <div class="onehundred">{{ hc.selected.countdown }}</div>
             <span class="onehundreddonuts"> til {{ hc.selected.goal }}</span></div>
-        <progress id="progressbar" max="{{ hc.selected.countdown }}" value="{{100 - hc.selected.goal}}"></progress>
+        <progress id="progressbar" max="100" value="{{100 - hc.selected.goal}}"></progress>
         <div id="progressbarlabel"></div>
+        <upgrade-directive></upgrade-directive>
         <div class="main-container">
             <img ng-click="hc.showToast(); hc.incrementCounter(); hc.incrementCountdown(); hc.playSound()"
                  ng-src="img/doughnut-giphy.gif" style="height: 180px; width: 170px;">
-            <button class="button button-large button-clear" ng-click="hc.updatePlayer()" ng-if="hc.selected.upgrade">
-                Upgrade Player
-            </button>
         </div>
         </div>
     </ion-content>
