@@ -62,8 +62,7 @@
         function incrementClicker(cost) {
             self.recorded.clicker++;
             self.recorded.counter = self.recorded.counter - cost;
-            self.recorded.countdown = self.recorded.countdown - cost;
-            console.log(self.recorded.countdown);
+            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
             self.update();
             return self.recorded.clicker;
         }
