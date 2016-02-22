@@ -1,5 +1,4 @@
 (function () {
-    angular.module('app.login', [])
     angular.module('app.login', ['ngStorage'])
 .controller('loginController', loginController);
     loginController.$inject = ['$timeout', 'homeService', '$state', '$localStorage'];
@@ -72,7 +71,6 @@ function loginController($timeout, homeService, $state, $localStorage) {
             });
         }
 
-        // ******** EMAIL LOGIN ********
 
     // ******** EMAIL LOGIN ********
     //var ref = new Firebase("https://angular-game.firebaseio.com");
