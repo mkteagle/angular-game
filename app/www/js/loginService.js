@@ -7,6 +7,9 @@
 
         var self = this;
         self.facebookLogin = facebookLogin;
+        self.googleLogin = googleLogin;
+        self.createUser = createUser;
+        self.authWithPassword = authWithPassword;
 
         var url = 'https://donut-click.firebaseio.com/';
         //var url = 'https://angular-game.firebaseio.com/';
@@ -92,60 +95,6 @@
                 }
             });
 
-        }
-
-        function changeEmail() {
-            ref.changeEmail({
-                oldEmail: "bobtony@firebase.com",
-                newEmail: "bobtony@google.com",
-                password: "correcthorsebatterystaple"
-            }, function (error) {
-                if (error === null) {
-                    console.log("Email changed successfully");
-                } else {
-                    console.log("Error changing email:", error);
-                }
-            });
-        }
-
-        function changePassword() {
-            ref.changePassword({
-                email: "bobtony@firebase.com",
-                oldPassword: "correcthorsebatterystaple",
-                newPassword: "neatsupersecurenewpassword"
-            }, function (error) {
-                if (error === null) {
-                    console.log("Password changed successfully");
-                } else {
-                    console.log("Error changing password:", error);
-                }
-            });
-        }
-
-        function resetPassord() {
-            ref.resetPassword({
-                email: "bobtony@firebase.com"
-            }, function (error) {
-                if (error === null) {
-                    console.log("Password reset email sent successfully");
-                } else {
-                    console.log("Error sending password reset email:", error);
-                }
-            });
-
-        }
-
-        function removeUser() {
-            ref.removeUser({
-                email: "bobtony@firebase.com",
-                password: "correcthorsebatterystaple"
-            }, function (error) {
-                if (error === null) {
-                    console.log("User removed successfully");
-                } else {
-                    console.log("Error removing user:", error);
-                }
-            });
         }
 
     }

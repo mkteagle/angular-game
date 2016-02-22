@@ -15,8 +15,6 @@ function loginController($timeout, homeService, $state, $localStorage, loginServ
     vm.googleLogin = googleLogin;
     vm.authWithPassword = authWithPassword;
     vm.createUser = createUser;
-    vm.changeEmail = changeEmail;
-    vm.changePassword = changePassword;
     vm.email = "";
     vm.password = "";
     //vm.isLoggedIn = false;
