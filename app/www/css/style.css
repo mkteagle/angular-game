@@ -139,6 +139,9 @@ progress::-webkit-progress-value {
 #createUser {
     position: center !important;
 }
+.upgrade-button[disabled] {
+    background: lightgray;
+}
 
 /*Animated Background */
 /*@keyframes animatedBackground {*/
