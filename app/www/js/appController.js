@@ -18,6 +18,7 @@ function AppCtrl ($ionicModal, $ionicPopover, $timeout, $localStorage, loginServ
     self.hasHeaderFabLeft = false;
     self.hasHeaderFabRight = false;
     //self.isUserLoggedIn = loginService.isUserLoggedIn;
+    self.logout = logout;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
@@ -25,7 +26,9 @@ function AppCtrl ($ionicModal, $ionicPopover, $timeout, $localStorage, loginServ
             this.classList.toggle('active');
         });
     }
-
+    function logout() {
+        loginService.logout();
+    }
     ////////////////////////////////////////
     // Layout Methods
     ////////////////////////////////////////
