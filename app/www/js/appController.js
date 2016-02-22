@@ -6,18 +6,18 @@
 angular.module('app.ctrl', [])
     .controller('AppCtrl', AppCtrl)
 
-AppCtrl.$inject = ['loginService'];
+AppCtrl.$inject = ['loginService', '$state'];
 
 
 
-function AppCtrl ($ionicModal, $ionicPopover, $timeout, $localStorage, loginService) {
+function AppCtrl (loginService, $state) {
     // Form data for the login modal
     var self = this;
     self.loginData = {};
     self.isExpanded = false;
     self.hasHeaderFabLeft = false;
     self.hasHeaderFabRight = false;
-    //self.isUserLoggedIn = loginService.isUserLoggedIn;
+    self.isUserLoggedIn = loginService.isUserLoggedIn;
     self.logout = logout;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
@@ -28,6 +28,7 @@ function AppCtrl ($ionicModal, $ionicPopover, $timeout, $localStorage, loginServ
     }
     function logout() {
         loginService.logout();
+        self.userLoggedIn = false;
     }
     ////////////////////////////////////////
     // Layout Methods
