@@ -27,12 +27,12 @@
         self.playerName = playerName;
         self.playerPic = playerPic;
         self.upgrades = [];
-        self.goal = 1000;
         self.index = 0;
+        self.goal = 1000;
         self.incrementClicker = incrementClicker;
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
-            self.goal = self.goal * 1.5;
+            self.goal = self.goal * 2;
         }
         self.recorded = {name: '', img: '', counter: 0, countdown: self.upgrades[self.index].goal, level: self.upgrades[self.index].id + 'x', goal: self.upgrades[self.index].goal, clicker: 0};
         function newGame() {
@@ -56,12 +56,15 @@
                 content: self.recorded.level
             });
         }
-
         function selectPlayer() {
             self.selected = angular.isNumber(self.recorded) ? $scope.player[self.recorded] : self.recorded;
         }
-        function incrementClicker() {
+        function incrementClicker(cost) {
             self.recorded.clicker++;
+            self.recorded.counter = self.recorded.counter - cost;
+            self.recorded.countdown = self.recorded.countdown - cost;
+            console.log(self.recorded.countdown);
+            self.update();
             return self.recorded.clicker;
         }
 

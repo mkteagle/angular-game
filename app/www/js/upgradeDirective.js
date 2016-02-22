@@ -9,19 +9,28 @@
         uc.upgrades = upgradeService.upgrades;
         uc.recorded = gameService.recorded;
         uc.upgradeable = [];
+        uc.upgrades = [];
         uc.grandpable = false;
-        uc.goal = 100;
+        uc.acgoal = 100;
+        uc.acindex = 0;
         uc.index = 0;
+        uc.cost = 10;
         uc.clickedAutoClicker = clickedAutoClicker;
+        uc.upgradePlayer = upgradePlayer;
         for (var i = 1; i < 1000; i++) {
-            uc.upgradeable.push({id: i, goal: uc.goal});
-            uc.goal = uc.goal * 2;
+            uc.upgradeable.push({id: i, acgoal: uc.acgoal, goal: self.goal, cost: uc.cost});
+            uc.acgoal = uc.acgoal * 2;
+            uc.cost = uc.cost * 2;
+        }
+        function upgradePlayer() {
+            gameService.updatePlayer();
         }
         function clickedAutoClicker () {
             //increment score every 10 seconds for first autoclicker
-            uc.recorded.clicker = gameService.incrementClicker();
+            console.log(uc.upgradeable[uc.acindex].cost);
+            uc.recorded.clicker = gameService.incrementClicker(uc.upgradeable[uc.acindex].cost);
             gameService.player.$save(uc.recorded);
-            uc.index++;
+            uc.acindex++;
         }
         $interval(function() {
             console.log('clicker works!!!' + uc.recorded.clicker);
@@ -37,13 +46,13 @@
     };
     return {
         restrict: 'EA',
-        scope: {
-            upgrades: '=',
-            recorded: '&',
-            upgradeable: '&',
-            grandpable: '&',
-            clicker: '&'
-        },
+        //scope: {
+        //    upgrades: '=',
+        //    recorded: '&',
+        //    upgradeable: '&',
+        //    grandpable: '&',
+        //    clicker: '&'
+        //},
             controller: upgradeController,
             controllerAs: 'uc',
             bindToController: true,
