@@ -18,14 +18,10 @@
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
 
-            <ion-list ng-show="hc.recorded.displayName != null">
+            <ion-list ng-hide="hc.recorded.displayName != null">
 
             <ion-list>
-<<<<<<< HEAD
-=======
-
->>>>>>> Ricardo2
-                <ion-item nav-clear  menu-close ui-sref="app.login">
+                <ion-item nav-clear ng-click="logOut()" menu-close ui-sref="app.login">
                     Log Out
                 </ion-item>
                 <!--<ion-item nav-clear menu-close>-->

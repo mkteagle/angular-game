@@ -50,6 +50,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
+    .state('logout', {
+        url: '/logout',
+        controller: function($scope, $route) {
+            $route.reload()
+        }
+    })
+
     .state('app.email', {
         url: '/registerEmail',
         views: {
