@@ -14,11 +14,11 @@
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.logout = logout;
-
+        self.isUserLoggedIn = false;
         //var url = 'https://donut-click.firebaseio.com/';
         var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
-        self.isUserLoggedIn = false;
+
 
         function storage() {
             self.isUserLoggedIn = true;
@@ -26,7 +26,7 @@
         }
 
         // ******** FACEBOOK LOGIN ********
-        function facebookLogin() {
+        function facebookLogin(isUserLoggedIn) {
             ref.authWithOAuthPopup('facebook', function (error, authData) {
                 if (error) {
                     console.log('Log in to Facebook Failed', error);
@@ -36,7 +36,7 @@
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
                         gameService.initPlayer();
-                        self.isUserLoggedIn = true;
+                        isUserLoggedIn = true;
                         self.authData = authData.facebook;
                         gameService.recorded.name = self.authData.displayName;
                         gameService.recorded.img = self.authData.profileImageURL;
