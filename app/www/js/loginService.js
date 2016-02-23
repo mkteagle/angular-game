@@ -120,10 +120,7 @@
         function logout() {
             ref.unauth();
             console.log('User is logged out');
-<<<<<<< HEAD
-=======
             $ionicHistory.nextViewOptions({historyRoot: true});
->>>>>>> Ricardo
             $state.go('app.login');
         }
 
