@@ -4,7 +4,7 @@
             <ion-nav-back-button class="no-text">
             </ion-nav-back-button>
             <ion-nav-buttons side="right">
-                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right">
+                <button ng-if="ac.loginService.isUserLoggedIn" class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right" >
                 </button>
             </ion-nav-buttons>
         </ion-nav-bar>
@@ -23,16 +23,10 @@
 
 
             <ion-list>
-                <ion-item nav-clear menu-close ng-hide="ac.isUserLoggedIn" ng-click="ac.logout()">Log Out</ion-item>
+                <ion-item class="animate-if" nav-clear menu-close ng-if="ac.loginService.isUserLoggedIn" ng-click="ac.logout()">Log Out</ion-item>
             </ion-list>
-            <ion-list ng-if="!ac.isUserLoggedIn">
-                <!--<ion-item nav-clear  menu-close ui-sref="app.login">-->
-                    <!--Log In-->
-                <!--</ion-item>-->
-                <!--<ion-item nav-clear menu-close>-->
-                    <!--<a ng-click="hc.newGame()">New Game</a>-->
-                <!--</ion-item>-->
-                <ion-item nav-clear menu-close ui-sref="app.game">
+            <ion-list class="animate-if" ng-if="!ac.loginService.isUserLoggedIn">
+                <ion-item class="animate-if" nav-clear menu-close ng-if="ac.loginService.isUserLoggedIn" ui-sref="app.game">
                     Resume Game
                 </ion-item>
             </ion-list>

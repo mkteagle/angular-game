@@ -7,7 +7,6 @@ function loginController(loginService) {
     var vm = this;
     vm.authData = loginService.authData;
     vm.recorded = loginService.recorded;
-    vm.isUserLoggedIn = loginService.isUserLoggedIn;
     vm.facebookLogin = facebookLogin;
     vm.googleLogin = googleLogin;
     vm.authWithPassword = authWithPassword;

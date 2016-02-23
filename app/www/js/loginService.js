@@ -14,16 +14,25 @@
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.logout = logout;
+<<<<<<< HEAD
         var url = 'https://donut-click.firebaseio.com/';
         //var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
         self.isUserLoggedIn = false;
+=======
+        self.isUserLoggedIn = false;
+        //var url = 'https://donut-click.firebaseio.com/';
+        var url = 'https://angular-game.firebaseio.com/';
+        var ref = new Firebase(url);
+
+
+>>>>>>> Ricardo
         function storage() {
             self.isUserLoggedIn = true;
             $localStorage.isUserLoggedIn = self.isUserLoggedIn;
         }
         // ******** FACEBOOK LOGIN ********
-        function facebookLogin() {
+        function facebookLogin(isUserLoggedIn) {
             ref.authWithOAuthPopup('facebook', function (error, authData) {
                 if (error) {
                     console.log('Log in to Facebook Failed', error);
@@ -32,6 +41,7 @@
                     console.log('Logged in to Facebook', authData);
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
+<<<<<<< HEAD
                         gameService.initPlayer().then(function(){
                             self.isUserLoggedIn = true;
                             self.authData = authData.facebook;
@@ -43,6 +53,16 @@
                             gameService.player.$save(self.recorded);
                             $state.go('app.splash');
                         });
+=======
+                        gameService.initPlayer();
+                        isUserLoggedIn = true;
+                        self.authData = authData.facebook;
+                        gameService.recorded.name = self.authData.displayName;
+                        gameService.recorded.img = self.authData.profileImageURL;
+                        gameService.update();
+                        self.storage();
+                        $state.go('app.splash');
+>>>>>>> Ricardo
                     });
                 }
 
