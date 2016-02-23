@@ -17,16 +17,17 @@
         uc.gindex = 0;
         uc.index = 0;
         uc.cost = 10;
+        uc.gcost = 100;
         uc.clickedAutoClicker = clickedAutoClicker;
         uc.upgradePlayer = upgradePlayer;
         uc.clickGrandpa = clickGrandpa;
         for (var i = 1; i < 1000; i++) {
-            uc.upgradeable.push({id: i, acgoal: uc.acgoal, cost: uc.cost});
+            uc.upgradeable.push({id: i, goal: uc.acgoal, cost: uc.cost});
             uc.acgoal = uc.acgoal * 2;
             uc.cost = uc.cost * 2;
         }
         for (var j = 1; j < 1000; j++) {
-            uc.grandpable.push({id: j, ggoal: uc.ggoal, cost: uc.gcost});
+            uc.grandpable.push({id: j, goal: uc.ggoal, cost: uc.gcost});
             uc.ggoal = uc.ggoal * 2;
             uc.gcost = uc.gcost * 2;
         }
@@ -46,13 +47,14 @@
         }
         $interval(function() {
             console.log('clicker works!!!' + uc.recorded.clicker);
-            uc.recorded.counter += uc.recorded.clicker += uc.recorded.grandpa;
-            //uc.recorded.counter += uc.recorded.grandpa;
+            console.log('grandpa works!!!' + uc.recorded.grandpa);
+            uc.recorded.counter += uc.recorded.clicker;
+            uc.recorded.counter += uc.recorded.grandpa;
             if (uc.recorded.countdown <= 0) {
                 uc.recorded.countdown = 0
             }
             else {
-                uc.recorded.countdown = uc.recorded.countdown - uc.recorded.clicker;
+                uc.recorded.countdown = uc.recorded.countdown - uc.recorded.clicker - uc.recorded.grandpa;
             }
             gameService.player.$save(uc.recorded);
         }, 1000)
