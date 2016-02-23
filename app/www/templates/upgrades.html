@@ -1,14 +1,14 @@
 <div layout="row">
-    <a class="item item-avatar" ng-if="uc.recorded.counter < uc.upgradeable[uc.index].goal" ng-click="uc.clickedAutoClicker()">
+    <button class="item item-avatar" ng-disabled="uc.recorded.counter < uc.upgradeable[uc.index].goal" ng-click="uc.clickedAutoClicker()">
         <img src="img/Happy_Homer.gif">
         <h2>Homer</h2>
         <p>Hmmmmm Donuts...</p>
-    </a>
-    <a class="item item-avatar" ng-disabled="uc.recorded.counter < uc.grandpable[uc.gindex].goal" ng-click="uc.clickGrandpa()">
+    </button>
+    <button class="item item-avatar" ng-disabled="uc.recorded.counter < uc.grandpable[uc.gindex].goal" ng-click="uc.clickGrandpa()">
             <img src="img/grandpa.jpg">
             <h2>Old Man</h2>
             <p>Gimme gimme.</p>
-        </a>
+        </button>
 
     <button class="upgrade-button button-medium button-positive-900" ng-disabled="uc.recorded.counter < uc.recorded.goal" ng-click="uc.upgradePlayer()">Upgrade Yoself</button>
 </div>
