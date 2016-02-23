@@ -27,14 +27,15 @@
         self.playerName = playerName;
         self.playerPic = playerPic;
         self.upgrades = [];
-        self.goal = 1000;
         self.index = 0;
+        self.goal = 1000;
         self.incrementClicker = incrementClicker;
+        self.clickGrandpa = clickGrandpa;
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
-            self.goal = self.goal * 1.5;
+            self.goal = self.goal * 2;
         }
-        self.recorded = {name: '', img: '', counter: 0, countdown: self.upgrades[self.index].goal, level: self.upgrades[self.index].id + 'x', goal: self.upgrades[self.index].goal, clicker: 0};
+        self.recorded = {name: '', img: '', counter: 0, countdown: self.upgrades[self.index].goal, level: self.upgrades[self.index].id + 'x', goal: self.upgrades[self.index].goal, clicker: 0, grandpa: 0};
         function newGame() {
             self.initPlayer();
             self.recorded.counter = 0;
@@ -56,13 +57,24 @@
                 content: self.recorded.level
             });
         }
-
         function selectPlayer() {
             self.selected = angular.isNumber(self.recorded) ? $scope.player[self.recorded] : self.recorded;
         }
-        function incrementClicker() {
+        function incrementClicker(cost) {
             self.recorded.clicker++;
+            self.recorded.counter = self.recorded.counter - cost;
+            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+            self.update();
             return self.recorded.clicker;
+        }
+        function clickGrandpa(cost) {
+            self.recorded.grandpa = self.recorded.grandpa + 10;
+            self.recorded.counter = self.recorded.counter - cost;
+            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+            console.log(self.recorded);
+            console.log(self.recorded.grandpa);
+            self.update();
+            return self.recorded.grandpa;
         }
 
         function incrementCountdown () {
@@ -109,7 +121,7 @@
         }
         function initPlayer () {
             self.level = '1x';
-            self.player.$add({name: self.recorded.name, img: self.recorded.img, counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.upgrades[self.index].goal, upgrade: false, goal: self.upgrades[self.index].goal, clicker: self.recorded.clicker}).then(function(ref) {
+            self.player.$add({name: self.recorded.name, img: self.recorded.img, counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.upgrades[self.index].goal, upgrade: false, goal: self.upgrades[self.index].goal, clicker: self.recorded.clicker, grandpa: self.recorded.grandpa}).then(function(ref) {
                 self.recordId = ref.key();
                 self.recorded = self.player.$getRecord(self.recordId);
                 self.recorded.id = self.recordId;

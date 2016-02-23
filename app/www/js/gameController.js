@@ -7,6 +7,17 @@
 
     function gameController(gameService) {
         var self = this;
+        self.value = gameService.recorded.goal;
+        self.type = '';
+        if (self.value < 25) {
+            self.type = 'success';
+        } else if (self.value < 50) {
+            self.type = 'info';
+        } else if (self.value < 75) {
+            self.type = 'warning';
+        } else {
+            self.type = 'danger';
+        }
 
         //I got this code here: http://ionden.com/a/plugins/ion.sound/en.html to make the sound for the button
         ion.sound({

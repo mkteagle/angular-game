@@ -2,9 +2,9 @@
     'use strict';
     angular.module('loginService', [])
         .service('loginService', loginService);
-    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService'];
+    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService', '$ionicHistory'];
 
-    function loginService($timeout, $state, $localStorage, gameService) {
+    function loginService($timeout, $state, $localStorage, gameService, $ionicHistory) {
         var self = this;
         self.authData = {};
         self.recorded = gameService.recorded;
@@ -13,8 +13,10 @@
         self.googleLogin = googleLogin;
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
-        var url = 'https://donut-click.firebaseio.com/';
-        //var url = 'https://angular-game.firebaseio.com/';
+        self.logout = logout;
+
+        //var url = 'https://donut-click.firebaseio.com/';
+        var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
         self.isUserLoggedIn = false;
 
@@ -22,6 +24,7 @@
             self.isUserLoggedIn = true;
             $localStorage.isUserLoggedIn = self.isUserLoggedIn;
         }
+
         // ******** FACEBOOK LOGIN ********
         function facebookLogin() {
             ref.authWithOAuthPopup('facebook', function (error, authData) {
@@ -33,6 +36,7 @@
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
                         gameService.initPlayer();
+                        self.isUserLoggedIn = true;
                         self.authData = authData.facebook;
                         gameService.recorded.name = self.authData.displayName;
                         gameService.recorded.img = self.authData.profileImageURL;
@@ -56,6 +60,7 @@
                     self.message = 'Logged in to Google.';
                     $timeout(function () { // invokes $scope.$apply()
                         gameService.initPlayer();
+                        self.isUserLoggedIn = true;
                         self.authData = authData.google;
                         self.recorded.name = gameService.playerName();
                         self.recorded.name = self.authData.displayName;
@@ -83,7 +88,8 @@
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
                     self.storage();
-                    $timeout(function(){
+                    self.isUserLoggedIn = true;
+                    $timeout(function () {
                         $state.go('app.splash');
                     })
                 }
@@ -102,13 +108,27 @@
                     console.log("Authenticated successfully with payload:", authData);
                     self.message = 'Logged into Game';
                     self.storage();
-                    $timeout(function() {
+                    self.isUserLoggedIn = true;
+                    $timeout(function () {
                         $state.go('app.splash');
                     })
                 }
             });
 
         }
+
+        function logout() {
+            ref.unauth();
+            console.log('User is logged out');
+<<<<<<< HEAD
+=======
+            $ionicHistory.nextViewOptions({historyRoot: true});
+>>>>>>> Ricardo
+            $state.go('app.login');
+        }
+
+
     }
+
 
 })();

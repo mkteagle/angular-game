@@ -139,4 +139,17 @@ progress::-webkit-progress-value {
 #createUser {
     position: center !important;
 }
+<<<<<<< HEAD
 
+=======
+.upgrade-button[disabled] {
+    background: lightgray;
+}
+.donut {
+    transition: -webkit-transform 0.25s ease;
+    cursor: pointer;
+}
+.donut:active {
+    -webkit-transform: scale(2);
+}
+>>>>>>> master

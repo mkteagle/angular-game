@@ -1,4 +1,5 @@
 <div layout="row">
+<<<<<<< HEAD
     <a class="item item-avatar" ng-if="uc.recorded.counter < uc.upgradeable[uc.index].goal" ng-click="uc.clickedAutoClicker()">
         <img src="img/Happy_Homer.gif">
         <h2>Homer</h2>
@@ -10,4 +11,10 @@
             <p>Gimme gimme.</p>
         </a>
 
+=======
+    <button class="upgrade-button button-medium button-positive" ng-disabled="uc.recorded.counter < uc.upgradeable[uc.acindex].goal" ng-click="uc.clickedAutoClicker()">Add Autoclicker</button>
+    <button class="upgrade-button button-medium button-positive" ng-disabled="uc.recorded.counter < uc.grandpable[uc.gindex].goal" ng-click="uc.clickGrandpa()">Add Grandpa</button>
+    <button class="upgrade-button button-medium button-positive-900" ng-disabled="uc.recorded.counter < uc.recorded.goal" ng-click="uc.upgradePlayer()">Upgrade Yoself</button>
+    </button>
+>>>>>>> master
 </div>

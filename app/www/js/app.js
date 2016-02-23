@@ -52,6 +52,13 @@ angular.module('starter', ['ionic', 'app.ctrl', 'ionic-material', 'ionMdInput', 
         }
     })
 
+    .state('logout', {
+        url: '/logout',
+        controller: function($scope, $route) {
+            $route.reload()
+        }
+    })
+
     .state('app.email', {
         url: '/registerEmail',
         views: {
@@ -90,6 +97,7 @@ angular.module('starter', ['ionic', 'app.ctrl', 'ionic-material', 'ionMdInput', 
             }
         })
     ;
+
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
