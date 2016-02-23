@@ -25,6 +25,7 @@
             uc.upgradeable.push({id: i, goal: uc.acgoal, cost: uc.cost});
             uc.acgoal = uc.acgoal * 2;
             uc.cost = uc.cost * 2;
+            console.log(uc.upgradeable[i]);
         }
         for (var j = 1; j < 1000; j++) {
             uc.grandpable.push({id: j, goal: uc.ggoal, cost: uc.gcost});
@@ -39,6 +40,7 @@
             uc.recorded.clicker = gameService.incrementClicker(uc.upgradeable[uc.acindex].cost);
             gameService.player.$save(uc.recorded);
             uc.acindex++;
+            console.log(uc.acindex);
         }
         function clickGrandpa() {
             uc.recorded.grandpa = gameService.clickGrandpa(uc.grandpable[uc.gindex].cost);
