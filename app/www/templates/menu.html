@@ -17,13 +17,18 @@
             <h2>User</h2>
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
+
+            <ion-list ng-hide="hc.recorded.displayName != null">
+
+
+
             <ion-list>
-                <ion-item nav-clear menu-close ng-if="ac.isUserLoggedIn" ng-click="ac.logout()">Log Out</ion-item>
+                <ion-item nav-clear menu-close ng-hide="ac.isUserLoggedIn" ng-click="ac.logout()">Log Out</ion-item>
             </ion-list>
             <ion-list ng-if="!ac.isUserLoggedIn">
-                <ion-item nav-clear  menu-close ui-sref="app.login">
-                    Log In
-                </ion-item>
+                <!--<ion-item nav-clear  menu-close ui-sref="app.login">-->
+                    <!--Log In-->
+                <!--</ion-item>-->
                 <!--<ion-item nav-clear menu-close>-->
                     <!--<a ng-click="hc.newGame()">New Game</a>-->
                 <!--</ion-item>-->

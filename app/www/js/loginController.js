@@ -12,11 +12,8 @@ function loginController(loginService) {
     vm.googleLogin = googleLogin;
     vm.authWithPassword = authWithPassword;
     vm.createUser = createUser;
-    //vm.changeEmail = changeEmail;
-    //vm.changePassword = changePassword;
     vm.email = '';
     vm.password = '';
-    //vm.isLoggedIn = false;
 
     function facebookLogin() {
         loginService.facebookLogin();
