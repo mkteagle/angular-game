@@ -14,25 +14,28 @@
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.logout = logout;
+        self.isUserLoggedIn = false;
         var url = 'https://donut-click.firebaseio.com/';
         //var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
-        self.isUserLoggedIn = false;
+
+
         function storage() {
             self.isUserLoggedIn = true;
             $localStorage.isUserLoggedIn = self.isUserLoggedIn;
         }
         // ******** FACEBOOK LOGIN ********
-        function facebookLogin() {
+        function facebookLogin(isUserLoggedIn) {
             ref.authWithOAuthPopup('facebook', function (error, authData) {
                 if (error) {
                     console.log('Log in to Facebook Failed', error);
                     self.message = 'Log in to Facebook Failed. ' + error;
-                } else {
+                }
+                else {
                     console.log('Logged in to Facebook', authData);
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
-                        gameService.initPlayer().then(function(){
+                        gameService.initPlayer().then(function () {
                             self.isUserLoggedIn = true;
                             self.authData = authData.facebook;
                             self.recorded = gameService.recorded;
@@ -45,7 +48,6 @@
                         });
                     });
                 }
-
             });
         }
 

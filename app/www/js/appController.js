@@ -17,8 +17,7 @@ function AppCtrl (loginService, $state, gameService) {
     self.isExpanded = false;
     self.hasHeaderFabLeft = false;
     self.hasHeaderFabRight = false;
-    self.isUserLoggedIn = loginService.isUserLoggedIn;
-    self.img = gameService.img;
+    self.loginService = loginService;
     self.logout = logout;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
@@ -29,7 +28,7 @@ function AppCtrl (loginService, $state, gameService) {
     }
     function logout() {
         loginService.logout();
-        self.userLoggedIn = false;
+        self.loginService.isUserLoggedIn = false;
     }
     ////////////////////////////////////////
     // Layout Methods
