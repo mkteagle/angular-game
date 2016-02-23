@@ -2,9 +2,9 @@
     'use strict';
     angular.module('loginService', [])
         .service('loginService', loginService);
-    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService'];
+    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService', '$ionicHistory'];
 
-    function loginService($timeout, $state, $localStorage, gameService) {
+    function loginService($timeout, $state, $localStorage, gameService, $ionicHistory) {
         var self = this;
         self.authData = {};
         self.recorded = gameService.recorded;
@@ -14,8 +14,9 @@
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.logout = logout;
-        var url = 'https://donut-click.firebaseio.com/';
-        //var url = 'https://angular-game.firebaseio.com/';
+
+        //var url = 'https://donut-click.firebaseio.com/';
+        var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
         self.isUserLoggedIn = false;
 
@@ -119,8 +120,14 @@
         function logout() {
             ref.unauth();
             console.log('User is logged out');
+<<<<<<< HEAD
+=======
+            $ionicHistory.nextViewOptions({historyRoot: true});
+>>>>>>> Ricardo
             $state.go('app.login');
         }
+
+
     }
 
 
