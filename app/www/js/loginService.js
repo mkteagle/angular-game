@@ -23,6 +23,7 @@
             self.isUserLoggedIn = true;
             $localStorage.isUserLoggedIn = self.isUserLoggedIn;
         }
+
         // ******** FACEBOOK LOGIN ********
         function facebookLogin() {
             ref.authWithOAuthPopup('facebook', function (error, authData) {
@@ -87,7 +88,7 @@
                     console.log("Successfully created user account with uid:", userData.uid);
                     self.storage();
                     self.isUserLoggedIn = true;
-                    $timeout(function(){
+                    $timeout(function () {
                         $state.go('app.splash');
                     })
                 }
@@ -107,30 +108,20 @@
                     self.message = 'Logged into Game';
                     self.storage();
                     self.isUserLoggedIn = true;
-                    $timeout(function() {
+                    $timeout(function () {
                         $state.go('app.splash');
                     })
                 }
             });
 
         }
-    }
-    function logout(email, password) {
-        ref.unauth({
-            email: email,
-            password: password
-        }, function (error) {
-            if (error) {
-                console.log("Logout Failed!", error);
-            }
-            else {
-                self.isUserLoggedIn = false;
-                $timeout(function() {
-                    $state.go('app.login');
-                })
-            }
-        })
 
+        function logout() {
+            ref.unauth();
+            console.log('User is logged out')
+            $state.go('app.login');
+        }
     }
+
 
 })();

@@ -12,7 +12,6 @@ function loginController(loginService) {
     vm.googleLogin = googleLogin;
     vm.authWithPassword = authWithPassword;
     vm.createUser = createUser;
-    vm.logout = logout;
     //vm.changeEmail = changeEmail;
     //vm.changePassword = changePassword;
     vm.email = '';
@@ -30,9 +29,6 @@ function loginController(loginService) {
     }
     function authWithPassword() {
         loginService.authWithPassword(vm.email, vm.password);
-    }
-    function logout() {
-        loginService.logout(vm.email, vm.password);
     }
 }
 })();
