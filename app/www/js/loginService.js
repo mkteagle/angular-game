@@ -14,19 +14,12 @@
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.logout = logout;
-<<<<<<< HEAD
+        self.isUserLoggedIn = false;
         var url = 'https://donut-click.firebaseio.com/';
         //var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
-        self.isUserLoggedIn = false;
-=======
-        self.isUserLoggedIn = false;
-        //var url = 'https://donut-click.firebaseio.com/';
-        var url = 'https://angular-game.firebaseio.com/';
-        var ref = new Firebase(url);
 
 
->>>>>>> Ricardo
         function storage() {
             self.isUserLoggedIn = true;
             $localStorage.isUserLoggedIn = self.isUserLoggedIn;
@@ -37,12 +30,12 @@
                 if (error) {
                     console.log('Log in to Facebook Failed', error);
                     self.message = 'Log in to Facebook Failed. ' + error;
-                } else {
+                }
+                else {
                     console.log('Logged in to Facebook', authData);
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
-<<<<<<< HEAD
-                        gameService.initPlayer().then(function(){
+                        gameService.initPlayer().then(function () {
                             self.isUserLoggedIn = true;
                             self.authData = authData.facebook;
                             self.recorded = gameService.recorded;
@@ -53,19 +46,8 @@
                             gameService.player.$save(self.recorded);
                             $state.go('app.splash');
                         });
-=======
-                        gameService.initPlayer();
-                        isUserLoggedIn = true;
-                        self.authData = authData.facebook;
-                        gameService.recorded.name = self.authData.displayName;
-                        gameService.recorded.img = self.authData.profileImageURL;
-                        gameService.update();
-                        self.storage();
-                        $state.go('app.splash');
->>>>>>> Ricardo
                     });
                 }
-
             });
         }
 

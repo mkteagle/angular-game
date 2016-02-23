@@ -17,13 +17,7 @@ function AppCtrl (loginService, $state, gameService) {
     self.isExpanded = false;
     self.hasHeaderFabLeft = false;
     self.hasHeaderFabRight = false;
-<<<<<<< HEAD
-    self.isUserLoggedIn = loginService.isUserLoggedIn;
-    self.img = gameService.img;
-=======
-    //self.isUserLoggedIn = loginService.isUserLoggedIn;
     self.loginService = loginService;
->>>>>>> Ricardo
     self.logout = logout;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
