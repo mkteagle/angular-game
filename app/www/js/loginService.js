@@ -14,17 +14,14 @@
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.logout = logout;
-
-        //var url = 'https://donut-click.firebaseio.com/';
-        var url = 'https://angular-game.firebaseio.com/';
+        var url = 'https://donut-click.firebaseio.com/';
+        //var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
         self.isUserLoggedIn = false;
-
         function storage() {
             self.isUserLoggedIn = true;
             $localStorage.isUserLoggedIn = self.isUserLoggedIn;
         }
-
         // ******** FACEBOOK LOGIN ********
         function facebookLogin() {
             ref.authWithOAuthPopup('facebook', function (error, authData) {
@@ -35,14 +32,17 @@
                     console.log('Logged in to Facebook', authData);
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
-                        gameService.initPlayer();
-                        self.isUserLoggedIn = true;
-                        self.authData = authData.facebook;
-                        gameService.recorded.name = self.authData.displayName;
-                        gameService.recorded.img = self.authData.profileImageURL;
-                        gameService.update();
-                        self.storage();
-                        $state.go('app.splash');
+                        gameService.initPlayer().then(function(){
+                            self.isUserLoggedIn = true;
+                            self.authData = authData.facebook;
+                            self.recorded = gameService.recorded;
+                            self.recorded.name = gameService.playerName();
+                            self.recorded.name = self.authData.displayName;
+                            self.recorded.img = gameService.playerPic();
+                            self.recorded.img = self.authData.profileImageURL;
+                            gameService.player.$save(self.recorded);
+                            $state.go('app.splash');
+                        });
                     });
                 }
 
@@ -59,21 +59,21 @@
                     console.log("Logged in to Google", authData);
                     self.message = 'Logged in to Google.';
                     $timeout(function () { // invokes $scope.$apply()
-                        gameService.initPlayer();
-                        self.isUserLoggedIn = true;
-                        self.authData = authData.google;
-                        self.recorded.name = gameService.playerName();
-                        self.recorded.name = self.authData.displayName;
-                        self.recorded.img = gameService.playerPic();
-                        self.recorded.img = self.authData.profileImageURL;
-                        gameService.player.$save(self.recorded);
-                        $state.go('app.splash');
+                        gameService.initPlayer().then(function(){
+                            self.isUserLoggedIn = true;
+                            self.authData = authData.google;
+                            self.recorded = gameService.recorded;
+                            self.recorded.name = gameService.playerName();
+                            self.recorded.name = self.authData.displayName;
+                            self.recorded.img = gameService.playerPic();
+                            self.recorded.img = self.authData.profileImageURL;
+                            gameService.player.$save(self.recorded);
+                            $state.go('app.splash');
+                        });
                     });
                 }
             });
         }
-
-
         // ******** EMAIL LOGIN ********
         //var ref = new Firebase("https://angular-game.firebaseio.com");
 
@@ -95,9 +95,7 @@
                 }
             });
         }
-
         function authWithPassword(email, password) {
-
             ref.authWithPassword({
                 email: email,
                 password: password
@@ -116,15 +114,12 @@
             });
 
         }
-
         function logout() {
             ref.unauth();
             console.log('User is logged out');
             $ionicHistory.nextViewOptions({historyRoot: true});
             $state.go('app.login');
         }
-
-
     }
 
 
