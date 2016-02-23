@@ -1,6 +1,6 @@
 <div layout="row">
-    <button class="upgrade-button button-medium button-positive" ng-disabled="uc.recorded.counter < uc.upgradeable[uc.acindex].acgoal" ng-click="uc.clickedAutoClicker()">Add Autoclicker</button>
-    <button class="upgrade-button button-medium button-positive" ng-disabled="uc.recorded.counter < uc.grandpable[uc.gindex].ggoal">Add Grandpa</button>
+    <button class="upgrade-button button-medium button-positive" ng-disabled="uc.recorded.counter < uc.upgradeable[uc.acindex].goal" ng-click="uc.clickedAutoClicker()">Add Autoclicker</button>
+    <button class="upgrade-button button-medium button-positive" ng-disabled="uc.recorded.counter < uc.grandpable[uc.gindex].goal" ng-click="uc.clickGrandpa()">Add Grandpa</button>
     <button class="upgrade-button button-medium button-positive-900" ng-disabled="uc.recorded.counter < uc.recorded.goal" ng-click="uc.upgradePlayer()">Upgrade Yoself</button>
     </button>
 </div>

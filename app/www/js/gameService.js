@@ -68,9 +68,11 @@
             return self.recorded.clicker;
         }
         function clickGrandpa(cost) {
-            self.recorded.grandpa++;
+            self.recorded.grandpa = self.recorded.grandpa + 10;
             self.recorded.counter = self.recorded.counter - cost;
             self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+            console.log(self.recorded);
+            console.log(self.recorded.grandpa);
             self.update();
             return self.recorded.grandpa;
         }

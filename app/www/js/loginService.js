@@ -118,7 +118,7 @@
 
         function logout() {
             ref.unauth();
-            console.log('User is logged out')
+            console.log('User is logged out');
             $state.go('app.login');
         }
     }
