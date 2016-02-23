@@ -98,6 +98,8 @@ function AppCtrl (loginService, $state) {
             fabs[0].remove();
         }
     };
+
+
 }
 
 })();
