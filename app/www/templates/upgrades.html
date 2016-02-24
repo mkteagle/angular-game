@@ -1,10 +1,10 @@
 <div layout="row">
-    <button class="item item-avatar" ng-disabled="uc.recorded.counter < uc.upgradeable[uc.index].goal" ng-click="uc.clickedAutoClicker()">
+    <button class="item item-avatar" ng-disabled="uc.recorded.counter < uc.upgradeable[uc.index].goal" ng-click="uc.clickedAutoClicker()" onclick="createFirework(100,800,8,5,1,100,50,50,false,false);return false">
         <img src="img/Happy_Homer.gif">
         <h2>Homer</h2>
         <p>Hmmmmm Donuts...</p>
     </button>
-    <button class="item item-avatar" ng-disabled="uc.recorded.counter < uc.grandpable[uc.gindex].goal" ng-click="uc.clickGrandpa()">
+    <button class="item item-avatar" ng-disabled="uc.recorded.counter < uc.grandpable[uc.gindex].goal" ng-click="uc.clickGrandpa()" onclick="createFirework(100,800,8,5,1,100,50,50,false,false);return false">
             <img src="img/grandpa.jpg">
             <h2>Old Man</h2>
             <p>Gimme gimme.</p>
