@@ -97,44 +97,44 @@ p {
     padding-left: 10px;
     margin-top: 50px;
 }
-/*progress {*/
-    /*width: 300px;*/
-    /*height: 14px;*/
-    /*margin: 50px auto;*/
-    /*display: block;*/
-    /*!* Important Thing *!*/
-    /*-webkit-appearance: none;*/
-    /*border: none;*/
-/*}*/
+progress {
+    width: 300px;
+    height: 14px;
+    margin: 50px auto;
+    display: block;
+    /* Important Thing */
+    -webkit-appearance: none;
+    border: none;
+}
 
-/*!* All good till now. Now we'll style the background *!*/
-/*progress::-webkit-progress-bar {*/
-    /*background: black;*/
-    /*border-radius: 50px;*/
-    /*padding: 2px;*/
-    /*box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.2);*/
-/*}*/
+/* All good till now. Now we'll style the background */
+progress::-webkit-progress-bar {
+    background: black;
+    border-radius: 50px;
+    padding: 2px;
+    box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.2);
+}
 
-/*!* Now the value part *!*/
-/*progress::-webkit-progress-value {*/
-    /*border-radius: 50px;*/
-    /*box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);*/
-    /*background:*/
-            /*-webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%),*/
-            /*-webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)),*/
-            /*-webkit-linear-gradient(left, #ba7448, #c4672d);*/
+/* Now the value part */
+progress::-webkit-progress-value {
+    border-radius: 50px;
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+    background:
+            -webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%),
+            -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)),
+            -webkit-linear-gradient(left, #ba7448, #c4672d);
 
-    /*!* Looks great, now animating it *!*/
-    /*background-size: 25px 14px, 100% 100%, 100% 100%;*/
-    /*-webkit-animation: move 5s linear 0 infinite;*/
-/*}*/
+    /* Looks great, now animating it */
+    background-size: 25px 14px, 100% 100%, 100% 100%;
+    -webkit-animation: move 5s linear 0 infinite;
+}
 
-/*!* That's it! Now let's try creating a new stripe pattern and animate it using animation and keyframes properties  *!*/
+/* That's it! Now let's try creating a new stripe pattern and animate it using animation and keyframes properties  */
 
-/*@-webkit-keyframes move {*/
-    /*0% {background-position: 0px 0px, 0 0, 0 0}*/
-    /*100% {background-position: -100px 0px, 0 0, 0 0}*/
-/*}*/
+@-webkit-keyframes move {
+    0% {background-position: 0px 0px, 0 0, 0 0}
+    100% {background-position: -100px 0px, 0 0, 0 0}
+}
 
 #createUser {
     position: center !important;
@@ -142,28 +142,10 @@ p {
 .upgrade-button[disabled] {
     background: lightgray;
 }
-
-/*Animated Background */
-/*@keyframes animatedBackground {*/
-    /*from { background-position: 0 0; }*/
-    /*to { background-position: 100% 0; }*/
-/*}*/
-
-/*@-webkit-keyframes animatedBackground {*/
-    /*from { background-position: 0 0; }*/
-    /*to { background-position: 100% 0; }*/
-/*}*/
-
-/*.scroll-content{*/
-    /*width: 100%;*/
-    /*height: 100%;*/
-    /*background-image: url(http://davidwalsh.name/demo/bg-clouds.png);*/
-    /*background-position: 0px 0px;*/
-    /*background-repeat: repeat-x;*/
-    /*background-size:cover;*/
-    /*-webkit-animation:animatedBackground 40s linear infinite;*/
-    /*-moz-animation:animatedBackground 40s linear infinite;*/
-    /*-ms-animation:animatedBackground 40s linear infinite;*/
-    /*-o-animation:animatedBackground 40s linear infinite;*/
-    /*animation:animatedBackground 40s linear infinite;*/
-/*}*/
+.donut {
+    transition: -webkit-transform 0.25s ease;
+    cursor: pointer;
+}
+.donut:active {
+    -webkit-transform: scale(2);
+}
