@@ -6,18 +6,18 @@
 angular.module('app.ctrl', [])
     .controller('AppCtrl', AppCtrl)
 
-AppCtrl.$inject = ['loginService', '$state'];
+AppCtrl.$inject = ['loginService', '$state', 'gameService'];
 
 
 
-function AppCtrl (loginService, $state) {
+function AppCtrl (loginService, $state, gameService) {
     // Form data for the login modal
     var self = this;
     self.loginData = {};
     self.isExpanded = false;
     self.hasHeaderFabLeft = false;
     self.hasHeaderFabRight = false;
-    self.isUserLoggedIn = loginService.isUserLoggedIn;
+    self.loginService = loginService;
     self.logout = logout;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
@@ -28,7 +28,7 @@ function AppCtrl (loginService, $state) {
     }
     function logout() {
         loginService.logout();
-        self.userLoggedIn = false;
+        self.loginService.isUserLoggedIn = false;
     }
     ////////////////////////////////////////
     // Layout Methods
