@@ -31,6 +31,7 @@
         self.goal = 1000;
         self.incrementClicker = incrementClicker;
         self.clickGrandpa = clickGrandpa;
+
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
@@ -132,6 +133,7 @@
             self.player.$save(self.recorded);
             self.leaderBoard.$save(self.recorded);
         }
+
     }
 
 })();

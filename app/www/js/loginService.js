@@ -2,9 +2,9 @@
     'use strict';
     angular.module('loginService', [])
         .service('loginService', loginService);
-    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService', '$ionicHistory'];
+    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService', '$ionicHistory', '$ionicSideMenuDelegate'];
 
-    function loginService($timeout, $state, $localStorage, gameService, $ionicHistory) {
+    function loginService($timeout, $state, $localStorage, gameService, $ionicHistory, $ionicSideMenuDelegate) {
         var self = this;
         self.authData = {};
         self.recorded = gameService.recorded;
@@ -15,10 +15,9 @@
         self.authWithPassword = authWithPassword;
         self.logout = logout;
         self.isUserLoggedIn = false;
-        var url = 'https://donut-click.firebaseio.com/';
-        //var url = 'https://angular-game.firebaseio.com/';
+        //var url = 'https://donut-click.firebaseio.com/';
+        var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
-
 
         function storage() {
             self.isUserLoggedIn = true;
@@ -35,6 +34,7 @@
                     console.log('Logged in to Facebook', authData);
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
+
                         gameService.initPlayer().then(function () {
                             self.isUserLoggedIn = true;
                             self.authData = authData.facebook;
@@ -119,6 +119,7 @@
         function logout() {
             ref.unauth();
             console.log('User is logged out');
+            $ionicSideMenuDelegate.toggleRight();
             $ionicHistory.nextViewOptions({historyRoot: true});
             $state.go('app.login');
         }

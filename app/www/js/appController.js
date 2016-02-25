@@ -18,6 +18,7 @@ function AppCtrl (loginService, $state, gameService) {
     self.hasHeaderFabLeft = false;
     self.hasHeaderFabRight = false;
     self.loginService = loginService;
+    self.img = gameService.img;
     self.logout = logout;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
