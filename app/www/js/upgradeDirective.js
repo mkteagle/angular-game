@@ -38,13 +38,13 @@
             function clickedAutoClicker() {
                 //increment score every 10 seconds for first autoclicker
                 uc.recorded.clicker = gameService.incrementClicker(uc.upgradeable[uc.acindex].cost);
-                gameService.player.$save(uc.recorded);
+                gameService.gameState();
                 uc.acindex++;
             }
 
             function clickGrandpa() {
                 uc.recorded.grandpa = gameService.clickGrandpa(uc.grandpable[uc.gindex].cost);
-                gameService.player.$save(uc.recorded);
+                gameService.gameState();
                 uc.gindex++;
             }
 
@@ -57,7 +57,7 @@
                 else {
                     uc.recorded.countdown = uc.recorded.countdown - uc.recorded.clicker - uc.recorded.grandpa;
                 }
-                gameService.player.$save(uc.recorded);
+                gameService.gameState();
             }, 1000)
         };
         return {
