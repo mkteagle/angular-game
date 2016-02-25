@@ -2,9 +2,9 @@
     'use strict';
     angular.module('loginService', [])
         .service('loginService', loginService);
-    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService', '$ionicHistory'];
+    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService', '$ionicHistory', '$ionicSideMenuDelegate'];
 
-    function loginService($timeout, $state, $localStorage, gameService, $ionicHistory) {
+    function loginService($timeout, $state, $localStorage, gameService, $ionicHistory, $ionicSideMenuDelegate) {
         var self = this;
         self.authData = {};
         self.recorded = gameService.recorded;
@@ -18,6 +18,7 @@
         //var url = 'https://donut-click.firebaseio.com/';
         var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
+
         function storage() {
             self.isUserLoggedIn = true;
             $localStorage.isUserLoggedIn = self.isUserLoggedIn;
@@ -28,11 +29,13 @@
                 if (error) {
                     console.log('Log in to Facebook Failed', error);
                     self.message = 'Log in to Facebook Failed. ' + error;
-                } else {
+                }
+                else {
                     console.log('Logged in to Facebook', authData);
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
-                        gameService.initPlayer().then(function(){
+
+                        gameService.initPlayer().then(function () {
                             self.isUserLoggedIn = true;
                             self.authData = authData.facebook;
                             self.recorded = gameService.recorded;
@@ -45,7 +48,6 @@
                         });
                     });
                 }
-
             });
         }
 
@@ -117,6 +119,7 @@
         function logout() {
             ref.unauth();
             console.log('User is logged out');
+            $ionicSideMenuDelegate.toggleRight();
             $ionicHistory.nextViewOptions({historyRoot: true});
             $state.go('app.login');
         }

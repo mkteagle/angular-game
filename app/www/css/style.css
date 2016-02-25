@@ -149,3 +149,11 @@ progress::-webkit-progress-value {
 .donut:active {
     -webkit-transform: scale(2);
 }
+#legend {
+    float: left;
+    width: 80px;
+    height: 50px;
+}
+#mainGame {
+    background-color: deepskyblue;
+}
