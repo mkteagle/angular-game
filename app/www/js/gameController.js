@@ -7,7 +7,7 @@
 
     function gameController(gameService) {
         var self = this;
-        self.value = gameService.recorded.goal;
+        //self.value = gameService.recorded.goal;
         self.type = '';
         if (self.value < 25) {
             self.type = 'success';
