@@ -3,15 +3,15 @@
     angular.module('gameService', [])
         .service('gameService', gameService);
 
-    gameService.$inject = ['$firebaseArray', 'ngToast'];
+    gameService.$inject = ['$firebaseArray', 'ngToast', 'loginService'];
 
 
-    function gameService ($firebaseArray, ngToast) {
+    function gameService ($firebaseArray, ngToast, loginService) {
         var self = this;
         var ref = new Firebase('http://donut-click.firebaseIO.com');
         var leaderRef = new Firebase('http://donut-click.firebaseIO.com/leaderboard');
         self.leaderBoard = $firebaseArray(leaderRef);
-        self.player = $firebaseArray(ref);
+        //self.player = loginService.initPlayer();
         self.initPlayer = initPlayer;
         self.incrementCounter = incrementCounter;
         self.update = update;
@@ -31,11 +31,23 @@
         self.goal = 1000;
         self.incrementClicker = incrementClicker;
         self.clickGrandpa = clickGrandpa;
+        self.player = loginService.user;
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
         }
-        self.recorded = {name: '', img: '', counter: 0, countdown: self.upgrades[self.index].goal, level: self.upgrades[self.index].id + 'x', goal: self.upgrades[self.index].goal, clicker: 0, grandpa: 0};
+        self.recorded = {};
+        self.init = init;
+        init();
+        //
+        //
+        self.recorded = {counter: 0, countdown: self.upgrades[self.index].goal, level: self.upgrades[self.index].id + 'x', goal: self.upgrades[self.index].goal, clicker: 0, grandpa: 0};
+        function init() {
+            self.recorded = loginService.initPlayer();
+            console.log(self.recorded);
+            //loginService.update();
+            self.initPlayer();
+        }
         function newGame() {
             self.initPlayer();
             self.recorded.counter = 0;
@@ -120,13 +132,14 @@
 
         }
         function initPlayer () {
+            console.log(self.player);
             self.level = '1x';
-            return(self.player.$add({name: self.recorded.name, img: self.recorded.img, counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.upgrades[self.index].goal, upgrade: false, goal: self.upgrades[self.index].goal, clicker: self.recorded.clicker, grandpa: self.recorded.grandpa}).then(function(ref) {
-                self.recordId = ref.key();
-                self.recorded = self.player.$getRecord(self.recordId);
-                self.recorded.id = self.recordId;
-                self.player.$save(self.recorded);
-            }));
+            //return(self.player.$add({name: self.recorded.name, img: self.recorded.img, counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.upgrades[self.index].goal, upgrade: false, goal: self.upgrades[self.index].goal, clicker: self.recorded.clicker, grandpa: self.recorded.grandpa}).then(function(ref) {
+            //    self.recordId = ref.key();
+            //    self.recorded = self.player.$getRecord(self.recordId);
+            //    self.recorded.id = self.recordId;
+            //    self.player.$save(self.recorded);
+            //}));
         }
         function update() {
             self.player.$save(self.recorded);
