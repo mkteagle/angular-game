@@ -29,7 +29,11 @@
         self.id = '';
         self.incrementClicker = incrementClicker;
         self.clickGrandpa = clickGrandpa;
+<<<<<<< HEAD
         self.firebaseAuthLogin = firebaseAuthLogin;
+=======
+
+>>>>>>> master
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
@@ -159,6 +163,23 @@
                 }
 
         }
+<<<<<<< HEAD
+=======
+        function initPlayer () {
+            self.level = '1x';
+            return(self.player.$add({name: self.recorded.name, img: self.recorded.img, counter: self.recorded.counter, date: Date.now(), level: self.level, id: self.recordId, countdown: self.upgrades[self.index].goal, upgrade: false, goal: self.upgrades[self.index].goal, clicker: self.recorded.clicker, grandpa: self.recorded.grandpa}).then(function(ref) {
+                self.recordId = ref.key();
+                self.recorded = self.player.$getRecord(self.recordId);
+                self.recorded.id = self.recordId;
+                self.player.$save(self.recorded);
+            }));
+        }
+        function update() {
+            self.player.$save(self.recorded);
+            self.leaderBoard.$save(self.recorded);
+        }
+
+>>>>>>> master
     }
 
 })();

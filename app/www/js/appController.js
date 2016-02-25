@@ -17,7 +17,12 @@ function AppCtrl ($state, gameService) {
     self.isExpanded = false;
     self.hasHeaderFabLeft = false;
     self.hasHeaderFabRight = false;
+<<<<<<< HEAD
     //self.loginService = loginService;
+=======
+    self.loginService = loginService;
+    self.img = gameService.img;
+>>>>>>> master
     self.logout = logout;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
