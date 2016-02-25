@@ -2,46 +2,52 @@
     'use strict';
     angular.module('loginService', [])
         .service('loginService', loginService);
-    loginService.$inject = ['$timeout', '$state','$localStorage', 'homeService'];
+    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService', '$ionicHistory'];
 
-    function loginService($timeout, $state, $localStorage, homeService) {
+    function loginService($timeout, $state, $localStorage, gameService, $ionicHistory) {
         var self = this;
         self.authData = {};
-        self.recorded = homeService.recorded;
+        self.recorded = gameService.recorded;
         self.storage = storage;
         self.facebookLogin = facebookLogin;
         self.googleLogin = googleLogin;
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
+        self.logout = logout;
+        self.isUserLoggedIn = false;
         var url = 'https://donut-click.firebaseio.com/';
         //var url = 'https://angular-game.firebaseio.com/';
         var ref = new Firebase(url);
-        self.isUserLoggedIn = false;
+
 
         function storage() {
             self.isUserLoggedIn = true;
             $localStorage.isUserLoggedIn = self.isUserLoggedIn;
         }
         // ******** FACEBOOK LOGIN ********
-        function facebookLogin() {
+        function facebookLogin(isUserLoggedIn) {
             ref.authWithOAuthPopup('facebook', function (error, authData) {
                 if (error) {
                     console.log('Log in to Facebook Failed', error);
                     self.message = 'Log in to Facebook Failed. ' + error;
-                } else {
+                }
+                else {
                     console.log('Logged in to Facebook', authData);
                     self.message = 'Logged in to Facebook.';
                     $timeout(function () { // invokes $scope.$apply()
-                        homeService.initPlayer();
-                        self.authData = authData.facebook;
-                        homeService.recorded.name = self.authData.displayName;
-                        homeService.recorded.img = self.authData.profileImageURL;
-                        homeService.update();
-                        self.storage();
-                        $state.go('app.splash');
+                        gameService.initPlayer().then(function () {
+                            self.isUserLoggedIn = true;
+                            self.authData = authData.facebook;
+                            self.recorded = gameService.recorded;
+                            self.recorded.name = gameService.playerName();
+                            self.recorded.name = self.authData.displayName;
+                            self.recorded.img = gameService.playerPic();
+                            self.recorded.img = self.authData.profileImageURL;
+                            gameService.player.$save(self.recorded);
+                            $state.go('app.splash');
+                        });
                     });
                 }
-
             });
         }
 
@@ -55,19 +61,21 @@
                     console.log("Logged in to Google", authData);
                     self.message = 'Logged in to Google.';
                     $timeout(function () { // invokes $scope.$apply()
-                        homeService.initPlayer();
-                        self.authData = authData.google;
-                        homeService.recorded.name = self.authData.displayName;
-                        homeService.recorded.img = self.authData.profileImageURL;
-                        homeService.player.$save(self.recorded);
-                        self.storage();
-                        $state.go('app.splash');
+                        gameService.initPlayer().then(function(){
+                            self.isUserLoggedIn = true;
+                            self.authData = authData.google;
+                            self.recorded = gameService.recorded;
+                            self.recorded.name = gameService.playerName();
+                            self.recorded.name = self.authData.displayName;
+                            self.recorded.img = gameService.playerPic();
+                            self.recorded.img = self.authData.profileImageURL;
+                            gameService.player.$save(self.recorded);
+                            $state.go('app.splash');
+                        });
                     });
                 }
             });
         }
-
-
         // ******** EMAIL LOGIN ********
         //var ref = new Firebase("https://angular-game.firebaseio.com");
 
@@ -82,15 +90,14 @@
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
                     self.storage();
-                    $timeout(function(){
+                    self.isUserLoggedIn = true;
+                    $timeout(function () {
                         $state.go('app.splash');
                     })
                 }
             });
         }
-
         function authWithPassword(email, password) {
-
             ref.authWithPassword({
                 email: email,
                 password: password
@@ -101,13 +108,21 @@
                     console.log("Authenticated successfully with payload:", authData);
                     self.message = 'Logged into Game';
                     self.storage();
-                    $timeout(function() {
+                    self.isUserLoggedIn = true;
+                    $timeout(function () {
                         $state.go('app.splash');
                     })
                 }
             });
 
         }
+        function logout() {
+            ref.unauth();
+            console.log('User is logged out');
+            $ionicHistory.nextViewOptions({historyRoot: true});
+            $state.go('app.login');
+        }
     }
+
 
 })();

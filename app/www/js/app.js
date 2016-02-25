@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'homeCtrl', 'ngToast', 'firebase', 'homeService', 'app.login', 'ngStorage', 'loginService'])
+angular.module('starter', ['ionic', 'app.ctrl', 'ionic-material', 'ionMdInput', 'gameController', 'ngToast', 'firebase', 'gameService', 'app.login', 'ngStorage', 'loginService', 'upgradeDirective', 'upgradeService'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -50,6 +50,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
+    .state('logout', {
+        url: '/logout',
+        controller: function($scope, $route) {
+            $route.reload()
+        }
+    })
+
     .state('app.email', {
         url: '/registerEmail',
         views: {
@@ -67,8 +74,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         url: '/game',
         views: {
             'menuContent': {
-                templateUrl: 'templates/home.html',
-                controller: 'homeController'
+                templateUrl: 'templates/game.html',
+                controller: 'gameController'
             },
             'fabContent': {
                 template: ''
@@ -80,7 +87,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             views: {
                 'menuContent': {
                     templateUrl: 'templates/splash.html',
-                    controller: 'homeController'
+                    controller: 'gameController'
                 },
                 'fabContent': {
                     template: ''
@@ -88,6 +95,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             }
         })
     ;
+
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');

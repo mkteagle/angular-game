@@ -139,28 +139,13 @@ progress::-webkit-progress-value {
 #createUser {
     position: center !important;
 }
-
-/*Animated Background */
-/*@keyframes animatedBackground {*/
-    /*from { background-position: 0 0; }*/
-    /*to { background-position: 100% 0; }*/
-/*}*/
-
-/*@-webkit-keyframes animatedBackground {*/
-    /*from { background-position: 0 0; }*/
-    /*to { background-position: 100% 0; }*/
-/*}*/
-
-/*.scroll-content{*/
-    /*width: 100%;*/
-    /*height: 100%;*/
-    /*background-image: url(http://davidwalsh.name/demo/bg-clouds.png);*/
-    /*background-position: 0px 0px;*/
-    /*background-repeat: repeat-x;*/
-    /*background-size:cover;*/
-    /*-webkit-animation:animatedBackground 40s linear infinite;*/
-    /*-moz-animation:animatedBackground 40s linear infinite;*/
-    /*-ms-animation:animatedBackground 40s linear infinite;*/
-    /*-o-animation:animatedBackground 40s linear infinite;*/
-    /*animation:animatedBackground 40s linear infinite;*/
-/*}*/
+.upgrade-button[disabled] {
+    background: lightgray;
+}
+.donut {
+    transition: -webkit-transform 0.25s ease;
+    cursor: pointer;
+}
+.donut:active {
+    -webkit-transform: scale(2);
+}
