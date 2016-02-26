@@ -8,7 +8,6 @@
 
     function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl) {
         var self = this;
-        var url = 'https://donut-click.firebaseio.com/';
         var ref = new Firebase(firebaseUrl);
         self.authObj = $firebaseAuth(ref);
         self.initPlayer = initPlayer;
@@ -32,6 +31,7 @@
         self.firebaseAuthLogin = firebaseAuthLogin;
         self.logout = logout;
         self.createUser = createUser;
+        self.authWithPassword = authWithPassword;
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
@@ -199,6 +199,40 @@
                 self.gameState();
                 return self.recorded.counter;
             }
+
+        }
+        function createUser(email, password) {
+            ref.createUser({
+                email: email,
+                password: password
+            }, function (error, userData) {
+                if (error) {
+                    console.log("Error creating user:", error);
+                } else {
+                    console.log("Successfully created user account with uid:", userData.uid);
+                    self.isLoggedIn = true;
+                    $timeout(function () {
+                        $state.go('app.splash');
+                    })
+                }
+            });
+        }
+        function authWithPassword(email, password) {
+            ref.authWithPassword({
+                email: email,
+                password: password
+            }, function (error, authData) {
+                if (error) {
+                    console.log("Login Failed!", error);
+                } else {
+                    console.log("Authenticated successfully with payload:", authData);
+                    self.message = 'Logged into Game';
+                    self.isLoggedIn = true;
+                    $timeout(function () {
+                        $state.go('app.splash');
+                    })
+                }
+            });
 
         }
     }
