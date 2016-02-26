@@ -77,7 +77,7 @@
                                 self.gameState();
                             }
                         }
-                        self.user.gameplay = self.recorded;
+                        self.recorded = self.user.gameplay;
                         self.gameState();
                     });
                 }
