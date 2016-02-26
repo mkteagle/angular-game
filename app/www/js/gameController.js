@@ -57,8 +57,6 @@
             gameService.gameState();
         }
         function incrementCountdown() {
-            console.log(self.selected.countdown);
-            console.log(self.goal);
             self.selected.countdown = gameService.incrementCountdown();
         }
         function incrementCounter () {
