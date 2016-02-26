@@ -31,6 +31,10 @@
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
         self.logout = logout;
+        for (var i = 1; i < 1000; i++) {
+            self.upgrades.push({id: i, goal: self.goal});
+            self.goal = self.goal * 2;
+        }
         self.recorded = {
             counter: 0,
             countdown: self.upgrades[self.index].goal,
@@ -39,11 +43,6 @@
             clicker: 0,
             grandpa: 0
         };
-        for (var i = 1; i < 1000; i++) {
-            self.upgrades.push({id: i, goal: self.goal});
-            self.goal = self.goal * 2;
-        }
-        self.recorded = {};
         self.init = init;
         init();
 
