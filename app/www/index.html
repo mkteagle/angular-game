@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
@@ -20,11 +20,13 @@
     <script src="lib/firebase/firebase.js"></script>
     <script src="js/angularfire.min.js"></script>
     <script src="lib/ngstorage/ngStorage.min.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+
     <script src="cordova.js"></script>
 
 
     <script src="js/loginController.js"></script>
-    <script src="js/loginService.js"></script>
+    <!--<script src="js/loginService.js"></script>-->
     <script src="js/gameController.js"></script>
     <script src="js/gameService.js"></script>
     <script src="js/appController.js"></script>
@@ -35,15 +37,34 @@
     <script src="js/gameService.js"></script>
     <script src="js/appController.js"></script>
 
+    <!-- fireworks source: http://www.schillmania.com/projects/fireworks/-->
+    <link rel="stylesheet" type="text/css" href="lib/fireworks/fireworks0.9.20050609/style/fireworks.css" media="screen" />
+    <script type="text/javascript" src="lib/fireworks/fireworks0.9.20050609/script/soundmanager.js"></script>
+    <script type="text/javascript" src="lib/fireworks/fireworks0.9.20050609/script/fireworks.js"></script>
+    <script type="text/javascript" src="lib/fireworks/fireworks0.9.20050609/script/iftype.js"></script>
+
     <script src="js/app.js"></script>
 
     <!-- Ion Sound -->
     <script src="./lib/ion-sound/ion.sound.min.js"></script>
 
-</head>
-<body ng-app="starter">
+    <!-- Fancy Font http://enjoycss.com/start#text -->
+    <script type="text/javascript" script-name="nosifer" src="http://use.edgefonts.net/nosifer.js"></script>
 
-    <ion-nav-view></ion-nav-view>
+
+    </head>
+<body ng-app="starter">
+<div id="sound">
+
+</div>
+
+<div id="fireworks-template">
+    <div id="fw" class="firework"></div>
+    <div id="fp" class="fireworkParticle"><img src="lib/fireworks/fireworks0.9.20050609/image/particles.gif" alt="" /></div>
+</div>
+
+<div id="fireContainer"></div>
+    <ion-nav-view> </ion-nav-view>
 
 </body>
 </html>

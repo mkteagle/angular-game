@@ -2,14 +2,21 @@
     'use strict';
     angular.module('loginService', [])
         .service('loginService', loginService);
+<<<<<<< HEAD
     loginService.$inject = ['$firebaseAuth', '$firebaseObject','$timeout', '$state', '$ionicHistory', 'firebaseUrl'];
 
     function loginService($firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl) {
+=======
+    loginService.$inject = ['$timeout', '$state','$localStorage', 'gameService', '$ionicHistory', '$ionicSideMenuDelegate'];
+
+    function loginService($timeout, $state, $localStorage, gameService, $ionicHistory, $ionicSideMenuDelegate) {
+>>>>>>> master
         var self = this;
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.logout = logout;
         self.isUserLoggedIn = false;
+<<<<<<< HEAD
         self.isLoggedIn = false;
         self.firebaseAuthLogin = firebaseAuthLogin;
         var ref = new Firebase(firebaseUrl);
@@ -39,6 +46,39 @@
                                 self.id = authData.uid;
                                 self.gameState(self.id);
                             }
+=======
+        //var url = 'https://donut-click.firebaseio.com/';
+        var url = 'https://angular-game.firebaseio.com/';
+        var ref = new Firebase(url);
+
+        function storage() {
+            self.isUserLoggedIn = true;
+            $localStorage.isUserLoggedIn = self.isUserLoggedIn;
+        }
+        // ******** FACEBOOK LOGIN ********
+        function facebookLogin(isUserLoggedIn) {
+            ref.authWithOAuthPopup('facebook', function (error, authData) {
+                if (error) {
+                    console.log('Log in to Facebook Failed', error);
+                    self.message = 'Log in to Facebook Failed. ' + error;
+                }
+                else {
+                    console.log('Logged in to Facebook', authData);
+                    self.message = 'Logged in to Facebook.';
+                    $timeout(function () { // invokes $scope.$apply()
+
+                        gameService.initPlayer().then(function () {
+                            self.isUserLoggedIn = true;
+                            self.authData = authData.facebook;
+                            self.recorded = gameService.recorded;
+                            self.recorded.name = gameService.playerName();
+                            self.recorded.name = self.authData.displayName;
+                            self.recorded.img = gameService.playerPic();
+                            self.recorded.img = self.authData.profileImageURL;
+                            gameService.player.$save(self.recorded);
+                            $state.go('app.splash');
+                        });
+>>>>>>> master
                     });
                     self.id = authData.uid;
                     console.log(self.user);
@@ -212,6 +252,7 @@
         function logout() {
             ref.unauth();
             console.log('User is logged out');
+            $ionicSideMenuDelegate.toggleRight();
             $ionicHistory.nextViewOptions({historyRoot: true});
             $state.go('app.login');
         }
