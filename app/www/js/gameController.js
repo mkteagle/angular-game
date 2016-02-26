@@ -7,7 +7,7 @@
 
     function gameController(gameService) {
         var self = this;
-        self.value = gameService.recorded.goal;
+        //self.value = gameService.recorded.goal;
         self.type = '';
         if (self.value < 25) {
             self.type = 'success';
@@ -36,34 +36,29 @@
         });
         self.incrementCounter = incrementCounter;
         self.level = gameService.level;
-        self.initPlayer = initPlayer;
         self.getChange = getChange;
-        self.player = gameService.player;
         self.selected = gameService.recorded;
         self.selectPlayer = selectPlayer;
-        self.countdown = gameService.countdown;
+        self.countdown = gameService.recorded.countdown;
+        self.counter = gameService.recorded.counter;
+        self.clicker = gameService.recorded.clicker;
+        self.goal = gameService.recorded.goal;
         self.updatePlayer = updatePlayer;
         self.playSound = playSound;
-        self.newGame = newGame;
         self.incrementCountdown = incrementCountdown;
 
         function playSound () {
             ion.sound.play("snap");
         }
-        function newGame() {
-            self.counter = gameService.newGame();
-        }
         function selectPlayer () {
             gameService.selectPlayer();
         }
         function getChange () {
-            gameService.update();
-        }
-
-        function initPlayer () {
-            gameService.initPlayer();
+            gameService.gameState();
         }
         function incrementCountdown() {
+            console.log(self.selected.countdown);
+            console.log(self.goal);
             self.selected.countdown = gameService.incrementCountdown();
         }
         function incrementCounter () {

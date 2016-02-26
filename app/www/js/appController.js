@@ -6,18 +6,17 @@
 angular.module('app.ctrl', [])
     .controller('AppCtrl', AppCtrl)
 
-AppCtrl.$inject = ['loginService', '$state', 'gameService'];
+AppCtrl.$inject = ['$state', 'gameService'];
 
 
 
-function AppCtrl (loginService, $state, gameService) {
+function AppCtrl ($state, gameService) {
     // Form data for the login modal
     var self = this;
     self.loginData = {};
     self.isExpanded = false;
     self.hasHeaderFabLeft = false;
     self.hasHeaderFabRight = false;
-    self.loginService = loginService;
     self.img = gameService.img;
     self.logout = logout;
 
