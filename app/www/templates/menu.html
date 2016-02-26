@@ -13,13 +13,18 @@
     </ion-side-menu-content>
     <ion-side-menu side="right">
         <ion-header-bar class="dark-bg expanded">
-<<<<<<< HEAD
+
             <!--<span class="avatar" ng-style="{'background-image': 'url({{ ac.img }})'}"></span>-->
             <!--<h2>User</h2>-->
-=======
->>>>>>> master
-            <span class="avatar" style="background: url('img/donutTemp.png'); background-size: cover;"></span>
-            <h2>Homer</h2>
+
+            <span class="avatar" style="background: background-size: cover;"><img ng-show="authData.facebook.profileImageURL" ng-src="{{ authData.facebook.profileImageURL }}"></span>
+            <span class="avatar" style="background: background-size: cover;"><img ng-show="authData.google.profileImageURL" ng-src="{{ authData.google.profileImageURL }}"></span>
+
+
+            <div>{{ authData.facebook.displayName }}</div>
+            <div>{{ authData.google.displayName }}</div>
+            <!--<div ng-click="vm.showData=!vm.showData">-->
+            </div>
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
 
