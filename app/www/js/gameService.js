@@ -30,6 +30,7 @@
         self.incrementClicker = incrementClicker;
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
+        self.logout = logout;
 
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
@@ -38,7 +39,13 @@
         self.recorded = {};
         self.init = init;
         init();
-
+        function logout() {
+                ref.unauth();
+                console.log('User is logged out');
+                $ionicSideMenuDelegate.toggleRight();
+                $ionicHistory.nextViewOptions({historyRoot: true});
+                $state.go('app.login');
+        }
         self.recorded = {counter: 0, countdown: self.upgrades[self.index].goal, level: self.upgrades[self.index].id + 'x', goal: self.upgrades[self.index].goal, clicker: 0, grandpa: 0};
 
         function init(){
@@ -53,11 +60,15 @@
                                 self.newUser.name = authData.google.displayName;
                                 self.newUser.img = authData.google.profileImageURL;
                                 self.user.$ref().set(self.newUser);
+                                self.recorded = self.user.gameplay;
+                                self.gameState();
                             }
                             if (authData.facebook) {
                                 self.newUser.name = authData.facebook.displayName;
                                 self.newUser.img = authData.facebook.profileImageURL;
                                 self.user.$ref().set(self.newUser);
+                                self.recorded = self.user.gameplay;
+                                self.gameState();
                             }
                         }
                         self.recorded = self.user.gameplay;
