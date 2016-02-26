@@ -31,6 +31,7 @@
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
         self.logout = logout;
+        self.createUser = createUser;
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
@@ -77,8 +78,14 @@
                                 self.gameState();
                             }
                         }
-                        self.recorded = self.user.gameplay;
+                        self.recorded.counter = self.user.gameplay.counter;
+                        self.recorded.clicker = self.user.gameplay.clicker;
+                        self.recorded.countdown = self.user.gameplay.countdown;
+                        self.recorded.grandpa = self.user.gameplay.grandpa;
+                        self.recorded.goal = self.user.gameplay.goal;
+                        self.recorded.level = self.user.gameplay.level;
                         self.gameState();
+
                     });
                 }
 
@@ -125,21 +132,29 @@
         }
 
         function incrementClicker(cost) {
-            self.recorded.clicker++;
-            self.recorded.counter = self.recorded.counter - cost;
-            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
-            self.gameState();
-            return self.recorded.clicker;
+            if (self.recorded.counter - cost < 0) {
+                return self.recorded.clicker;
+            }
+            else {
+                self.recorded.clicker++;
+                self.recorded.counter = self.recorded.counter - cost;
+                self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+                self.gameState();
+                return self.recorded.clicker;
+            }
         }
 
         function clickGrandpa(cost) {
-            self.recorded.grandpa = self.recorded.grandpa + 10;
-            self.recorded.counter = self.recorded.counter - cost;
-            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
-            console.log(self.recorded);
-            console.log(self.recorded.grandpa);
-            self.gameState();
-            return self.recorded.grandpa;
+            if (self.recorded.counter - cost < 0) {
+                return self.recorded.grandpa;
+            }
+            else {
+                self.recorded.grandpa = self.recorded.grandpa + 10;
+                self.recorded.counter = self.recorded.counter - cost;
+                self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+                self.gameState();
+                return self.recorded.grandpa;
+            }
         }
 
         function incrementCountdown() {

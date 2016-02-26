@@ -12,8 +12,8 @@
             <div class="onehundred">{{ hc.selected.counter }}</div>
             <span class="onehundreddonuts"> donuts</span></div>
         <div class="row">
-            <div class="onehundred">{{ hc.selected.countdown }}</div>
-            <span class="onehundreddonuts"> til {{ hc.selected.goal }}</span></div>
+            <div class="onehundred"><span class="textsize">{{ hc.selected.countdown }}</span></div>
+            <span class="onehundreddonuts"><span class="textsize">til {{ hc.selected.goal }}</span></span></div>
         <progress id="progressbar" max="{{hc.selected.goal}}" value="{{ hc.selected.goal - hc.selected.countdown }}"></progress>
         <div id="progressbarlabel"></div>
         <upgrade-directive></upgrade-directive>

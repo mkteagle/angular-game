@@ -9,8 +9,8 @@ function loginController(gameService) {
     vm.recorded = gameService.recorded;
     vm.facebookLogin = facebookLogin;
     vm.googleLogin = googleLogin;
-    //vm.authWithPassword = authWithPassword;
-    //vm.createUser = createUser;
+    vm.authWithPassword = authWithPassword;
+    vm.createUser = createUser;
     vm.email = '';
     vm.password = '';
 
@@ -20,11 +20,11 @@ function loginController(gameService) {
     function googleLogin() {
         gameService.googleLogin();
     }
-    //function createUser() {
-    //    loginService.createUser(vm.email, vm.password);
-    //}
-    //function authWithPassword() {
-    //    loginService.authWithPassword(vm.email, vm.password);
-    //}
+    function createUser() {
+        gameService.createUser(vm.email, vm.password);
+    }
+    function authWithPassword() {
+        gameService.authWithPassword(vm.email, vm.password);
+    }
 }
 })();
