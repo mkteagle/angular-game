@@ -13,8 +13,8 @@
     </ion-side-menu-content>
     <ion-side-menu side="right">
         <ion-header-bar class="dark-bg expanded">
-            <img class="avatar" src="{{ gc.img }}">
-            <h2>{{ gc.name }}</h2>
+            <img class="avatar" src="{{ gc.user.img }}">
+            <h2>{{ gc.user.name }}</h2>
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
 
@@ -22,7 +22,7 @@
             <ion-list>
                 <ion-item class="animate-if" nav-clear menu-close ng-if="gc.gameService.isLoggedIn" ng-click="gc.logout()">Log Out</ion-item>
             </ion-list>
-            <ion-list class="animate-if" ng-if="!ac.gameService.isLoggedIn">
+            <ion-list class="animate-if" ng-if="!gc.gameService.isLoggedIn">
                 <ion-item class="animate-if" nav-clear menu-close ng-if="gc.gameService.isLoggedIn" ui-sref="app.game">
                     Resume Game
                 </ion-item>

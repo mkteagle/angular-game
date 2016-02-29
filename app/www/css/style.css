@@ -141,6 +141,8 @@ progress::-webkit-progress-value {
 .upgrade-button[disabled] {
     background: lightgray;
     color: darkslategray;
+    border-radius: 25px;
+    border: 1px;
 }
 .donut {
     transition: -webkit-transform 0.25s ease;
@@ -185,11 +187,12 @@ progress::-webkit-progress-value {
     background-color: deepskyblue;
 }
 .item2 {
-    font-size: 1.25em;
+    font-size: 1em;
     height: 110px;
     width: 90px;
     background: navy;
     color: white;
+    border-radius: 25px;
 }
 .buttonimg {
     height: 48px;
@@ -208,4 +211,8 @@ progress::-webkit-progress-value {
     justify-content: space-between;
     flex-wrap: nowrap;
     max-width: 90%;
+}
+.footer {
+    height: 130px;
+    background: yellow;
 }

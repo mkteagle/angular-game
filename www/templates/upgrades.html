@@ -1,12 +1,17 @@
 <div class="button-area-line">
-    <button class="item upgrade-button" ng-disabled="uc.recorded.counter < uc.recorded.cost" ng-click="uc.clickedAutoClicker()" onclick="createFirework(100,800,8,5,1,100,50,50,false,false);return false">
-        <img class="buttonimg" src="img/Happy_Homer.gif">
-        <h2>Homer</h2>
+    <button class="item2 upgrade-button" ng-disabled="uc.recorded.counter < uc.recorded.cost" ng-click="uc.clickedAutoClicker()" onclick="createFirework(100,800,8,5,1,100,50,50,false,false);return false">
+        <img class="buttonimg" src="img/wizard.png">
+        <span>Clicker</span>
+        <span>{{ uc.recorded.cost }}</span>
     </button>
-    <button class="item upgrade-button" ng-disabled="uc.recorded.counter < uc.recorded.gcost" ng-click="uc.clickGrandpa()" onclick="createFirework(100,800,8,5,1,100,50,50,false,false);return false">
+    <button class="item2 upgrade-button" ng-disabled="uc.recorded.counter < uc.recorded.gcost" ng-click="uc.clickGrandpa()" onclick="createFirework(100,800,8,5,1,100,50,50,false,false);return false">
             <img class="buttonimg" src="img/grandpa.png">
-            <h2>Old Man</h2>
+            <span>Old Man</span>
+            <span>{{ uc.recorded.gcost }}</span>
         </button>
 
-    <button class="upgrade-button button-medium button-positive-900" ng-disabled="uc.recorded.counter < uc.recorded.goal" ng-click="uc.upgradePlayer()">Level Up</button>
+    <button class="item2 upgrade-button" ng-disabled="uc.recorded.counter < uc.recorded.goal" ng-click="uc.upgradePlayer()">
+        <span>Level Up</span>
+        <span>{{ uc.recorded.level }}</span>
+    </button>
 </div>
