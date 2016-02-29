@@ -28,12 +28,10 @@
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
         self.logout = logout;
-<<<<<<< HEAD
         self.getUser = getUser;
-=======
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
->>>>>>> master
+
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
@@ -77,12 +75,9 @@
                                     self.newUser.name = authData.google.displayName;
                                     self.newUser.img = authData.google.profileImageURL;
                                 //});
-
                                 self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
-                                self.google = true;
-                                console.log(self.user);
                             }
                             if (authData.facebook) {
                                 self.newUser.name = authData.facebook.displayName;
@@ -90,8 +85,6 @@
                                 self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
-                                self.facebook = true;
-                                console.log(self.user);
                             }
                         }
                         self.recorded.counter = self.user.gameplay.counter;

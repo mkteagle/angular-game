@@ -2,11 +2,10 @@
     angular.module('upgradeDirective', [])
         .directive('upgradeDirective', upgradeDirective);
 
-    upgradeDirective.$inject = ['upgradeService', 'gameService', '$timeout', '$interval'];
-    function upgradeDirective(upgradeService, gameService, $timeout, $interval) {
+    upgradeDirective.$inject = ['gameService', '$timeout', '$interval'];
+    function upgradeDirective (gameService, $timeout, $interval) {
         var upgradeController = function () {
             var uc = this;
-            uc.upgrades = upgradeService.upgrades;
             uc.recorded = gameService.recorded;
             //uc.upgrades = [];
             uc.gindex = gameService.recorded.gindex;
