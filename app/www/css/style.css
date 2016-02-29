@@ -216,3 +216,6 @@ progress::-webkit-progress-value {
     height: 130px;
     background: yellow;
 }
+.toaster {
+    background: lightgray;
+}

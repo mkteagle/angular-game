@@ -127,7 +127,7 @@
 
         function showToast() {
             ngToast.create({
-                className: 'success',
+                className: 'toaster',
                 content: self.recorded.level
             });
         }
