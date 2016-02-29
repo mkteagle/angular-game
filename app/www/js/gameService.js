@@ -3,10 +3,10 @@
     angular.module('gameService', [])
         .service('gameService', gameService);
 
-    gameService.$inject = ['ngToast', '$firebaseAuth', '$firebaseObject', '$timeout', '$state', '$ionicHistory', 'firebaseUrl'];
+    gameService.$inject = ['ngToast', '$firebaseAuth', '$firebaseObject', '$timeout', '$state', '$ionicHistory', 'firebaseUrl', '$ionicSideMenuDelegate'];
 
 
-    function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl) {
+    function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl, $ionicSideMenuDelegate) {
         var self = this;
         var ref = new Firebase(firebaseUrl);
         self.authObj = $firebaseAuth(ref);
@@ -22,14 +22,18 @@
         self.upgrades = [];
         self.goal = 1000;
         self.user = {};
-        self.newUser = {};
+        self.newUser = {name:"joe"};
         self.id = '';
         self.incrementClicker = incrementClicker;
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
         self.logout = logout;
+<<<<<<< HEAD
+        self.getUser = getUser;
+=======
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
+>>>>>>> master
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
@@ -56,6 +60,10 @@
             $state.go('app.login');
         }
 
+        function getUser() {
+            return self.newUser;
+        }
+
         function init() {
             self.authObj.$onAuth(function (authData) {
                 if (self.authObj.$getAuth()) {
@@ -65,11 +73,16 @@
                     self.user.$loaded().then(function () {
                         if (self.user.name == undefined) {
                             if (authData.google) {
-                                self.newUser.name = authData.google.displayName;
-                                self.newUser.img = authData.google.profileImageURL;
+                                //$timeout(function () {
+                                    self.newUser.name = authData.google.displayName;
+                                    self.newUser.img = authData.google.profileImageURL;
+                                //});
+
                                 self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
+                                self.google = true;
+                                console.log(self.user);
                             }
                             if (authData.facebook) {
                                 self.newUser.name = authData.facebook.displayName;
@@ -77,6 +90,8 @@
                                 self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
+                                self.facebook = true;
+                                console.log(self.user);
                             }
                         }
                         self.recorded.counter = self.user.gameplay.counter;
