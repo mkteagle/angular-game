@@ -24,8 +24,6 @@
         self.user = {};
         self.newUser = {};
         self.id = '';
-        self.acgoal = 100;
-        self.ggoal = 1000;
         self.incrementClicker = incrementClicker;
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
@@ -44,10 +42,8 @@
             goal: 1000,
             clicker: 0,
             grandpa: 0,
-            acgoal: 100,
-            ggoal: 1000,
-            aindex: 0,
-            gindex: 0
+            cost: 100,
+            gcost: 1000
         };
         self.init = init;
         init();
@@ -90,10 +86,8 @@
                         self.recorded.goal = self.user.gameplay.goal;
                         self.recorded.level = self.user.gameplay.level;
                         self.recorded.index = self.user.gameplay.index;
-                        self.recorded.gindex = self.user.gameplay.gindex;
-                        self.recorded.aindex = self.user.gameplay.aindex;
-                        self.recorded.acgoal = self.user.gameplay.acgoal;
-                        self.recorded.ggoal = self.user.gameplay.ggoal;
+                        self.recorded.cost = self.user.gameplay.cost;
+                        self.recorded.gcost = self.user.gameplay.gcost;
                         self.gameState();
 
                     });
@@ -138,27 +132,29 @@
             });
         }
 
-        function incrementClicker(cost) {
-            if (self.recorded.counter - cost < 0) {
+        function incrementClicker() {
+            if (self.recorded.counter - self.recorded.cost < 0) {
                 return self.recorded.clicker;
             }
             else {
                 self.recorded.clicker++;
-                self.recorded.counter = self.recorded.counter - cost;
+                self.recorded.counter = self.recorded.counter - self.recorded.cost;
                 self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+                self.recorded.cost = self.recorded.cost * 2;
                 self.gameState();
                 return self.recorded.clicker;
             }
         }
 
-        function clickGrandpa(cost) {
-            if (self.recorded.counter - cost < 0) {
+        function clickGrandpa() {
+            if (self.recorded.counter - self.recorded.cost < 0) {
                 return self.recorded.grandpa;
             }
             else {
                 self.recorded.grandpa = self.recorded.grandpa + 10;
-                self.recorded.counter = self.recorded.counter - cost;
+                self.recorded.counter = self.recorded.counter - self.recorded.gcost;
                 self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+                self.recorded.gcost = self.recorded.gcost * 2;
                 self.gameState();
                 return self.recorded.grandpa;
             }
