@@ -1,13 +1,8 @@
 (function () {
     angular.module('upgradeDirective', [])
         .directive('upgradeDirective', upgradeDirective);
-
     upgradeDirective.$inject = ['gameService', '$timeout', '$interval'];
-<<<<<<< HEAD
-    function upgradeDirective(gameService, $timeout, $interval) {
-=======
     function upgradeDirective (gameService, $timeout, $interval) {
->>>>>>> Ricardo
         var upgradeController = function () {
             var uc = this;
             uc.recorded = gameService.recorded;
