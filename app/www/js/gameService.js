@@ -3,10 +3,10 @@
     angular.module('gameService', [])
         .service('gameService', gameService);
 
-    gameService.$inject = ['ngToast', '$firebaseAuth', '$firebaseObject', '$timeout', '$state', '$ionicHistory', 'firebaseUrl'];
+    gameService.$inject = ['ngToast', '$firebaseAuth', '$firebaseObject', '$timeout', '$state', '$ionicHistory', 'firebaseUrl', '$ionicSideMenuDelegate'];
 
 
-    function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl) {
+    function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl, $ionicSideMenuDelegate) {
         var self = this;
         var ref = new Firebase(firebaseUrl);
         self.authObj = $firebaseAuth(ref);
@@ -127,7 +127,7 @@
 
         function showToast() {
             ngToast.create({
-                className: 'success',
+                className: 'toaster',
                 content: self.recorded.level
             });
         }
