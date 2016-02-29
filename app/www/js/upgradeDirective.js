@@ -11,11 +11,10 @@
             uc.upgradeable = [];
             uc.upgrades = [];
             uc.grandpable = [];
-            uc.acgoal = 100;
-            uc.acindex = 0;
-            uc.ggoal = 1000;
-            uc.gindex = 0;
-            uc.index = 0;
+            uc.acgoal = gameService.recorded.acgoal;
+            uc.aindex = gameService.recorded.aindex;
+            uc.ggoal = gameService.recorded.ggoal;
+            uc.gindex = gameService.recorded.gindex;
             uc.cost = 10;
             uc.gcost = 100;
             uc.clickedAutoClicker = clickedAutoClicker;
@@ -36,16 +35,15 @@
             }
 
             function clickedAutoClicker() {
-                //increment score every 10 seconds for first autoclicker
-                uc.recorded.clicker = gameService.incrementClicker(uc.upgradeable[uc.acindex].cost);
+                uc.recorded.clicker = gameService.incrementClicker(uc.upgradeable[gameService.recorded.aindex].cost);
                 gameService.gameState();
-                uc.acindex++;
+                gameService.recorded.aindex++;
             }
 
             function clickGrandpa() {
-                uc.recorded.grandpa = gameService.clickGrandpa(uc.grandpable[uc.gindex].cost);
+                uc.recorded.grandpa = gameService.clickGrandpa(uc.grandpable[gameService.recorded.gindex].cost);
                 gameService.gameState();
-                uc.gindex++;
+                gameService.recorded.gindex++;
             }
 
             $interval(function () {
