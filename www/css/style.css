@@ -140,6 +140,7 @@ progress::-webkit-progress-value {
 }
 .upgrade-button[disabled] {
     background: lightgray;
+    color: darkslategray;
 }
 .donut {
     transition: -webkit-transform 0.25s ease;
@@ -183,9 +184,15 @@ progress::-webkit-progress-value {
 #mainGame {
     background-color: deepskyblue;
 }
-.item {
-    height: 90px;
+.item2 {
+    font-size: 1.25em;
+    height: 110px;
     width: 90px;
+    background: navy;
+    color: white;
+}
+.footer {
+    height: 120px;
 }
 .buttonimg {
     height: 48px;
