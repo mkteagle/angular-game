@@ -140,6 +140,7 @@ progress::-webkit-progress-value {
 }
 .upgrade-button[disabled] {
     background: lightgray;
+    color: darkslategray;
 }
 .donut {
     transition: -webkit-transform 0.25s ease;
@@ -182,4 +183,29 @@ progress::-webkit-progress-value {
 }
 #mainGame {
     background-color: deepskyblue;
+}
+.item2 {
+    font-size: 1.25em;
+    height: 110px;
+    width: 90px;
+    background: navy;
+    color: white;
+}
+.buttonimg {
+    height: 48px;
+    width: 48px;
+}
+.button-area-line {
+    margin: 10px auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    max-width: 90%;
 }
