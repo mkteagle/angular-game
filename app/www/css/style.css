@@ -187,7 +187,6 @@ progress::-webkit-progress-value {
 #mainGame {
     background-color: deepskyblue;
 }
-<<<<<<< HEAD
 #upgrades {
     margin-left: 16%;
     max-width: 70%;
@@ -202,8 +201,9 @@ progress::-webkit-progress-value {
     border-radius: 10px;
 }
 .bar-assertive-900 {
-    background-color: dodgerblue; !important
-=======
+    background-color: dodgerblue;
+!important
+}
 .item2 {
     font-size: 1em;
     height: 110px;
@@ -236,5 +236,4 @@ progress::-webkit-progress-value {
 }
 .toaster {
     background: lightgray;
->>>>>>> master
 }
