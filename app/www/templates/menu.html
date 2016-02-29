@@ -17,17 +17,19 @@
             <!--<span class="avatar" ng-style="{'background-image': 'url({{ ac.img }})'}"></span>-->
             <!--<h2>User</h2>-->
 
-            <span class="avatar" style="background: background-size: cover;"><img ng-show="ac.getUser().img" ng-src="{{ ac.getUser().img }}"></span>
+            <div>
+                <img class="avatar" ng-src="{{ac.gameService.user.img}}" alt="">
+                <h2>{{ac.gameService.user.name}}</h2>
+            </div>
 
-            <div>{{ ac.name }}</div>
 
             <!--<div ng-click="vm.showData=!vm.showData">-->
             </div>
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
 
-            <ion-list ng-hide="hc.recorded.displayName != null">
 
+            <!--<ion-list ng-hide="hc.recorded.displayName != null">-->
 
 
             <ion-list>

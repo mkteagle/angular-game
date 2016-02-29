@@ -104,6 +104,7 @@
         function firebaseAuthLogin(provider) {
             self.authObj.$authWithOAuthPopup(provider).then(function (authData) {
                 console.log("Authenticated successfully with provider " + provider + " with payload:", authData);
+                init();
                 $state.go('app.splash');
             }).catch(function (error) {
                 console.error("Authentication failed:", error);
