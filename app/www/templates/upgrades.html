@@ -10,5 +10,8 @@
             <span>{{ uc.recorded.gcost }}</span>
         </button>
 
-    <button class="item2 upgrade-button" ng-disabled="uc.recorded.counter < uc.recorded.goal" ng-click="uc.upgradePlayer()">Level Up</button>
+    <button class="item2 upgrade-button" ng-disabled="uc.recorded.counter < uc.recorded.goal" ng-click="uc.upgradePlayer()">
+        <span>Level Up</span>
+        <span>{{ uc.recorded.level }}</span>
+    </button>
 </div>
