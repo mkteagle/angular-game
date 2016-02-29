@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'app.ctrl', 'ionic-material', 'ionMdInput', 'gameController', 'ngToast', 'firebase', 'gameService', 'app.login', 'ngStorage', 'upgradeDirective', 'upgradeService'])
-    .constant('firebaseUrl', "https://donut-click.firebaseio.com/")
+    .constant('firebaseUrl', "https://angular-game.firebaseio.com/")
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -34,7 +34,8 @@ angular.module('starter', ['ionic', 'app.ctrl', 'ionic-material', 'ionMdInput', 
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
-        controller: 'AppCtrl as ac'
+        controller: 'AppCtrl as ac',
+        cache: false
     })
 
     .state('app.login', {

@@ -17,12 +17,10 @@
             <!--<span class="avatar" ng-style="{'background-image': 'url({{ ac.img }})'}"></span>-->
             <!--<h2>User</h2>-->
 
-            <span class="avatar" style="background: background-size: cover;"><img ng-show="authData.facebook.profileImageURL" ng-src="{{ authData.facebook.profileImageURL }}"></span>
-            <span class="avatar" style="background: background-size: cover;"><img ng-show="authData.google.profileImageURL" ng-src="{{ authData.google.profileImageURL }}"></span>
+            <span class="avatar" style="background: background-size: cover;"><img ng-show="ac.getUser().img" ng-src="{{ ac.getUser().img }}"></span>
 
+            <div>{{ ac.name }}</div>
 
-            <div>{{ authData.facebook.displayName }}</div>
-            <div>{{ authData.google.displayName }}</div>
             <!--<div ng-click="vm.showData=!vm.showData">-->
             </div>
         </ion-header-bar>

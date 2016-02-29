@@ -20,6 +20,7 @@ function AppCtrl ($state, gameService) {
     self.img = gameService.img;
     self.logout = logout;
     self.gameService = gameService;
+    self.getUser = gameService.getUser;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
