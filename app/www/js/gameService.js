@@ -28,8 +28,10 @@
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
         self.logout = logout;
+
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
+
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
@@ -67,14 +69,12 @@
                             if (authData.google) {
                                 self.newUser.name = authData.google.displayName;
                                 self.newUser.img = authData.google.profileImageURL;
-                                self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
                             if (authData.facebook) {
                                 self.newUser.name = authData.facebook.displayName;
                                 self.newUser.img = authData.facebook.profileImageURL;
-                                self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
@@ -103,6 +103,7 @@
         function firebaseAuthLogin(provider) {
             self.authObj.$authWithOAuthPopup(provider).then(function (authData) {
                 console.log("Authenticated successfully with provider " + provider + " with payload:", authData);
+                init();
                 $state.go('app.splash');
             }).catch(function (error) {
                 console.error("Authentication failed:", error);

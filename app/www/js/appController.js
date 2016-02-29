@@ -8,8 +8,6 @@ angular.module('app.ctrl', [])
 
 AppCtrl.$inject = ['$state', 'gameService'];
 
-
-
 function AppCtrl ($state, gameService) {
     // Form data for the login modal
     var self = this;
