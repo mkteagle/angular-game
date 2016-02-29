@@ -87,14 +87,15 @@ p {
     width: 100%;
     justify-content: center;
 }
+.textsize {
+    font-size: 1em;
+}
 .onehundred {
-    font-size: 2em;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 .onehundreddonuts {
-    font-size: 2em;
-    padding-left: 10px;
-    margin-top: 50px;
+    padding-left: 2px;
+    margin-top: 10px;
 }
 progress {
     width: 300px;
@@ -140,6 +141,9 @@ progress::-webkit-progress-value {
 }
 .upgrade-button[disabled] {
     background: lightgray;
+    color: darkslategray;
+    border-radius: 25px;
+    border: 1px;
 }
 .donut {
     transition: -webkit-transform 0.25s ease;
@@ -183,6 +187,7 @@ progress::-webkit-progress-value {
 #mainGame {
     background-color: deepskyblue;
 }
+<<<<<<< HEAD
 #upgrades {
     margin-left: 16%;
     max-width: 70%;
@@ -198,4 +203,38 @@ progress::-webkit-progress-value {
 }
 .bar-assertive-900 {
     background-color: dodgerblue; !important
+=======
+.item2 {
+    font-size: 1em;
+    height: 110px;
+    width: 90px;
+    background: navy;
+    color: white;
+    border-radius: 25px;
+}
+.buttonimg {
+    height: 48px;
+    width: 48px;
+}
+.button-area-line {
+    margin: 10px auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    max-width: 90%;
+}
+.footer {
+    height: 130px;
+    background: yellow;
+}
+.toaster {
+    background: lightgray;
+>>>>>>> master
 }
