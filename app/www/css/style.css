@@ -237,3 +237,25 @@ progress::-webkit-progress-value {
 .toaster {
     background: lightgray;
 }
+.ngtoast-fly.ngtoast-opening {
+    animation: ngtoast-flyin 0.3s;
+}
+.ngtoast-fly.ngtoast-open {
+    transform: translateY(0px);
+    opacity: 1;
+}
+.ngtoast-fly.ngtoast-closing {
+    animation: ngtoast-flyout 0.5s;
+    transform: translateX(0px);
+}
+.ngtoast-default {
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    position: fixed;
+    top: 150px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    padding: 10px;
+}

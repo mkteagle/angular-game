@@ -128,7 +128,7 @@
 
         function showToast() {
             ngToast.create({
-                className: 'toaster',
+                className: 'ngtoast-default ngtoast-fly',
                 content: self.recorded.level
             });
         }
