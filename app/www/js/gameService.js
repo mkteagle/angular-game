@@ -146,16 +146,6 @@
             }
         }
 
-<<<<<<< HEAD
-        function clickGrandpa(cost) {
-            self.recorded.grandpa = self.recorded.grandpa + 999999;
-            self.recorded.counter = self.recorded.counter - cost;
-            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
-            console.log(self.recorded);
-            console.log(self.recorded.grandpa);
-            self.gameState();
-            return self.recorded.grandpa;
-=======
         function clickGrandpa() {
             if (self.recorded.counter - self.recorded.cost < 0) {
                 return self.recorded.grandpa;
@@ -168,7 +158,6 @@
                 self.gameState();
                 return self.recorded.grandpa;
             }
->>>>>>> master
         }
 
         function incrementCountdown() {
