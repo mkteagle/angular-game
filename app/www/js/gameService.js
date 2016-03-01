@@ -133,7 +133,7 @@
         }
 
         function clickGrandpa(cost) {
-            self.recorded.grandpa = self.recorded.grandpa + 10;
+            self.recorded.grandpa = self.recorded.grandpa + 999999;
             self.recorded.counter = self.recorded.counter - cost;
             self.recorded.countdown = self.recorded.goal - self.recorded.counter;
             console.log(self.recorded);
