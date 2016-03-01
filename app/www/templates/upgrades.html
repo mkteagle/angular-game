@@ -5,13 +5,14 @@
         <span>{{ uc.recorded.cost }}</span>
     </button>
     <button class="item2 upgrade-button" ng-disabled="uc.recorded.counter < uc.recorded.gcost" ng-click="uc.clickGrandpa()" onclick="createFirework(100,800,8,5,1,100,50,50,false,false);return false">
-        <img class="buttonimg" src="img/grandpa.png">
-        <span>Gramps</span>
-        <span>{{ uc.recorded.gcost }}</span>
+            <img class="buttonimg" src="img/grandpa.png">
+            <span>Gramps</span>
+            <span>{{ uc.recorded.gcost }}</span>
     </button>
-
     <button class="item2 upgrade-button" ng-disabled="uc.recorded.counter < uc.recorded.goal" ng-click="uc.upgradePlayer()">
         <span>Level Up</span>
         <span>{{ uc.recorded.level }}</span>
     </button>
 </div>
+
+

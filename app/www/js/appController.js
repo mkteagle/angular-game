@@ -8,8 +8,6 @@ angular.module('app.ctrl', [])
 
 AppCtrl.$inject = ['$state', 'gameService'];
 
-
-
 function AppCtrl ($state, gameService) {
     // Form data for the login modal
     var self = this;
@@ -21,6 +19,7 @@ function AppCtrl ($state, gameService) {
     self.logout = logout;
     self.gameService = gameService;
     self.getUser = gameService.getUser;
+    self.leaderboard = leaderboard;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
@@ -31,6 +30,9 @@ function AppCtrl ($state, gameService) {
     function logout() {
         gameService.logout();
         self.gameService.isUserLoggedIn = false;
+    }
+    function leaderboard () {
+        gameService.leaderboard();
     }
     ////////////////////////////////////////
     // Layout Methods
