@@ -8,10 +8,8 @@
 
     function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl) {
         var self = this;
-        var url = 'https://donut-click.firebaseio.com/';
         var ref = new Firebase(firebaseUrl);
         self.authObj = $firebaseAuth(ref);
-        self.initPlayer = initPlayer;
         self.incrementCounter = incrementCounter;
         self.recordId = null;
         self.id = null;
@@ -22,7 +20,6 @@
         self.playerName = playerName;
         self.playerPic = playerPic;
         self.upgrades = [];
-        self.index = 0;
         self.goal = 1000;
         self.user = {};
         self.newUser = {};
@@ -31,17 +28,22 @@
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
         self.logout = logout;
+        self.createUser = createUser;
+        self.authWithPassword = authWithPassword;
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
         }
         self.recorded = {
             counter: 0,
-            countdown: self.upgrades[self.index].goal,
-            level: self.upgrades[self.index].id + 'x',
-            goal: self.upgrades[self.index].goal,
+            index: 0,
+            countdown: 1000,
+            level: '1x',
+            goal: 1000,
             clicker: 0,
-            grandpa: 0
+            grandpa: 0,
+            cost: 100,
+            gcost: 1000
         };
         self.init = init;
         init();
@@ -77,8 +79,17 @@
                                 self.gameState();
                             }
                         }
-                        self.user.gameplay = self.recorded;
+                        self.recorded.counter = self.user.gameplay.counter;
+                        self.recorded.clicker = self.user.gameplay.clicker;
+                        self.recorded.countdown = self.user.gameplay.countdown;
+                        self.recorded.grandpa = self.user.gameplay.grandpa;
+                        self.recorded.goal = self.user.gameplay.goal;
+                        self.recorded.level = self.user.gameplay.level;
+                        self.recorded.index = self.user.gameplay.index;
+                        self.recorded.cost = self.user.gameplay.cost;
+                        self.recorded.gcost = self.user.gameplay.gcost;
                         self.gameState();
+
                     });
                 }
 
@@ -105,16 +116,13 @@
         self.facebookLogin = function () {
             self.firebaseAuthLogin('facebook');
         };
-        function initPlayer() {
-            console.log('caught you');
-        }
 
         function playerName() {
-            return self.recorded.name;
+            return self.user.name;
         }
 
         function playerPic() {
-            return self.recorded.img;
+            return self.user.img;
         }
 
         function showToast() {
@@ -124,14 +132,21 @@
             });
         }
 
-        function incrementClicker(cost) {
-            self.recorded.clicker++;
-            self.recorded.counter = self.recorded.counter - cost;
-            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
-            self.gameState();
-            return self.recorded.clicker;
+        function incrementClicker() {
+            if (self.recorded.counter - self.recorded.cost < 0) {
+                return self.recorded.clicker;
+            }
+            else {
+                self.recorded.clicker++;
+                self.recorded.counter = self.recorded.counter - self.recorded.cost;
+                self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+                self.recorded.cost = self.recorded.cost * 2;
+                self.gameState();
+                return self.recorded.clicker;
+            }
         }
 
+<<<<<<< HEAD
         function clickGrandpa(cost) {
             self.recorded.grandpa = self.recorded.grandpa + 999999;
             self.recorded.counter = self.recorded.counter - cost;
@@ -140,6 +155,20 @@
             console.log(self.recorded.grandpa);
             self.gameState();
             return self.recorded.grandpa;
+=======
+        function clickGrandpa() {
+            if (self.recorded.counter - self.recorded.cost < 0) {
+                return self.recorded.grandpa;
+            }
+            else {
+                self.recorded.grandpa = self.recorded.grandpa + 10;
+                self.recorded.counter = self.recorded.counter - self.recorded.gcost;
+                self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+                self.recorded.gcost = self.recorded.gcost * 2;
+                self.gameState();
+                return self.recorded.grandpa;
+            }
+>>>>>>> master
         }
 
         function incrementCountdown() {
@@ -148,42 +177,76 @@
                 self.gameState();
                 return self.recorded.countdown = 0;
             }
-            else if (self.recorded.counter < self.upgrades[self.index].goal) {
-                self.recorded.countdown = self.recorded.countdown - Number(self.upgrades[self.index].id);
+            else if (self.recorded.counter < self.upgrades[self.recorded.index].goal) {
+                self.recorded.countdown = self.recorded.countdown - Number(self.upgrades[self.recorded.index].id);
                 self.gameState();
                 return self.recorded.countdown;
             }
             else {
                 self.recorded.upgrade = true;
-                self.recorded.countdown = self.recorded.countdown - Number(self.upgrades[self.index].id);
+                self.recorded.countdown = self.recorded.countdown - Number(self.upgrades[self.recorded.index].id);
                 self.gameState();
                 return self.recorded.countdown;
             }
         }
 
         function updatePlayer() {
-            self.recorded.counter = self.recorded.counter - self.upgrades[self.index].goal;
-            self.index++;
+            self.recorded.counter = self.recorded.counter - self.upgrades[self.recorded.index].goal;
+            self.recorded.index++;
             self.recorded.upgrade = false;
-            self.recorded.countdown = self.upgrades[self.index].goal;
-            self.recorded.goal = self.upgrades[self.index].goal;
-            self.recorded.level = self.upgrades[self.index].id + 'x';
+            self.recorded.countdown = self.upgrades[self.recorded.index].goal;
+            self.recorded.goal = self.upgrades[self.recorded.index].goal;
+            self.recorded.level = self.upgrades[self.recorded.index].id + 'x';
             self.gameState();
         }
 
         function incrementCounter() {
-            if (self.recorded.counter < self.upgrades[self.index].goal) {
-                self.recorded.counter = self.recorded.counter + self.upgrades[self.index].id;
+            if (self.recorded.counter < self.upgrades[self.recorded.index].goal) {
+                self.recorded.counter = self.recorded.counter + self.upgrades[self.recorded.index].id;
                 self.showToast();
                 self.gameState();
                 return self.recorded.counter;
             }
             else {
-                self.recorded.counter = self.recorded.counter + self.upgrades[self.index].id;
+                self.recorded.counter = self.recorded.counter + self.upgrades[self.recorded.index].id;
                 self.showToast();
                 self.gameState();
                 return self.recorded.counter;
             }
+
+        }
+        function createUser(email, password) {
+            ref.createUser({
+                email: email,
+                password: password
+            }, function (error, userData) {
+                if (error) {
+                    console.log("Error creating user:", error);
+                } else {
+                    console.log("Successfully created user account with uid:", userData.uid);
+                    self.isLoggedIn = true;
+                    $timeout(function () {
+                        $state.go('app.splash');
+                    })
+                }
+            });
+        }
+        function authWithPassword(email, password) {
+            ref.authWithPassword({
+                email: email,
+                password: password
+            }, function (error, authData) {
+                if (error) {
+                    console.log("Login Failed!", error);
+                } else {
+                    console.log("Authenticated successfully with payload:", authData);
+                    self.message = 'Logged into Game';
+                    self.isLoggedIn = true;
+                    $timeout(function () {
+                        $state.go('app.splash');
+                    })
+                }
+            });
 
         }
     }

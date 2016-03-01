@@ -2,50 +2,30 @@
     angular.module('upgradeDirective', [])
         .directive('upgradeDirective', upgradeDirective);
 
-    upgradeDirective.$inject = ['upgradeService', 'gameService', '$timeout', '$interval'];
-    function upgradeDirective(upgradeService, gameService, $timeout, $interval) {
+    upgradeDirective.$inject = ['gameService', '$timeout', '$interval'];
+    function upgradeDirective(gameService, $timeout, $interval) {
         var upgradeController = function () {
             var uc = this;
-            uc.upgrades = upgradeService.upgrades;
             uc.recorded = gameService.recorded;
-            uc.upgradeable = [];
-            uc.upgrades = [];
-            uc.grandpable = [];
-            uc.acgoal = 100;
-            uc.acindex = 0;
-            uc.ggoal = 1000;
-            uc.gindex = 0;
-            uc.index = 0;
-            uc.cost = 10;
-            uc.gcost = 100;
+            //uc.upgrades = [];
+            uc.gindex = gameService.recorded.gindex;
+            uc.cost = gameService.recorded.cost;
+            uc.gcost = gameService.recorded.gcost;
             uc.clickedAutoClicker = clickedAutoClicker;
             uc.upgradePlayer = upgradePlayer;
             uc.clickGrandpa = clickGrandpa;
-            for (var i = 1; i < 1000; i++) {
-                uc.upgradeable.push({id: i, goal: uc.acgoal, cost: uc.cost});
-                uc.acgoal = uc.acgoal * 2;
-                uc.cost = uc.cost * 2;
-            }
-            for (var j = 1; j < 1000; j++) {
-                uc.grandpable.push({id: j, goal: uc.ggoal, cost: uc.gcost});
-                uc.ggoal = uc.ggoal * 2;
-                uc.gcost = uc.gcost * 2;
-            }
             function upgradePlayer() {
                 gameService.updatePlayer();
             }
 
             function clickedAutoClicker() {
-                //increment score every 10 seconds for first autoclicker
-                uc.recorded.clicker = gameService.incrementClicker(uc.upgradeable[uc.acindex].cost);
+                uc.recorded.clicker = gameService.incrementClicker();
                 gameService.gameState();
-                uc.acindex++;
             }
 
             function clickGrandpa() {
-                uc.recorded.grandpa = gameService.clickGrandpa(uc.grandpable[uc.gindex].cost);
+                uc.recorded.grandpa = gameService.clickGrandpa();
                 gameService.gameState();
-                uc.gindex++;
             }
 
             $interval(function () {
