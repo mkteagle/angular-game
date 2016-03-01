@@ -158,8 +158,13 @@ progress::-webkit-progress-value {
     box-sizing: content-box;
     cursor: pointer;
     border: none;
+<<<<<<< HEAD
+    font: normal 20px/normal "nosifer", Helvetica, sans-serif;
+    color: rgba(255,0,0,1);
+=======
     font: normal 30px/normal "nosifer", Helvetica, sans-serif;
     color: red;
+>>>>>>> master
     text-align: center;
     -o-text-overflow: clip;
     text-overflow: clip;
