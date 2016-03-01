@@ -158,8 +158,8 @@ progress::-webkit-progress-value {
     box-sizing: content-box;
     cursor: pointer;
     border: none;
-    font: normal 30px/normal "nosifer", Helvetica, sans-serif;
-    color: red;
+    font: normal 20px/normal "nosifer", Helvetica, sans-serif;
+    color: rgba(255,0,0,1);
     text-align: center;
     -o-text-overflow: clip;
     text-overflow: clip;
@@ -236,4 +236,26 @@ progress::-webkit-progress-value {
 }
 .toaster {
     background: lightgray;
+}
+.ngtoast-fly.ngtoast-opening {
+    animation: ngtoast-flyin 0.3s;
+}
+.ngtoast-fly.ngtoast-open {
+    transform: translateY(0px);
+    opacity: 1;
+}
+.ngtoast-fly.ngtoast-closing {
+    animation: ngtoast-flyout 0.5s;
+    transform: translateX(0px);
+}
+.ngtoast-default {
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    position: fixed;
+    top: 150px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    padding: 10px;
 }
