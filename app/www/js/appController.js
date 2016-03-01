@@ -8,13 +8,7 @@ angular.module('app.ctrl', [])
 
 AppCtrl.$inject = ['$state', 'gameService', '$ionicSideMenuDelegate', '$ionicHistory'];
 
-<<<<<<< HEAD
-function AppCtrl ($state, gameService) {
-=======
-
-
 function AppCtrl ($state, gameService, $ionicSideMenuDelegate, $ionicHistory) {
->>>>>>> Ricardo
     // Form data for the login modal
     var self = this;
     self.loginData = {};
