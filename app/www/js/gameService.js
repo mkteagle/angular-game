@@ -64,6 +64,7 @@
                 if (self.authObj.$getAuth()) {
                     self.id = authData.uid;
                     self.isLoggedIn = true;
+
                     self.user = $firebaseObject(ref.child('users').child(self.id));
                     self.user.$loaded().then(function () {
                         if (self.user.name == undefined) {
@@ -79,6 +80,15 @@
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
+                            //if (authData.email) {
+                            //    self.newUser.name = authData.email.displayName;
+                            //    self.newUser.img = authData.email.profilePicURL;
+                            //    self.user.$ref().set(self.newUser);
+                            //    self.user.gameplay = self.recorded;
+                            //    self.gameState();
+                            //    self.email = true;
+                            //    console.log(self.user);
+                            //}
                         }
                         self.recorded.counter = self.user.gameplay.counter;
                         self.recorded.clicker = self.user.gameplay.clicker;
@@ -115,6 +125,7 @@
             self.authObj.$authWithOAuthPopup(provider).then(function (authData) {
                 console.log("Authenticated successfully with provider " + provider + " with payload:", authData);
                 init();
+                $ionicHistory.nextViewOptions({historyRoot: true});
                 $state.go('app.splash');
             }).catch(function (error) {
                 console.error("Authentication failed:", error);
