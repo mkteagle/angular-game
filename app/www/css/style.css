@@ -199,3 +199,12 @@ progress::-webkit-progress-value {
 .bar-assertive-900 {
     background-color: dodgerblue; !important
 }
+#howTo {
+    text-align: center;
+    color: #1C2A9C;
+}
+#howTo1 {
+    text-align: center;
+    color: #1C2A9C;
+    font-family: Cursive;
+}
