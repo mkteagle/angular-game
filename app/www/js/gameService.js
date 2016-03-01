@@ -31,6 +31,7 @@
 
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
+        self.leaderboard = leaderboard;
 
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
@@ -99,6 +100,16 @@
         self.gameState = function () {
             self.user.$ref().child('gameplay').update(self.recorded);
         };
+
+        function leaderboard() {
+            self.myusers = $firebaseObject(ref.child('users'));
+            console.log(self.myusers);
+
+            angular.forEach(self.myusers, function(value, key) {
+                console.log(key + ':' + value);
+            });
+
+        }
 
         function firebaseAuthLogin(provider) {
             self.authObj.$authWithOAuthPopup(provider).then(function (authData) {

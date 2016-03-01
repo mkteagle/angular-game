@@ -142,8 +142,12 @@ progress::-webkit-progress-value {
 .upgrade-button[disabled] {
     background: lightgray;
     color: darkslategray;
-    border-radius: 25px;
-    border: 1px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    border: 3px solid;
+    border-color: #5676cf;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
 }
 .donut {
     transition: -webkit-transform 0.25s ease;
@@ -208,9 +212,24 @@ progress::-webkit-progress-value {
     font-size: 1em;
     height: 110px;
     width: 90px;
-    background: navy;
-    color: white;
-    border-radius: 25px;
+    color: #FFF;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    border: 3px solid;
+    border-color: #5676cf;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    background: #5684E0;
+}
+.item2:active:hover {
+    color: #E0E3EC;
+    border-color: #E0E3EC;
+    text-shadow: none;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
 }
 .buttonimg {
     height: 48px;
@@ -218,17 +237,10 @@ progress::-webkit-progress-value {
 }
 .button-area-line {
     margin: 10px auto;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
-    -webkit-flex-direction: row;
-    -moz-flex-direction: row;
     flex-direction: row;
     justify-content: space-between;
-    flex-wrap: nowrap;
-    max-width: 90%;
+    width: 100%;
 }
 .footer {
     height: 130px;
