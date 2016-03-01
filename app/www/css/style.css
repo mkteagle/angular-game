@@ -201,7 +201,6 @@ progress::-webkit-progress-value {
     border-radius: 10px;
 }
 .bar-assertive-900 {
-<<<<<<< HEAD
     background-color: dodgerblue; !important
 }
 #howTo {
@@ -212,7 +211,6 @@ progress::-webkit-progress-value {
     text-align: center;
     color: #1C2A9C;
     font-family: Cursive;
-=======
     background-color: dodgerblue;
 !important
 }
@@ -248,5 +246,4 @@ progress::-webkit-progress-value {
 }
 .toaster {
     background: lightgray;
->>>>>>> origin/Ricardo
 }
