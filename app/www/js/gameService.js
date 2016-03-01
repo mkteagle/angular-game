@@ -112,12 +112,6 @@
         };
 
         function leaderboard() {
-            self.myusers = $firebaseObject(ref.child('users'));
-            console.log(self.myusers);
-
-            angular.forEach(self.myusers, function(value, key) {
-                console.log(key + ':' + value);
-            });
 
         }
 
