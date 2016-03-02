@@ -81,6 +81,18 @@ angular.module('starter', ['ionic','app.ctrl', 'ionic-material', 'ionMdInput', '
                     }
                 }
             })
+        .state('app.leaderboard', {
+            url: '/leaderboard',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/leaderboard.html',
+                    controller: 'gameController'
+                },
+                'fabContent': {
+                    template: ''
+                }
+            }
+        })
             .state('app.splash', {
                 url: '/splash',
                 views: {

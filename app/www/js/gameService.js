@@ -8,6 +8,7 @@
 
     function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl, $ionicSideMenuDelegate) {
         var self = this;
+        self.leaders = [];
         var ref = new Firebase(firebaseUrl);
         self.authObj = $firebaseAuth(ref);
         self.incrementCounter = incrementCounter;
@@ -112,12 +113,25 @@
         };
 
         function leaderboard() {
-            self.myusers = $firebaseObject(ref.child('users'));
-            console.log(self.myusers);
+            var childData = {};
+            ref.once("value", function(snapshot) {
+                // The callback function will get called twice, once for "fred" and once for "barney"
+                snapshot.forEach(function(childSnapshot) {
+                    // key will be "fred" the first time and "barney" the second time
+                    var key = childSnapshot.key();
+                    // childData will be the actual contents of the child
+                    childData = childSnapshot.val();
+                    angular.forEach(childData, function(value) {
+                        console.log(value.gameplay);
 
-            angular.forEach(self.myusers, function(value, key) {
-                console.log(key + ':' + value);
+                        self.leaders.push(value);
+                        console.log(self.leaders);
+
+                    });
+                });
+
             });
+
 
         }
 
