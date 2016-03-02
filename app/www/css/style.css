@@ -244,13 +244,6 @@ progress::-webkit-progress-value {
     height: 48px;
     width: 48px;
 }
-.button-area-line {
-    margin: 10px auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-}
 .footer {
     height: 130px;
     background: yellow;
@@ -280,4 +273,8 @@ progress::-webkit-progress-value {
     left: 0;
     margin: auto;
     padding: 10px;
+}
+.button-bar2 {
+    background: yellow;
+    !important;
 }
