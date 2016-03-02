@@ -21,6 +21,9 @@ function AppCtrl ($state, gameService, $ionicSideMenuDelegate, $ionicHistory) {
     self.getUser = gameService.getUser;
     self.leaderboard = leaderboard;
 
+    self.leaderboarded = false;
+
+
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
         navIcons.addEventListener('click', function () {
@@ -35,6 +38,7 @@ function AppCtrl ($state, gameService, $ionicSideMenuDelegate, $ionicHistory) {
         self.gameService.isLoggedIn = false;
     }
     function leaderboard () {
+        self.leaderboarded = true;
         gameService.leaderboard();
     }
     ////////////////////////////////////////

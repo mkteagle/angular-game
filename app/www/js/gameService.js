@@ -58,6 +58,7 @@
             $ionicSideMenuDelegate.toggleRight();
             $ionicHistory.nextViewOptions({historyRoot: true});
             $state.go('app.login');
+            
         }
 
         function init() {
@@ -81,15 +82,6 @@
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
-                            //if (authData.email) {
-                            //    self.newUser.name = authData.email.displayName;
-                            //    self.newUser.img = authData.email.profilePicURL;
-                            //    self.user.$ref().set(self.newUser);
-                            //    self.user.gameplay = self.recorded;
-                            //    self.gameState();
-                            //    self.email = true;
-                            //    console.log(self.user);
-                            //}
                         }
                         self.recorded.counter = self.user.gameplay.counter;
                         self.recorded.clicker = self.user.gameplay.clicker;
@@ -111,26 +103,19 @@
         self.gameState = function () {
             self.user.$ref().child('gameplay').update(self.recorded);
         };
-
         function leaderboard() {
             var childData = {};
             ref.once("value", function(snapshot) {
-                // The callback function will get called twice, once for "fred" and once for "barney"
                 snapshot.forEach(function(childSnapshot) {
-                    // key will be "fred" the first time and "barney" the second time
                     var key = childSnapshot.key();
-                    // childData will be the actual contents of the child
                     childData = childSnapshot.val();
                     angular.forEach(childData, function(value) {
-                        console.log(value.gameplay);
-
                         self.leaders.push(value);
-                        console.log(self.leaders);
-
                     });
                 });
 
             });
+            $state.go('app.leaderboard');
         }
 
         function firebaseAuthLogin(provider) {
@@ -239,9 +224,9 @@
                     console.log("Error creating user:", error);
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
+                    $state.go('app.splash');
                     self.isLoggedIn = true;
                     $timeout(function () {
-                        $state.go('app.splash');
                     })
                 }
             });
