@@ -61,14 +61,6 @@
             
         }
 
-<<<<<<< HEAD
-=======
-
-        function getUser() {
-            return self.newUser;
-        }
-
->>>>>>> Ricardo
         function init() {
             self.authObj.$onAuth(function (authData) {
                 if (self.authObj.$getAuth()) {
