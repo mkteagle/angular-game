@@ -56,7 +56,9 @@
             $ionicSideMenuDelegate.toggleRight();
             $ionicHistory.nextViewOptions({historyRoot: true});
             $state.go('app.login');
+            
         }
+
 
         function getUser() {
             return self.newUser;
@@ -87,15 +89,6 @@
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
-                            //if (authData.email) {
-                            //    self.newUser.name = authData.email.displayName;
-                            //    self.newUser.img = authData.email.profilePicURL;
-                            //    self.user.$ref().set(self.newUser);
-                            //    self.user.gameplay = self.recorded;
-                            //    self.gameState();
-                            //    self.email = true;
-                            //    console.log(self.user);
-                            //}
                         }
                         self.recorded.counter = self.user.gameplay.counter;
                         self.recorded.clicker = self.user.gameplay.clicker;
@@ -233,9 +226,9 @@
                     console.log("Error creating user:", error);
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
+                    $state.go('app.splash');
                     self.isLoggedIn = true;
                     $timeout(function () {
-                        $state.go('app.splash');
                     })
                 }
             });
