@@ -205,7 +205,16 @@ progress::-webkit-progress-value {
     border-radius: 10px;
 }
 .bar-assertive-900 {
-    background-color: dodgerblue;
+    background-color: dodgerblue; !important
+}
+#howTo {
+    text-align: center;
+    color: #1C2A9C;
+}
+#howTo1 {
+    text-align: center;
+    color: #1C2A9C;
+    font-family: Cursive;
 !important
 }
 .item2 {

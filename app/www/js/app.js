@@ -20,7 +20,7 @@ angular.module('starter', ['ionic','app.ctrl', 'ionic-material', 'ionMdInput', '
             }
         });
     })
-    .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $locationProvider) {
 
         // Turn off caching for demo simplicity's sake
         $ionicConfigProvider.views.maxCache(0);
@@ -110,4 +110,5 @@ angular.module('starter', ['ionic','app.ctrl', 'ionic-material', 'ionMdInput', '
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/login');
+        $locationProvider.html5Mode(true);
     });

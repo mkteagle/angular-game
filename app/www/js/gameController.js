@@ -146,7 +146,6 @@
             $timeout(function() {
                 self.name = gameService.playerName();
                 self.img = gameService.playerPic();
-                console.log(self.img + ' & ' + self.name);
             });
         }
     }
