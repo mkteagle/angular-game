@@ -58,8 +58,17 @@
             $ionicSideMenuDelegate.toggleRight();
             $ionicHistory.nextViewOptions({historyRoot: true});
             $state.go('app.login');
+            
         }
 
+<<<<<<< HEAD
+=======
+
+        function getUser() {
+            return self.newUser;
+        }
+
+>>>>>>> Ricardo
         function init() {
             self.authObj.$onAuth(function (authData) {
                 if (self.authObj.$getAuth()) {
@@ -81,15 +90,6 @@
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
-                            //if (authData.email) {
-                            //    self.newUser.name = authData.email.displayName;
-                            //    self.newUser.img = authData.email.profilePicURL;
-                            //    self.user.$ref().set(self.newUser);
-                            //    self.user.gameplay = self.recorded;
-                            //    self.gameState();
-                            //    self.email = true;
-                            //    console.log(self.user);
-                            //}
                         }
                         self.recorded.counter = self.user.gameplay.counter;
                         self.recorded.clicker = self.user.gameplay.clicker;
@@ -131,8 +131,6 @@
                 });
 
             });
-
-
         }
 
         function firebaseAuthLogin(provider) {
@@ -170,31 +168,22 @@
         }
 
         function incrementClicker() {
-            if (self.recorded.counter - self.recorded.cost < 0) {
-                return self.recorded.clicker;
-            }
-            else {
-                self.recorded.clicker++;
-                self.recorded.counter = self.recorded.counter - self.recorded.cost;
-                self.recorded.countdown = self.recorded.goal - self.recorded.counter;
-                self.recorded.cost = self.recorded.cost * 2;
-                self.gameState();
-                return self.recorded.clicker;
-            }
+            self.recorded.clicker++;
+            self.recorded.counter = self.recorded.counter - self.recorded.cost;
+            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+            self.recorded.cost = self.recorded.cost * 2;
+            self.gameState();
+            return self.recorded.clicker;
+
         }
 
         function clickGrandpa() {
-            if (self.recorded.counter - self.recorded.cost < 0) {
-                return self.recorded.grandpa;
-            }
-            else {
-                self.recorded.grandpa = self.recorded.grandpa + 10;
-                self.recorded.counter = self.recorded.counter - self.recorded.gcost;
-                self.recorded.countdown = self.recorded.goal - self.recorded.counter;
-                self.recorded.gcost = self.recorded.gcost * 2;
-                self.gameState();
-                return self.recorded.grandpa;
-            }
+            self.recorded.grandpa = self.recorded.grandpa + 10;
+            self.recorded.counter = self.recorded.counter - self.recorded.gcost;
+            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+            self.recorded.gcost = self.recorded.gcost * 2;
+            self.gameState();
+            return self.recorded.grandpa;
         }
 
         function incrementCountdown() {
@@ -250,9 +239,9 @@
                     console.log("Error creating user:", error);
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
+                    $state.go('app.splash');
                     self.isLoggedIn = true;
                     $timeout(function () {
-                        $state.go('app.splash');
                     })
                 }
             });
