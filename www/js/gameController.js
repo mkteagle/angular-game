@@ -13,12 +13,12 @@
                 {
                     alias: "snap",
                     name: "snap",
-                    path: "../www/lib/ion-sound/sounds/",
+                    path: "lib/ion-sound/sounds/",
                     volume: 0.9,
                     preload: false
                 }
             ],
-            path: "../www/lib/ion-sound/sounds/",
+            path: "lib/ion-sound/sounds/",
             preload: true,
             multiplay: true
         });
