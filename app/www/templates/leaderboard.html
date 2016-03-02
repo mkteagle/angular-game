@@ -10,7 +10,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in hc.gameService.leaders | orderBy:'-gameplay.counter'">
+            <tr ng-repeat="item in hc.gameService.leaders track by $index | orderBy:'-gameplay.counter'">
                 <th>*</th>
                 <th>{{item.name | name | truncate}}</th>
                 <th>{{item.gameplay.counter}}</th>
