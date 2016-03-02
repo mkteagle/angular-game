@@ -6,9 +6,9 @@
 angular.module('app.ctrl', [])
     .controller('AppCtrl', AppCtrl)
 
-    AppCtrl.$inject = ['$state', 'gameService', '$ionicSideMenuDelegate', '$ionicHistory'];
+AppCtrl.$inject = ['$state', 'gameService', '$ionicSideMenuDelegate', '$ionicHistory'];
 
-    function AppCtrl ($state, gameService, $ionicSideMenuDelegate, $ionicHistory) {
+function AppCtrl ($state, gameService, $ionicSideMenuDelegate, $ionicHistory) {
     // Form data for the login modal
     var self = this;
     self.loginData = {};
@@ -20,6 +20,9 @@ angular.module('app.ctrl', [])
     self.gameService = gameService;
     self.getUser = gameService.getUser;
     self.leaderboard = leaderboard;
+
+    self.leaderboarded = false;
+
 
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
@@ -35,6 +38,7 @@ angular.module('app.ctrl', [])
         self.gameService.isLoggedIn = false;
     }
     function leaderboard () {
+        self.leaderboarded = true;
         gameService.leaderboard();
     }
     ////////////////////////////////////////

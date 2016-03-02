@@ -8,6 +8,7 @@
 
     function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl, $ionicSideMenuDelegate) {
         var self = this;
+        self.leaders = [];
         var ref = new Firebase(firebaseUrl);
         self.authObj = $firebaseAuth(ref);
         self.incrementCounter = incrementCounter;
@@ -57,6 +58,7 @@
             $ionicSideMenuDelegate.toggleRight();
             $ionicHistory.nextViewOptions({historyRoot: true});
             $state.go('app.login');
+            
         }
 
         function init() {
@@ -64,6 +66,7 @@
                 if (self.authObj.$getAuth()) {
                     self.id = authData.uid;
                     self.isLoggedIn = true;
+
                     self.user = $firebaseObject(ref.child('users').child(self.id));
                     self.user.$loaded().then(function () {
                         if (self.user.name == undefined) {
@@ -100,15 +103,19 @@
         self.gameState = function () {
             self.user.$ref().child('gameplay').update(self.recorded);
         };
-
         function leaderboard() {
-            self.myusers = $firebaseObject(ref.child('users'));
-            console.log(self.myusers);
+            var childData = {};
+            ref.once("value", function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var key = childSnapshot.key();
+                    childData = childSnapshot.val();
+                    angular.forEach(childData, function(value) {
+                        self.leaders.push(value);
+                    });
+                });
 
-            angular.forEach(self.myusers, function(value, key) {
-                console.log(key + ':' + value);
             });
-
+            $state.go('app.leaderboard');
         }
 
         function firebaseAuthLogin(provider) {
@@ -146,31 +153,22 @@
         }
 
         function incrementClicker() {
-            if (self.recorded.counter - self.recorded.cost < 0) {
-                return self.recorded.clicker;
-            }
-            else {
-                self.recorded.clicker++;
-                self.recorded.counter = self.recorded.counter - self.recorded.cost;
-                self.recorded.countdown = self.recorded.goal - self.recorded.counter;
-                self.recorded.cost = self.recorded.cost * 2;
-                self.gameState();
-                return self.recorded.clicker;
-            }
+            self.recorded.clicker++;
+            self.recorded.counter = self.recorded.counter - self.recorded.cost;
+            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+            self.recorded.cost = self.recorded.cost * 2;
+            self.gameState();
+            return self.recorded.clicker;
+
         }
 
         function clickGrandpa() {
-            if (self.recorded.counter - self.recorded.cost < 0) {
-                return self.recorded.grandpa;
-            }
-            else {
-                self.recorded.grandpa = self.recorded.grandpa + 10;
-                self.recorded.counter = self.recorded.counter - self.recorded.gcost;
-                self.recorded.countdown = self.recorded.goal - self.recorded.counter;
-                self.recorded.gcost = self.recorded.gcost * 2;
-                self.gameState();
-                return self.recorded.grandpa;
-            }
+            self.recorded.grandpa = self.recorded.grandpa + 10;
+            self.recorded.counter = self.recorded.counter - self.recorded.gcost;
+            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+            self.recorded.gcost = self.recorded.gcost * 2;
+            self.gameState();
+            return self.recorded.grandpa;
         }
 
         function incrementCountdown() {
@@ -226,9 +224,9 @@
                     console.log("Error creating user:", error);
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
+                    $state.go('app.splash');
                     self.isLoggedIn = true;
                     $timeout(function () {
-                        $state.go('app.splash');
                     })
                 }
             });
