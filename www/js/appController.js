@@ -6,9 +6,9 @@
 angular.module('app.ctrl', [])
     .controller('AppCtrl', AppCtrl)
 
-AppCtrl.$inject = ['$state', 'gameService'];
+    AppCtrl.$inject = ['$state', 'gameService', '$ionicSideMenuDelegate', '$ionicHistory'];
 
-function AppCtrl ($state, gameService) {
+    function AppCtrl ($state, gameService, $ionicSideMenuDelegate, $ionicHistory) {
     // Form data for the login modal
     var self = this;
     self.loginData = {};
@@ -29,7 +29,10 @@ function AppCtrl ($state, gameService) {
     }
     function logout() {
         gameService.logout();
-        self.gameService.isUserLoggedIn = false;
+        $ionicSideMenuDelegate.toggleRight();
+        $ionicHistory.nextViewOptions({historyRoot: true});
+        $state.go('app.login');
+        self.gameService.isLoggedIn = false;
     }
     function leaderboard () {
         gameService.leaderboard();
