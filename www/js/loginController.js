@@ -5,7 +5,7 @@
 function loginController(gameService) {
     // controller data and functions
     var vm = this;
-    vm.authData = gameService.authData;
+    vm.authData = gameService.user;
     vm.recorded = gameService.recorded;
     vm.facebookLogin = facebookLogin;
     vm.googleLogin = googleLogin;
