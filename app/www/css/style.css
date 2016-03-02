@@ -253,8 +253,7 @@ progress::-webkit-progress-value {
 .toaster {
     background: lightgray;
 }
-<<<<<<< HEAD
-=======
+
 .ngtoast-fly.ngtoast-opening {
     animation: ngtoast-flyin 0.3s;
 }
@@ -277,4 +276,3 @@ progress::-webkit-progress-value {
     margin: auto;
     padding: 10px;
 }
->>>>>>> master
