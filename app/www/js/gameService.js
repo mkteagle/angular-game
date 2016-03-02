@@ -60,18 +60,6 @@
             $state.go('app.login');
             
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> master
-=======
-
->>>>>>> master
-=======
-
->>>>>>> master
         function init() {
             self.authObj.$onAuth(function (authData) {
                 if (self.authObj.$getAuth()) {
@@ -121,13 +109,7 @@
                     var key = childSnapshot.key();
                     childData = childSnapshot.val();
                     angular.forEach(childData, function(value) {
-<<<<<<< HEAD
-
                         self.leaders.push(value);
-
-=======
-                        self.leaders.push(value);
->>>>>>> master
                     });
                 });
 
