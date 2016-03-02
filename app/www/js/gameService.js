@@ -60,15 +60,14 @@
             $state.go('app.login');
             
         }
-
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
-        function getUser() {
-            return self.newUser;
-        }
+>>>>>>> master
+=======
 
->>>>>>> Ricardo
+>>>>>>> master
         function init() {
             self.authObj.$onAuth(function (authData) {
                 if (self.authObj.$getAuth()) {
@@ -122,10 +121,8 @@
                     // childData will be the actual contents of the child
                     childData = childSnapshot.val();
                     angular.forEach(childData, function(value) {
-                        console.log(value.gameplay);
 
                         self.leaders.push(value);
-                        console.log(self.leaders);
 
                     });
                 });
