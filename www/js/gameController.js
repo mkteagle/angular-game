@@ -13,12 +13,12 @@
                 {
                     alias: "snap",
                     name: "snap",
-                    path: "lib/ion-sound/sounds/",
+                    path: "../www/lib/ion-sound/sounds/",
                     volume: 0.9,
                     preload: false
                 }
             ],
-            path: "lib/ion-sound/sounds/",
+            path: "../www/lib/ion-sound/sounds/",
             preload: true,
             multiplay: true
         });
@@ -146,7 +146,6 @@
             $timeout(function() {
                 self.name = gameService.playerName();
                 self.img = gameService.playerPic();
-                console.log(self.img + ' & ' + self.name);
             });
         }
     }
