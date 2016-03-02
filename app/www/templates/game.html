@@ -1,11 +1,11 @@
-<ion-view id="mainGame" view-title="Game Play" ng-controller="gameController as hc" ng-init="hc.countItDown()">
+<ion-view id="mainGame" view-title="Game Play" ng-controller="gameController as hc">
     <ion-content>
         <toast class="toaster"></toast>
         </div>
         <div class="row enjoy-css">
 
             <div class="onehundred">{{ hc.selected.counter }}</div>
-            <span class="onehundreddonuts"> donuts</span></div>
+            <span class="onehundreddonuts"><div class="donutstext">donuts</div></span></div>
         <div class="row">
             <div class="onehundred"><span class="textsize">{{ hc.selected.countdown }}</span></div>
             <span class="onehundreddonuts"><span class="textsize">til {{ hc.selected.goal }}</span></span></div>
@@ -15,16 +15,18 @@
             <img class="donut" ng-click="hc.showToast(); hc.incrementCounter(); hc.incrementCountdown(); hc.playSound()"
                  ng-src="img/555884.gif" style="height: 350px; width: 345px;" onclick="createFirework(85,62,2,4,50,45,50,43,false,true);">
         </div>
-        <div class="row">
-            <h5>Clickers</h5><span>{{ hc.selected.clicker }}</span>
-            <h5>Grandpas</h5><span>{{ hc.selected.grandpa }}</span>
+        <div class="toptobottom">
+            <div class="row">
+                <h5>Clickers {{ hc.selected.clicker }}</h5>
+            </div>
+            <div class="row">
+                <h5>Grandpas {{ hc.selected.grandpa }}</h5>
+            </div>
+        </div>
+
+        <div class="button-bar2 social-login">
+            <upgrade-directive></upgrade-directive>
         </div>
     </ion-content>
-    <div class="button-bar2 social-login">
-        <upgrade-directive></upgrade-directive>
-    </div>
-    <!--<ion-footer-bar class="footer">-->
-        <!---->
-        <!--<upgrade-directive></upgrade-directive>-->
-    <!--</ion-footer-bar>-->
+
 </ion-view>
