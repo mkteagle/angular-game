@@ -3,10 +3,10 @@
     angular.module('gameService', [])
         .service('gameService', gameService);
 
-    gameService.$inject = ['ngToast', '$firebaseAuth', '$firebaseObject', '$timeout', '$state', '$ionicHistory', 'firebaseUrl'];
+    gameService.$inject = ['ngToast', '$firebaseAuth', '$firebaseObject', '$timeout', '$state', '$ionicHistory', 'firebaseUrl', '$ionicSideMenuDelegate'];
 
 
-    function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl) {
+    function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl, $ionicSideMenuDelegate) {
         var self = this;
         var ref = new Firebase(firebaseUrl);
         self.authObj = $firebaseAuth(ref);
@@ -28,8 +28,11 @@
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
         self.logout = logout;
+
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
+        self.leaderboard = leaderboard;
+
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
             self.goal = self.goal * 2;
@@ -67,14 +70,12 @@
                             if (authData.google) {
                                 self.newUser.name = authData.google.displayName;
                                 self.newUser.img = authData.google.profileImageURL;
-                                self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
                             if (authData.facebook) {
                                 self.newUser.name = authData.facebook.displayName;
                                 self.newUser.img = authData.facebook.profileImageURL;
-                                self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
@@ -100,9 +101,20 @@
             self.user.$ref().child('gameplay').update(self.recorded);
         };
 
+        function leaderboard() {
+            self.myusers = $firebaseObject(ref.child('users'));
+            console.log(self.myusers);
+
+            angular.forEach(self.myusers, function(value, key) {
+                console.log(key + ':' + value);
+            });
+
+        }
+
         function firebaseAuthLogin(provider) {
             self.authObj.$authWithOAuthPopup(provider).then(function (authData) {
                 console.log("Authenticated successfully with provider " + provider + " with payload:", authData);
+                init();
                 $state.go('app.splash');
             }).catch(function (error) {
                 console.error("Authentication failed:", error);
@@ -127,7 +139,7 @@
 
         function showToast() {
             ngToast.create({
-                className: 'success',
+                className: 'ngtoast-default ngtoast-fly',
                 content: self.recorded.level
             });
         }
