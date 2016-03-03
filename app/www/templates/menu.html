@@ -15,7 +15,8 @@
         <ion-header-bar class="dark-bg expanded">
                 <img class="avatar" ng-src="{{ac.gameService.user.img}}" ng-if="ac.gameService.isLoggedIn" alt="">
                 <img class="avatar" ng-src="" ng-if="!ac.gameService.isLoggedIn" alt="">
-                <h2>{{ac.gameService.user.name}}</h2>
+                <h2 ng-if="ac.gameService.isLoggedIn">{{ac.gameService.user.name}}</h2>
+                <h2 ng-if="!ac.gameService.isLoggedIn">Welcome</h2>
             </div>
             </div>
         </ion-header-bar>
