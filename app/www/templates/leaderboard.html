@@ -11,16 +11,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in hc.gameService.leaders | orderBy:'-gameplay.counter'">
+            <tr ng-repeat="item in hc.gameService.childData | orderObjectBy:'gameplay.counter'">
                 <th>*</th>
-                <th>{{item.name | name | truncate}}</th>
+                <th>{{item.name | initials }}</th>
                 <th>{{item.gameplay.counter}}</th>
             </tr>
             </tbody>
             </table>
-
-        <!--<div ng-repeat="item in hc.gameService.leaders">-->
-            <!--<div>{{item.name}} {{item.gameplay.counter}}</div>-->
         </div>
         </ion-content>
     </ion-view>
