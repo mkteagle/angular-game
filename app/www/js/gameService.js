@@ -8,29 +8,22 @@
 
     function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl, $ionicSideMenuDelegate) {
         var self = this;
-        self.leaders = [];
         var ref = new Firebase(firebaseUrl);
         self.authObj = $firebaseAuth(ref);
         self.incrementCounter = incrementCounter;
-        self.recordId = null;
-        self.id = null;
         self.updated = 100;
         self.showToast = showToast;
         self.incrementCountdown = incrementCountdown;
         self.updatePlayer = updatePlayer;
-        self.playerName = playerName;
-        self.playerPic = playerPic;
         self.upgrades = [];
         self.goal = 1000;
         self.user = {};
         self.newUser = {};
-        self.id = '';
         self.childData = {};
         self.incrementClicker = incrementClicker;
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
         self.logout = logout;
-
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.leaderboard = leaderboard;
@@ -54,8 +47,21 @@
         init();
 
         function logout() {
-            ref.unauth();
+            $timeout(function() {
+                ref.unauth();
+            });
+            ref.onAuth(function(authData) {
+                if (authData) {
+                    console.log("Logged in");
+                } else {
+                    console.log("Logged out");
+                    self.user.img = 'http://www.junkiemonkeys.com/wp-content/uploads/2014/07/212119-Avatar.jpg';
+                }
+            });
+
             console.log('User is logged out');
+            self.user.img = null;
+            console.log(self.user.img);
             $ionicSideMenuDelegate.toggleRight();
             $ionicHistory.nextViewOptions({historyRoot: true});
             $state.go('app.login');
@@ -101,14 +107,12 @@
                 }
 
             });
-            console.log(self.user);
         }
 
         self.gameState = function () {
             self.user.$ref().child('gameplay').update(self.recorded);
         };
         function leaderboard() {
-
             ref.once("value", function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     self.childData = childSnapshot.val();
@@ -141,14 +145,6 @@
         self.facebookLogin = function () {
             self.firebaseAuthLogin('facebook');
         };
-
-        function playerName() {
-            return self.user.name;
-        }
-
-        function playerPic() {
-            return self.user.img;
-        }
 
         function showToast() {
             ngToast.create({
@@ -245,8 +241,13 @@
                     console.log("Login Failed!", error);
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
+                    self.id = authData.uid;
+                    self.user = $firebaseObject(ref.child('users').child(self.id));
                     self.message = 'Logged into Game';
                     self.isLoggedIn = true;
+                    self.newUser.name = authData.password.email;
+                    self.user.$ref().set(self.newUser);
+                    self.gameState();
                     $timeout(function () {
                         $state.go('app.splash');
                     })
