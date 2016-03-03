@@ -25,6 +25,7 @@
         self.user = {};
         self.newUser = {};
         self.id = '';
+        self.childData = {};
         self.incrementClicker = incrementClicker;
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
@@ -72,12 +73,15 @@
                             if (authData.google) {
                                 self.newUser.name = authData.google.displayName;
                                 self.newUser.img = authData.google.profileImageURL;
+                                self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
                             if (authData.facebook) {
+                                console.log(authData);
                                 self.newUser.name = authData.facebook.displayName;
                                 self.newUser.img = authData.facebook.profileImageURL;
+                                self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
@@ -97,20 +101,20 @@
                 }
 
             });
+            console.log(self.user);
         }
 
         self.gameState = function () {
             self.user.$ref().child('gameplay').update(self.recorded);
         };
         function leaderboard() {
-            var childData = {};
+
             ref.once("value", function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
-                    var key = childSnapshot.key();
-                    childData = childSnapshot.val();
-                    angular.forEach(childData, function(value) {
-                        self.leaders.push(value);
-                    });
+                    self.childData = childSnapshot.val();
+                    //angular.forEach(childData, function(value) {
+                    //    self.leaders.push(value);
+                    //});
                 });
 
             });
@@ -120,9 +124,11 @@
         function firebaseAuthLogin(provider) {
             self.authObj.$authWithOAuthPopup(provider).then(function (authData) {
                 console.log("Authenticated successfully with provider " + provider + " with payload:", authData);
-                init();
-                $ionicHistory.nextViewOptions({historyRoot: true});
-                $state.go('app.splash');
+                $timeout(function() {
+                    init();
+                    $ionicHistory.nextViewOptions({historyRoot: true});
+                    $state.go('app.splash');
+                })
             }).catch(function (error) {
                 console.error("Authentication failed:", error);
             });
