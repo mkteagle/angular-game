@@ -13,12 +13,11 @@
     </ion-side-menu-content>
     <ion-side-menu side="right">
         <ion-header-bar class="dark-bg expanded">
-            <img class="avatar" ng-src="{{ac.gameService.user.img}}" ng-if="ac.gameService.user.img" alt="">
-            <img class="avatar" ng-src="" ngif="!ac.gameService.isLoggedIn" alt="">
-                <!--<img class="avatar" ng-src="{{ac.gameService.user.img}}" alt="">-->
-                <h2>{{ac.gameService.user.name}}</h2>
-                <!--<h2>{{ac.gameService.authWithPassword.email}}</h2>-->
-            </div>
+            <div>
+                <img class="avatar" ng-src="{{ac.gameService.user.img}}" ng-if="ac.gameService.isLoggedIn" alt=""/>
+                <img class="avatar" src="https://donut-click.firebaseapp.com/img/simpsons-donut.png" ng-if="!ac.gameService.isLoggedIn" alt=""/>
+                <h2 ng-if="ac.gameService.isLoggedIn">{{ac.gameService.user.name}}</h2>
+                <h2 ng-if="!ac.gameService.isLoggedIn">Welcome</h2>
             </div>
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
