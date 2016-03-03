@@ -225,6 +225,9 @@
                     console.log("Error creating user:", error);
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
+                    self.newUser.name = authData.password.email;
+                    self.user.$ref().set(self.newUser);
+                    self.gameState();
                     $state.go('app.splash');
                     self.isLoggedIn = true;
                     $timeout(function () {
