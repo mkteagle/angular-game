@@ -25,6 +25,7 @@
         self.user = {};
         self.newUser = {};
         self.id = '';
+        self.childData = {};
         self.incrementClicker = incrementClicker;
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
@@ -60,7 +61,6 @@
             $state.go('app.login');
             
         }
-
         function init() {
             self.authObj.$onAuth(function (authData) {
                 if (self.authObj.$getAuth()) {
@@ -73,12 +73,15 @@
                             if (authData.google) {
                                 self.newUser.name = authData.google.displayName;
                                 self.newUser.img = authData.google.profileImageURL;
+                                self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
                             if (authData.facebook) {
+                                console.log(authData);
                                 self.newUser.name = authData.facebook.displayName;
                                 self.newUser.img = authData.facebook.profileImageURL;
+                                self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
@@ -98,39 +101,34 @@
                 }
 
             });
+            console.log(self.user);
         }
 
         self.gameState = function () {
             self.user.$ref().child('gameplay').update(self.recorded);
         };
-
         function leaderboard() {
-            var childData = {};
+
             ref.once("value", function(snapshot) {
-                // The callback function will get called twice, once for "fred" and once for "barney"
                 snapshot.forEach(function(childSnapshot) {
-                    // key will be "fred" the first time and "barney" the second time
-                    var key = childSnapshot.key();
-                    // childData will be the actual contents of the child
-                    childData = childSnapshot.val();
-                    angular.forEach(childData, function(value) {
-                        console.log(value.gameplay);
-
-                        self.leaders.push(value);
-                        console.log(self.leaders);
-
-                    });
+                    self.childData = childSnapshot.val();
+                    //angular.forEach(childData, function(value) {
+                    //    self.leaders.push(value);
+                    //});
                 });
 
             });
+            $state.go('app.leaderboard');
         }
 
         function firebaseAuthLogin(provider) {
             self.authObj.$authWithOAuthPopup(provider).then(function (authData) {
                 console.log("Authenticated successfully with provider " + provider + " with payload:", authData);
-                init();
-                $ionicHistory.nextViewOptions({historyRoot: true});
-                $state.go('app.splash');
+                $timeout(function() {
+                    init();
+                    $ionicHistory.nextViewOptions({historyRoot: true});
+                    $state.go('app.splash');
+                })
             }).catch(function (error) {
                 console.error("Authentication failed:", error);
             });
