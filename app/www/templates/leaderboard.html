@@ -11,7 +11,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in hc.gameService.childData | orderObjectBy:'gameplay.counter'">
+            <tr ng-repeat="item in hc.gameService.childData | orderObjectBy:'-gameplay.counter'">
                 <th>*</th>
                 <th>{{item.name | initials }}</th>
                 <th>{{item.gameplay.counter}}</th>
