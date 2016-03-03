@@ -241,8 +241,13 @@
                     console.log("Login Failed!", error);
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
+                    self.id = authData.uid;
+                    self.user = $firebaseObject(ref.child('users').child(self.id));
                     self.message = 'Logged into Game';
                     self.isLoggedIn = true;
+                    self.newUser.name = authData.password.email;
+                    self.user.$ref().set(self.newUser);
+                    self.gameState();
                     $timeout(function () {
                         $state.go('app.splash');
                     })
