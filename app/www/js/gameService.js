@@ -60,7 +60,6 @@
             $state.go('app.login');
             
         }
-
         function init() {
             self.authObj.$onAuth(function (authData) {
                 if (self.authObj.$getAuth()) {

@@ -1,5 +1,6 @@
 <ion-view id="mainGame" view-title="leaderboard" ng-controller="gameController as hc" ng-init="hc.countItDown()">
     <ion-content>
+
         <table class="table">
         <h2>Top Players</h2>
             <thead>
@@ -10,7 +11,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in hc.gameService.leaders track by $index | orderBy:'-gameplay.counter'">
+            <tr ng-repeat="item in hc.gameService.leaders | orderBy:'-gameplay.counter'">
                 <th>*</th>
                 <th>{{item.name | name | truncate}}</th>
                 <th>{{item.gameplay.counter}}</th>
