@@ -13,7 +13,8 @@
     </ion-side-menu-content>
     <ion-side-menu side="right">
         <ion-header-bar class="dark-bg expanded">
-                <img class="avatar" ng-src="{{ac.gameService.user.img}}" alt="">
+                <img class="avatar" ng-src="{{ac.gameService.user.img}}" ng-if="ac.gameService.isLoggedIn" alt="">
+                <img class="avatar" ng-src="" ng-if="!ac.gameService.isLoggedIn" alt="">
                 <h2>{{ac.gameService.user.name}}</h2>
             </div>
             </div>
@@ -22,7 +23,7 @@
             <ion-list>
             <ion-list>
                 <ion-item class="animate-if" nav-clear menu-close ng-if="ac.gameService.isLoggedIn" ng-click="ac.logout()">Log Out</ion-item>
-                <ion-item class="animate-if" nav-clear menu-close ng-if="ac.gameService.isLoggedIn" ng-click="ac.leaderboard()" ng-disabled="ac.leaderboarded">Leaderboard</ion-item>
+                <ion-item class="animate-if" nav-clear menu-close ng-if="ac.gameService.isLoggedIn" ng-click="ac.leaderboard()">Leaderboard</ion-item>
 
             </ion-list>
             <ion-list class="animate-if" ng-if="!ac.gameService.isLoggedIn">
