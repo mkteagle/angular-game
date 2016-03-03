@@ -6,9 +6,9 @@
 angular.module('app.ctrl', [])
     .controller('AppCtrl', AppCtrl)
 
-AppCtrl.$inject = ['$state', 'gameService', '$ionicSideMenuDelegate', '$ionicHistory'];
+    AppCtrl.$inject = ['$state', 'gameService', '$ionicSideMenuDelegate', '$ionicHistory'];
 
-function AppCtrl ($state, gameService, $ionicSideMenuDelegate, $ionicHistory) {
+    function AppCtrl ($state, gameService, $ionicSideMenuDelegate, $ionicHistory) {
     // Form data for the login modal
     var self = this;
     self.loginData = {};

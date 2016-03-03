@@ -8,6 +8,7 @@
 
     function gameService(ngToast, $firebaseAuth, $firebaseObject, $timeout, $state, $ionicHistory, firebaseUrl, $ionicSideMenuDelegate) {
         var self = this;
+        self.leaders = [];
         var ref = new Firebase(firebaseUrl);
         self.authObj = $firebaseAuth(ref);
         self.incrementCounter = incrementCounter;
@@ -22,15 +23,16 @@
         self.upgrades = [];
         self.goal = 1000;
         self.user = {};
-        self.newUser = {name:"joe"};
+        self.newUser = {};
         self.id = '';
         self.incrementClicker = incrementClicker;
         self.clickGrandpa = clickGrandpa;
         self.firebaseAuthLogin = firebaseAuthLogin;
         self.logout = logout;
-        self.getUser = getUser;
+
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
+        self.leaderboard = leaderboard;
 
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
@@ -59,11 +61,6 @@
             
         }
 
-
-        function getUser() {
-            return self.newUser;
-        }
-
         function init() {
             self.authObj.$onAuth(function (authData) {
                 if (self.authObj.$getAuth()) {
@@ -74,18 +71,14 @@
                     self.user.$loaded().then(function () {
                         if (self.user.name == undefined) {
                             if (authData.google) {
-                                //$timeout(function () {
-                                    self.newUser.name = authData.google.displayName;
-                                    self.newUser.img = authData.google.profileImageURL;
-                                //});
-                                self.user.$ref().set(self.newUser);
+                                self.newUser.name = authData.google.displayName;
+                                self.newUser.img = authData.google.profileImageURL;
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
                             if (authData.facebook) {
                                 self.newUser.name = authData.facebook.displayName;
                                 self.newUser.img = authData.facebook.profileImageURL;
-                                self.user.$ref().set(self.newUser);
                                 self.user.gameplay = self.recorded;
                                 self.gameState();
                             }
@@ -110,6 +103,27 @@
         self.gameState = function () {
             self.user.$ref().child('gameplay').update(self.recorded);
         };
+
+        function leaderboard() {
+            var childData = {};
+            ref.once("value", function(snapshot) {
+                // The callback function will get called twice, once for "fred" and once for "barney"
+                snapshot.forEach(function(childSnapshot) {
+                    // key will be "fred" the first time and "barney" the second time
+                    var key = childSnapshot.key();
+                    // childData will be the actual contents of the child
+                    childData = childSnapshot.val();
+                    angular.forEach(childData, function(value) {
+                        console.log(value.gameplay);
+
+                        self.leaders.push(value);
+                        console.log(self.leaders);
+
+                    });
+                });
+
+            });
+        }
 
         function firebaseAuthLogin(provider) {
             self.authObj.$authWithOAuthPopup(provider).then(function (authData) {
@@ -140,37 +154,28 @@
 
         function showToast() {
             ngToast.create({
-                className: 'toaster',
+                className: 'ngtoast-default ngtoast-fly',
                 content: self.recorded.level
             });
         }
 
         function incrementClicker() {
-            if (self.recorded.counter - self.recorded.cost < 0) {
-                return self.recorded.clicker;
-            }
-            else {
-                self.recorded.clicker++;
-                self.recorded.counter = self.recorded.counter - self.recorded.cost;
-                self.recorded.countdown = self.recorded.goal - self.recorded.counter;
-                self.recorded.cost = self.recorded.cost * 2;
-                self.gameState();
-                return self.recorded.clicker;
-            }
+            self.recorded.clicker++;
+            self.recorded.counter = self.recorded.counter - self.recorded.cost;
+            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+            self.recorded.cost = self.recorded.cost * 2;
+            self.gameState();
+            return self.recorded.clicker;
+
         }
 
         function clickGrandpa() {
-            if (self.recorded.counter - self.recorded.cost < 0) {
-                return self.recorded.grandpa;
-            }
-            else {
-                self.recorded.grandpa = self.recorded.grandpa + 10;
-                self.recorded.counter = self.recorded.counter - self.recorded.gcost;
-                self.recorded.countdown = self.recorded.goal - self.recorded.counter;
-                self.recorded.gcost = self.recorded.gcost * 2;
-                self.gameState();
-                return self.recorded.grandpa;
-            }
+            self.recorded.grandpa = self.recorded.grandpa + 10;
+            self.recorded.counter = self.recorded.counter - self.recorded.gcost;
+            self.recorded.countdown = self.recorded.goal - self.recorded.counter;
+            self.recorded.gcost = self.recorded.gcost * 2;
+            self.gameState();
+            return self.recorded.grandpa;
         }
 
         function incrementCountdown() {

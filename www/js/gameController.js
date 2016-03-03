@@ -13,12 +13,12 @@
                 {
                     alias: "snap",
                     name: "snap",
-                    path: "../www/lib/ion-sound/sounds/",
+                    path: "lib/ion-sound/sounds/",
                     volume: 0.9,
                     preload: false
                 }
             ],
-            path: "../www/lib/ion-sound/sounds/",
+            path: "lib/ion-sound/sounds/",
             preload: true,
             multiplay: true
         });
@@ -26,6 +26,7 @@
         self.level = gameService.level;
         self.getChange = getChange;
         self.selected = gameService.recorded;
+        self.user = gameService.user;
         self.selectPlayer = selectPlayer;
         self.countdown = gameService.recorded.countdown;
         self.counter = gameService.recorded.counter;
