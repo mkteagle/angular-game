@@ -119,9 +119,6 @@
             ref.once("value", function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     self.childData = childSnapshot.val();
-                    //angular.forEach(childData, function(value) {
-                    //    self.leaders.push(value);
-                    //});
                 });
 
             });
@@ -235,10 +232,7 @@
                     console.log("Error creating user:", error);
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
-                    self.user = $firebaseObject(ref.child('users').child(self.id));
-                    self.message = 'Logged into Game';
                     self.newUser.name = authData.password.email;
-                    self.newUser.img = "https://donut-click.firebaseapp.com/img/simpsons-donut.png";
                     self.user.$ref().set(self.newUser);
                     self.gameState();
                     $state.go('app.splash');
@@ -263,7 +257,6 @@
                     self.message = 'Logged into Game';
                     self.isLoggedIn = true;
                     self.newUser.name = authData.password.email;
-                    self.newUser.img = "https://donut-click.firebaseapp.com/img/simpsons-donut.png";
                     self.user.$ref().set(self.newUser);
                     self.gameState();
                     $timeout(function () {

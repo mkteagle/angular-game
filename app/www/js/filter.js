@@ -20,17 +20,6 @@
             }
             };
         })
-        //.filter('name', function() {
-        //return function(input) {
-        //    if (input == null) {
-        //        return "Unknown";
-        //    } else {
-        //
-        //        return input;
-        //    }
-        //};
-
-//})
         .filter('orderObjectBy', function() {
             return function(items, field, reverse) {
                 var filtered = [];
