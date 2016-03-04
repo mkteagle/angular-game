@@ -119,12 +119,12 @@
             self.user.$ref().child('gameplay').update(self.recorded);
         };
         function leaderboard() {
+            console.log(ref);
             ref.once("value", function(snapshot) {
+                console.log(snapshot);
                 snapshot.forEach(function(childSnapshot) {
                     self.childData = childSnapshot.val();
-                    //angular.forEach(childData, function(value) {
-                    //    self.leaders.push(value);
-                    //});
+                    console.log(childData);
                 });
 
             });
