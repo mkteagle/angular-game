@@ -252,11 +252,7 @@
             }, function (error, authData) {
                 if (error) {
                     console.log("Login Failed!", error);
-<<<<<<< HEAD
                     self.showError(error);
-=======
-                    self.showError(error)
->>>>>>> master
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
                     self.id = authData.uid;
