@@ -230,9 +230,9 @@
                     self.newUser.name = authData.password.email;
                     self.newUser.img = "https://donut-click.firebaseapp.com/img/simpsons-donut.png";
                     self.user.$ref().set(self.newUser);
+                    self.isLoggedIn = true;
                     self.gameState();
                     $state.go('app.splash');
-                    self.isLoggedIn = true;
                     $timeout(function () {
                     })
                 }
@@ -248,7 +248,6 @@
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
                     self.id = authData.uid;
-
                     self.user = $firebaseObject(ref.child('users').child(self.id));
                     self.message = 'Logged into Game';
                     self.isLoggedIn = true;
