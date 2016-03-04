@@ -48,15 +48,16 @@
         init();
         function showError(error) {
             ngToast.create({
-                className: 'failure',
+                className: 'error',
                 content: error
             });
         }
+
         function logout() {
-            $timeout(function() {
+            $timeout(function () {
                 ref.unauth();
             });
-            ref.onAuth(function(authData) {
+            ref.onAuth(function (authData) {
                 if (authData) {
                     console.log("Logged in");
                 } else {
@@ -71,8 +72,9 @@
             $ionicSideMenuDelegate.toggleRight();
             $ionicHistory.nextViewOptions({historyRoot: true});
             $state.go('app.login');
-            
+
         }
+
         function init() {
             self.authObj.$onAuth(function (authData) {
                 if (self.authObj.$getAuth()) {
@@ -119,8 +121,8 @@
             self.user.$ref().child('gameplay').update(self.recorded);
         };
         function leaderboard() {
-            ref.once("value", function(snapshot) {
-                snapshot.forEach(function(childSnapshot) {
+            ref.once("value", function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
                     self.childData = childSnapshot.val();
                 });
 
@@ -131,7 +133,7 @@
         function firebaseAuthLogin(provider) {
             self.authObj.$authWithOAuthPopup(provider).then(function (authData) {
                 console.log("Authenticated successfully with provider " + provider + " with payload:", authData);
-                $timeout(function() {
+                $timeout(function () {
                     init();
                     $ionicHistory.nextViewOptions({historyRoot: true});
                     $state.go('app.splash');
@@ -219,6 +221,7 @@
             }
 
         }
+
         function createUser(email, password) {
             ref.createUser({
                 email: email,
@@ -242,6 +245,7 @@
                 }
             });
         }
+
         function authWithPassword(email, password) {
             ref.authWithPassword({
                 email: email,

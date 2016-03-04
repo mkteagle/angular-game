@@ -284,3 +284,6 @@ progress::-webkit-progress-value {
     text-align: center;
     padding-top: 10px;
 }
+#leaderboardwrapper {
+    padding: 10px;
+}

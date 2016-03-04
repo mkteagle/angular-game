@@ -5,7 +5,22 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic','app.ctrl', 'ionic-material', 'ionMdInput', 'gameController', 'ngToast', 'firebase', 'gameService', 'app.login', 'ngStorage', 'upgradeDirective', 'nameFilters', 'angular-toArrayFilter'])
+angular.module('starter', [
+    'ionic',
+    'app.ctrl',
+    'ionic-material',
+    'ionMdInput',
+    'gameController',
+    'ngToast',
+    'firebase',
+    'gameService',
+    'app.login',
+    'ngStorage',
+    'upgradeDirective',
+    'nameFilters',
+    'angular-toArrayFilter'
+    ])
+    
     .constant('firebaseUrl', "https://donut-click.firebaseio.com/")
     .run(function($ionicPlatform) {
         $ionicPlatform.ready(function() {
