@@ -25,6 +25,7 @@ function loginController(gameService) {
     }
     function authWithPassword() {
         gameService.authWithPassword(vm.email, vm.password);
+        vm.password = '';
     }
 }
 })();
