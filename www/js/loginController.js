@@ -26,6 +26,7 @@ function loginController(gameService) {
     }
     function createUser() {
         gameService.createUser(vm.email, vm.password);
+        vm.password = '';
     }
     function authWithPassword() {
         gameService.authWithPassword(vm.email, vm.password);

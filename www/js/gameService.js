@@ -13,7 +13,6 @@
         self.incrementCounter = incrementCounter;
         self.updated = 100;
         self.showToast = showToast;
-        //self.showError = showError;
         self.incrementCountdown = incrementCountdown;
         self.updatePlayer = updatePlayer;
         self.upgrades = [];
@@ -28,8 +27,7 @@
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.leaderboard = leaderboard;
-        self.error = false;
-
+        self.showError = showError;
 
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
@@ -48,7 +46,12 @@
         };
         self.init = init;
         init();
-
+        function showError(error) {
+            ngToast.create({
+                className: 'failure',
+                content: error
+            });
+        }
         function logout() {
             $timeout(function() {
                 ref.unauth();
@@ -153,13 +156,6 @@
             });
         }
 
-        //function showError() {
-        //    ngToast.create({
-        //        className: 'faliure',
-        //        content: authWithPassword.email.password
-        //    });
-        //}
-
         function incrementClicker() {
             self.recorded.clicker++;
             self.recorded.counter = self.recorded.counter - self.recorded.cost;
@@ -230,9 +226,13 @@
             }, function (error, userData) {
                 if (error) {
                     console.log("Error creating user:", error);
+                    self.showError(error);
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
+                    self.user = $firebaseObject(ref.child('users').child(self.id));
+                    self.message = 'Logged into Game';
                     self.newUser.name = authData.password.email;
+                    self.newUser.img = "https://donut-click.firebaseapp.com/img/simpsons-donut.png";
                     self.user.$ref().set(self.newUser);
                     self.isLoggedIn = true;
                     self.gameState();
@@ -248,8 +248,8 @@
                 password: password
             }, function (error, authData) {
                 if (error) {
-                    self.error = true;
                     console.log("Login Failed!", error);
+                    self.showError(error);
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
                     self.id = authData.uid;
@@ -257,6 +257,7 @@
                     self.message = 'Logged into Game';
                     self.isLoggedIn = true;
                     self.newUser.name = authData.password.email;
+                    self.newUser.img = "https://donut-click.firebaseapp.com/img/simpsons-donut.png";
                     self.user.$ref().set(self.newUser);
                     self.gameState();
                     $timeout(function () {

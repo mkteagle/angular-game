@@ -1,12 +1,15 @@
 <ion-view id="login" view-title="Login" align-title="left">
+
     <ion-content style="background-color: deepskyblue;">
         <div class="hero no-header flat">
             <div class="content">
                 <div class="app-icon"></div>
                 <div ng-source="vm.recorded.img"></div>
                 <h1>Donut Clicker</h1>
+                <toast></toast>
             </div>
         </div>
+        <toast></toast>
         <div class="list">
             <ion-md-input placeholder="Username or Email" ng-model="vm.email" highlight-color="balanced" type="text"></ion-md-input>
             <ion-md-input placeholder="Password" highlight-color="energized" ng-model="vm.password" type="password"></ion-md-input>
@@ -14,9 +17,6 @@
         <div class="padding">
             <button ng-click="vm.authWithPassword()" id="login" class="button button-full button-assertive ink">Login</button>
         </div>
-        <!--<div toast="vm.showError">-->
-            <!--Invalid Email, Username or Password-->
-        <!--</div>-->
         <div class="button-bar social-login">
             <button id="google" class="button button-small button-border icon-left ion-social-google button-assertive-900" ng-click='vm.googleLogin()'>Google+</button>
             <button class="button button-small button-border icon-left ion-social-facebook button-positive-900" ng-click='vm.facebookLogin()'>Facebook</button>

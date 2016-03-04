@@ -11,19 +11,9 @@
             </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <tr ng-repeat="item in hc.gameService.leaders | toArray | orderBy:'-gameplay.counter'">
-                <th>*</th>
-                <th>{{item.name | name |}}</th>
-=======
-            <tr ng-repeat="item in hc.gameService.childData | orderObjectBy:'gameplay.counter'">
-=======
-            <tr ng-repeat="item in hc.gameService.childData | toArray | orderBy :'-gameplay.counter' | limitTo: '10'">
->>>>>>> origin/master
+            <tr ng-repeat="item in hc.gameService.childData | toArray | orderBy:'-gameplay.counter' | limitTo: '10'">
                 <th>*</th>
                 <th>{{item.name | initials }}</th>
->>>>>>> master
                 <th>{{item.gameplay.counter}}</th>
             </tr>
             </tbody>
