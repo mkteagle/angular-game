@@ -119,12 +119,12 @@
             self.user.$ref().child('gameplay').update(self.recorded);
         };
         function leaderboard() {
+            console.log(ref);
             ref.once("value", function(snapshot) {
+                console.log(snapshot);
                 snapshot.forEach(function(childSnapshot) {
                     self.childData = childSnapshot.val();
-                    //angular.forEach(childData, function(value) {
-                    //    self.leaders.push(value);
-                    //});
+                    console.log(childData);
                 });
 
             });
@@ -252,7 +252,7 @@
             }, function (error, authData) {
                 if (error) {
                     console.log("Login Failed!", error);
-                    self.showError(error)
+                    self.showError(error);
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
                     self.id = authData.uid;

@@ -11,9 +11,15 @@
             </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
+            <tr ng-repeat="item in hc.gameService.leaders | toArray | orderBy:'-gameplay.counter'">
+                <th>*</th>
+                <th>{{item.name | name |}}</th>
+=======
             <tr ng-repeat="item in hc.gameService.childData | orderObjectBy:'gameplay.counter'">
                 <th>*</th>
                 <th>{{item.name | initials }}</th>
+>>>>>>> master
                 <th>{{item.gameplay.counter}}</th>
             </tr>
             </tbody>
