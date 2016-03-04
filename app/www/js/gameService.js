@@ -27,6 +27,7 @@
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.leaderboard = leaderboard;
+        self.showError = showError;
 
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
@@ -45,7 +46,12 @@
         };
         self.init = init;
         init();
-
+        function showError(error) {
+            ngToast.create({
+                className: 'failure',
+                content: error
+            });
+        }
         function logout() {
             $timeout(function() {
                 ref.unauth();
@@ -239,6 +245,7 @@
             }, function (error, authData) {
                 if (error) {
                     console.log("Login Failed!", error);
+                    self.showError(error);
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
                     self.id = authData.uid;
