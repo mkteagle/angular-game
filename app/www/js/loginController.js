@@ -16,15 +16,20 @@ function loginController(gameService) {
 
     function facebookLogin() {
         gameService.facebookLogin();
+        vm.email = '';
+        vm.password = '';
     }
     function googleLogin() {
         gameService.googleLogin();
+        vm.email = '';
+        vm.password = '';
     }
     function createUser() {
         gameService.createUser(vm.email, vm.password);
     }
     function authWithPassword() {
         gameService.authWithPassword(vm.email, vm.password);
+        vm.password = '';
     }
 }
 })();
