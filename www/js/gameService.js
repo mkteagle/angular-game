@@ -225,8 +225,14 @@
                     console.log("Error creating user:", error);
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
-                    $state.go('app.splash');
+                    self.user = $firebaseObject(ref.child('users').child(self.id));
+                    self.message = 'Logged into Game';
+                    self.newUser.name = authData.password.email;
+                    self.newUser.img = "https://donut-click.firebaseapp.com/img/simpsons-donut.png";
+                    self.user.$ref().set(self.newUser);
                     self.isLoggedIn = true;
+                    self.gameState();
+                    $state.go('app.splash');
                     $timeout(function () {
                     })
                 }
@@ -241,8 +247,14 @@
                     console.log("Login Failed!", error);
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
+                    self.id = authData.uid;
+                    self.user = $firebaseObject(ref.child('users').child(self.id));
                     self.message = 'Logged into Game';
                     self.isLoggedIn = true;
+                    self.newUser.name = authData.password.email;
+                    self.newUser.img = "https://donut-click.firebaseapp.com/img/simpsons-donut.png";
+                    self.user.$ref().set(self.newUser);
+                    self.gameState();
                     $timeout(function () {
                         $state.go('app.splash');
                     })
