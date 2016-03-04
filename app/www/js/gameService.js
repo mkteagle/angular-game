@@ -119,12 +119,9 @@
             self.user.$ref().child('gameplay').update(self.recorded);
         };
         function leaderboard() {
-            console.log(ref);
             ref.once("value", function(snapshot) {
-                console.log(snapshot);
                 snapshot.forEach(function(childSnapshot) {
                     self.childData = childSnapshot.val();
-                    console.log(childData);
                 });
 
             });
