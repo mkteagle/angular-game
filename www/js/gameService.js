@@ -13,6 +13,7 @@
         self.incrementCounter = incrementCounter;
         self.updated = 100;
         self.showToast = showToast;
+        //self.showError = showError;
         self.incrementCountdown = incrementCountdown;
         self.updatePlayer = updatePlayer;
         self.upgrades = [];
@@ -27,6 +28,8 @@
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.leaderboard = leaderboard;
+        self.error = false;
+
 
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
@@ -153,6 +156,13 @@
             });
         }
 
+        //function showError() {
+        //    ngToast.create({
+        //        className: 'faliure',
+        //        content: authWithPassword.email.password
+        //    });
+        //}
+
         function incrementClicker() {
             self.recorded.clicker++;
             self.recorded.counter = self.recorded.counter - self.recorded.cost;
@@ -244,11 +254,11 @@
                 password: password
             }, function (error, authData) {
                 if (error) {
+                    self.error = true;
                     console.log("Login Failed!", error);
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
                     self.id = authData.uid;
-
                     self.user = $firebaseObject(ref.child('users').child(self.id));
                     self.message = 'Logged into Game';
                     self.isLoggedIn = true;
