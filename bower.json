@@ -34,6 +34,10 @@
   "dependencies": {
     "ionic": "~1.0.0",
     "waves": "0.6",
+<<<<<<< HEAD
+    "angular-toArrayFilter": "^1.0.1"
+=======
     "angular-toArrayFilter": "~1.0.1"
+>>>>>>> origin/master
   }
 }

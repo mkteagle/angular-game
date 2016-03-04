@@ -258,6 +258,9 @@ progress::-webkit-progress-value {
     animation: ngtoast-flyout 0.5s;
     transform: translateX(0px);
 }
+.failure {
+    color: red;
+}
 .ngtoast-default {
     border-radius: 10px;
     width: 200px;

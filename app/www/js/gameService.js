@@ -27,6 +27,7 @@
         self.createUser = createUser;
         self.authWithPassword = authWithPassword;
         self.leaderboard = leaderboard;
+        self.showError = showError;
 
         for (var i = 1; i < 1000; i++) {
             self.upgrades.push({id: i, goal: self.goal});
@@ -45,7 +46,12 @@
         };
         self.init = init;
         init();
-
+        function showError(error) {
+            ngToast.create({
+                className: 'failure',
+                content: error
+            });
+        }
         function logout() {
             $timeout(function() {
                 ref.unauth();
@@ -220,13 +226,17 @@
             }, function (error, userData) {
                 if (error) {
                     console.log("Error creating user:", error);
+                    self.showError(error);
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
+                    self.user = $firebaseObject(ref.child('users').child(self.id));
+                    self.message = 'Logged into Game';
                     self.newUser.name = authData.password.email;
+                    self.newUser.img = "https://donut-click.firebaseapp.com/img/simpsons-donut.png";
                     self.user.$ref().set(self.newUser);
+                    self.isLoggedIn = true;
                     self.gameState();
                     $state.go('app.splash');
-                    self.isLoggedIn = true;
                     $timeout(function () {
                     })
                 }
@@ -239,6 +249,7 @@
             }, function (error, authData) {
                 if (error) {
                     console.log("Login Failed!", error);
+                    self.showError(error);
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
                     self.id = authData.uid;
@@ -246,6 +257,7 @@
                     self.message = 'Logged into Game';
                     self.isLoggedIn = true;
                     self.newUser.name = authData.password.email;
+                    self.newUser.img = "https://donut-click.firebaseapp.com/img/simpsons-donut.png";
                     self.user.$ref().set(self.newUser);
                     self.gameState();
                     $timeout(function () {

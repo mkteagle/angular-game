@@ -10,7 +10,12 @@
             </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
             <tr ng-repeat="item in hc.gameService.childData | toArray | orderBy :'-gameplay.counter' | limitTo: '10'">
+=======
+            <tr ng-repeat="item in hc.gameService.childData | toArray | orderBy:'-gameplay.counter' | limitTo: '10'">
+                <th>*</th>
+>>>>>>> master
                 <th>{{item.name | initials }}</th>
                 <th>{{item.gameplay.counter}}</th>
             </tr>

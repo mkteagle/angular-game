@@ -36,7 +36,11 @@
     "commit": "6b2ed5d7bd0c1dfac66727b81b84c749dca19bdb"
   },
   "_source": "git://github.com/petebacondarwin/angular-toArrayFilter.git",
+<<<<<<< HEAD
+  "_target": "^1.0.1",
+=======
   "_target": "~1.0.1",
+>>>>>>> origin/master
   "_originalSource": "angular-toArrayFilter",
   "_direct": true
 }
